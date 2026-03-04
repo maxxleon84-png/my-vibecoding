@@ -225,6 +225,19 @@ body::before {
   text-decoration: none;
 }
 
+/* ---- Ссылка на лендинг ---- */
+.landing-link {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color var(--transition);
+}
+
+.landing-link:hover {
+  color: var(--color-accent);
+}
+
 /* ---- Соцсети ---- */
 .socials {
   display: flex;

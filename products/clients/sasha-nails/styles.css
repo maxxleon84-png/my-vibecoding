@@ -1,0 +1,279 @@
+/* =============================================================
+   clients/sasha-nails/styles.css
+   Визитка — Александра Леонидова, мастер маникюра
+   Палитра: зелёный + жёлтый + розовый
+   ============================================================= */
+
+:root {
+  --bg:        #0A140D;
+  --surface:   #132018;
+  --primary:   #4ADE80;
+  --accent:    #FACC15;
+  --pink:      #F472B6;
+  --border:    #1E4A2A;
+  --text:      #E8F5EA;
+  --muted:     #6FAD7A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 50%;
+  --transition: 0.25s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 24px;
+  color: var(--text);
+}
+
+#sparkle-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    rgba(10, 20, 13, 0.2) 0%,
+    rgba(10, 20, 13, 0.7) 60%,
+    rgba(10, 20, 13, 0.95) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Карточка ---- */
+.card-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.06),
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Фото ---- */
+.photo-wrap {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 0 0 2px rgba(244, 114, 182, 0.25),
+    0 0 0 4px var(--primary),
+    0 0 0 7px rgba(74, 222, 128, 0.12),
+    0 0 0 9px var(--accent),
+    0 0 0 12px rgba(250, 204, 21, 0.08),
+    0 0 24px rgba(74, 222, 128, 0.45),
+    0 0 48px rgba(244, 114, 182, 0.2);
+}
+
+.photo {
+  width: 130px;
+  height: 130px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Вращающееся кольцо — жёлтое */
+.photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: rgba(250, 204, 21, 0.35);
+  animation: spin 5s linear infinite;
+  z-index: 2;
+}
+
+/* Второе кольцо — розовое пунктирное */
+.photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: var(--radius-full);
+  border: 1px dashed rgba(244, 114, 182, 0.4);
+  animation: spin 10s linear infinite reverse;
+  z-index: 2;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.photo-glow {
+  position: absolute;
+  inset: -14px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* ---- Имя ---- */
+.identity { text-align: center; }
+
+.name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
+.title {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.divider {
+  color: var(--accent);
+  margin: 0 6px;
+}
+
+/* ---- Виды маникюра ---- */
+.services {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: all var(--transition);
+}
+
+.service-item:hover {
+  border-color: var(--pink);
+  background: rgba(244, 114, 182, 0.08);
+  box-shadow: 0 0 12px rgba(244, 114, 182, 0.2);
+}
+
+.service-icon { font-size: 1.1em; }
+
+/* ---- CTA ---- */
+.cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.55);
+}
+
+/* ---- Соцсети ---- */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all var(--transition);
+  min-width: 80px;
+}
+
+.social-link:hover {
+  color: var(--pink);
+  background: rgba(244, 114, 182, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ---- Адаптив ---- */
+@media (max-width: 480px) {
+  .card-inner { padding: 32px 20px; gap: 20px; }
+
+  .photo-wrap,
+  .photo { width: 110px; height: 110px; }
+}
