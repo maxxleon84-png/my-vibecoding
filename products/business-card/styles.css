@@ -1,0 +1,290 @@
+/* =============================================================
+   products/business-card/styles.css
+   Цифровая визитка — Максим Леонидов
+   ============================================================= */
+
+/* ---- Страница ---- */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #070D1F;
+  padding: var(--space-lg);
+}
+
+/* ---- Canvas фон: матрица ---- */
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+/* Затемняющий градиент поверх canvas */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    rgba(7, 13, 31, 0.35) 0%,
+    rgba(7, 13, 31, 0.75) 60%,
+    rgba(7, 13, 31, 0.95) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- Обёртка карточки ---- */
+.card-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+}
+
+.card-inner {
+  background: #1A3260;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.05),
+    0 24px 64px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Фото ---- */
+.photo-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  /* Многослойный контур через box-shadow */
+  border-radius: 50%;
+  /* слой 1: тонкий белый */
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    /* слой 2: основной синий */
+    0 0 0 4px var(--color-primary),
+    /* слой 3: промежуток */
+    0 0 0 7px rgba(0, 119, 255, 0.12),
+    /* слой 4: циановый контур */
+    0 0 0 9px var(--color-accent),
+    /* слой 5: промежуток */
+    0 0 0 12px rgba(0, 212, 255, 0.08),
+    /* слой 6: внешнее свечение */
+    0 0 0 14px rgba(0, 119, 255, 0.2),
+    /* glow наружу */
+    0 0 30px rgba(0, 119, 255, 0.5),
+    0 0 60px rgba(0, 212, 255, 0.2);
+}
+
+.photo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Вращающееся кольцо поверх контура */
+.photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: var(--color-accent);
+  border-right-color: rgba(0, 212, 255, 0.3);
+  animation: spin-ring 4s linear infinite;
+  z-index: 2;
+}
+
+/* Второе вращающееся кольцо (в обратную сторону) */
+.photo-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 119, 255, 0.35);
+  animation: spin-ring 8s linear infinite reverse;
+  z-index: 2;
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.photo-glow {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 119, 255, 0.2) 0%, transparent 70%);
+  animation: pulse-glow 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* ---- Имя и должность ---- */
+.identity {
+  text-align: center;
+}
+
+.name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.title {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.divider {
+  color: var(--color-accent);
+  margin: 0 var(--space-xs);
+}
+
+/* ---- Услуги ---- */
+.services {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-white);
+  transition: all var(--transition);
+}
+
+.service-item:hover {
+  border-color: var(--color-primary);
+  background: rgba(0, 119, 255, 0.08);
+  box-shadow: var(--glow-primary);
+}
+
+.service-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ---- CTA кнопка ---- */
+.cta-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: var(--fs-base);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+}
+
+/* ---- Соцсети ---- */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  transition: all var(--transition);
+  min-width: 56px;
+}
+
+.social-link:hover {
+  color: var(--color-accent);
+  background: rgba(0, 212, 255, 0.06);
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  flex-shrink: 0;
+}
+
+/* ---- Мобильная адаптация ---- */
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-md);
+    align-items: flex-start;
+    padding-top: var(--space-2xl);
+  }
+
+  .card-inner {
+    padding: var(--space-2xl) var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  .photo-wrap {
+    width: 120px;
+    height: 120px;
+  }
+
+  .photo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-size: var(--fs-xl);
+  }
+}
