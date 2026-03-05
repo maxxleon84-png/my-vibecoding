@@ -149,3 +149,46 @@ document.getElementById('quiz-restart').addEventListener('click', () => {
   showStep(1);
   document.getElementById('quiz-bar').style.width = '0%';
 });
+
+/* ---- Форма заявки → Telegram ---- */
+const TG_TOKEN   = '8637033664:AAEcbBM7CfvQtvsN0sXS12CHPb8Ni6NAL94';
+const TG_CHAT_ID = '322353894';
+
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn     = document.getElementById('form-btn');
+  const success = document.getElementById('form-success');
+  const error   = document.getElementById('form-error');
+
+  const name    = document.getElementById('form-name').value.trim();
+  const phone   = document.getElementById('form-phone').value.trim();
+  const service = document.getElementById('form-service').value;
+  const msg     = document.getElementById('form-msg').value.trim();
+
+  const text = `🔔 *Новая заявка с лендинга*\n\n👤 Имя: ${name}\n📞 Контакт: ${phone || '—'}\n💼 Услуга: ${service || '—'}\n💬 Сообщение: ${msg || '—'}`;
+
+  btn.disabled = true;
+  btn.textContent = 'Отправляю...';
+  success.style.display = 'none';
+  error.style.display   = 'none';
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'Markdown' }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      success.style.display = 'block';
+      e.target.reset();
+    } else {
+      throw new Error(data.description);
+    }
+  } catch {
+    error.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg> Отправить заявку';
+  }
+});

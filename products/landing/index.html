@@ -353,11 +353,34 @@
       <div class="container">
         <div class="contact-wrap">
           <h2 class="contact-title">Готовы начать?</h2>
-          <p class="contact-sub">Напишите в Telegram — отвечу в течение часа и обсудим детали</p>
-          <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary--lg">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
-            Написать в Telegram
-          </a>
+          <p class="contact-sub">Оставьте заявку — отвечу в течение часа и обсудим детали</p>
+
+          <form class="contact-form" id="contact-form">
+            <div class="form-row">
+              <input type="text" id="form-name" class="form-input" placeholder="Ваше имя" required>
+              <input type="tel" id="form-phone" class="form-input" placeholder="Телефон или @username">
+            </div>
+            <select id="form-service" class="form-input form-select">
+              <option value="">Какой сайт нужен?</option>
+              <option value="Цифровая визитка">Цифровая визитка</option>
+              <option value="Лендинг">Лендинг</option>
+              <option value="Квиз">Квиз</option>
+              <option value="Калькулятор">Калькулятор</option>
+              <option value="Не знаю — помогите выбрать">Не знаю — помогите выбрать</option>
+            </select>
+            <textarea id="form-msg" class="form-input form-textarea" placeholder="Расскажите о вашем бизнесе (необязательно)"></textarea>
+            <button type="submit" class="btn-primary btn-primary--lg form-submit" id="form-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
+              Отправить заявку
+            </button>
+            <div class="form-success" id="form-success">
+              ✅ Заявка отправлена! Напишу вам в ближайший час.
+            </div>
+            <div class="form-error" id="form-error">
+              ❌ Не удалось отправить. Напишите напрямую: <a href="https://t.me/maxxleon927">@maxxleon927</a>
+            </div>
+          </form>
+
           <div class="contact-socials">
             <a href="https://instagram.com/maxx.leonidov" target="_blank" rel="noopener noreferrer" class="contact-social">Instagram</a>
             <span class="contact-divider">·</span>
