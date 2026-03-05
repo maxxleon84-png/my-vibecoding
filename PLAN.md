@@ -77,9 +77,9 @@
 **Цель:** Всё онлайн, ссылки рабочие
 
 - [x] Инициализировать git-репозиторий
-- [ ] Деплой лендинга на Netlify (основной URL)
-- [ ] Деплой визитки на Netlify (отдельный сайт или путь)
-- [ ] Деплой sasha-nails на Netlify (для Александры)
+- [x] Деплой лендинга на Vercel (my-vibecoding.vercel.app)
+- [x] Деплой визитки на Vercel (my-vibecoding-card.vercel.app)
+- [x] Деплой sasha-nails на Vercel (sasha-nails.vercel.app)
 - [ ] Проверить все внутренние ссылки после деплоя
 - [ ] Добавить ссылки в шапку Telegram-канала
 - [ ] Добавить бота в Telegram-канал
