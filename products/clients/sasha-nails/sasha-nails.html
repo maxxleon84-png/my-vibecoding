@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Александра Леонидова — Маникюр</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0A140D;
+      --surface:   #132018;
+      --primary:   #4ADE80;
+      --accent:    #FACC15;
+      --pink:      #F472B6;
+      --border:    #1E4A2A;
+      --text:      #E8F5EA;
+      --muted:     #6FAD7A;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --transition: 0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      padding: 24px;
+      color: var(--text);
+    }
+
+    #sparkle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%,
+        rgba(10,20,13,0.2) 0%, rgba(10,20,13,0.7) 60%, rgba(10,20,13,0.95) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card-wrapper { position: relative; z-index: 2; width: 100%; max-width: 400px; }
+
+    .card-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      box-shadow:
+        0 0 0 1px rgba(74,222,128,0.06),
+        0 24px 64px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 2px rgba(244,114,182,0.25),
+        0 0 0 4px var(--primary),
+        0 0 0 7px rgba(74,222,128,0.12),
+        0 0 0 9px var(--accent),
+        0 0 0 12px rgba(250,204,21,0.08),
+        0 0 24px rgba(74,222,128,0.45),
+        0 0 48px rgba(244,114,182,0.2);
+    }
+
+    .photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      border-top-color: var(--accent);
+      border-right-color: rgba(250,204,21,0.35);
+      animation: spin 5s linear infinite;
+      z-index: 2;
+    }
+
+    .photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -24px;
+      border-radius: 50%;
+      border: 1px dashed rgba(244,114,182,0.4);
+      animation: spin 10s linear infinite reverse;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .photo-glow {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,222,128,0.2) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.08); }
+    }
+
+    .identity { text-align: center; }
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      text-shadow: 0 0 20px rgba(74,222,128,0.4);
+    }
+
+    .title {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .divider { color: var(--accent); margin: 0 6px; }
+
+    .services {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all var(--transition);
+    }
+
+    .service-item:hover {
+      border-color: var(--pink);
+      background: rgba(244,114,182,0.08);
+      box-shadow: 0 0 12px rgba(244,114,182,0.2);
+    }
+
+    .service-icon { font-size: 1.1em; }
+
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--radius-lg);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(56,189,248,0.4);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(56,189,248,0.55);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .social-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 24px;
+      border-radius: var(--radius-md);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: all var(--transition);
+      min-width: 80px;
+    }
+
+    .social-link:hover {
+      color: var(--pink);
+      background: rgba(244,114,182,0.06);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .card-inner { padding: 32px 20px; gap: 20px; }
+      .photo-wrap, .photo { width: 110px; height: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sparkle-canvas"></canvas>
+
+  <main class="card-wrapper">
+    <div class="card-inner">
+
+      <div class="photo-wrap">
+        <img src="photo.jpg" alt="Александра Леонидова" class="photo">
+        <div class="photo-glow"></div>
+      </div>
+
+      <div class="identity">
+        <h1 class="name">Александра Леонидова</h1>
+        <p class="title">Мастер маникюра <span class="divider">·</span> Баранчинский</p>
+      </div>
+
+      <ul class="services">
+        <li class="service-item"><span class="service-icon">💅</span><span>Классический</span></li>
+        <li class="service-item"><span class="service-icon">✨</span><span>Гель-лак</span></li>
+        <li class="service-item"><span class="service-icon">💎</span><span>Наращивание</span></li>
+        <li class="service-item"><span class="service-icon">🎨</span><span>Дизайн</span></li>
+      </ul>
+
+      <a href="https://t.me/DreamerSasha" target="_blank" rel="noopener noreferrer" class="cta-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/>
+        </svg>
+        Записаться
+      </a>
+
+      <nav class="socials">
+        <a href="https://t.me/DreamerSasha" target="_blank" rel="noopener noreferrer" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
+          <span>Telegram</span>
+        </a>
+        <a href="https://instagram.com/ladyleonidova" target="_blank" rel="noopener noreferrer" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span>Instagram</span>
+        </a>
+      </nav>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('sparkle-canvas');
+      const ctx    = canvas.getContext('2d');
+      const COLORS = ['#4ADE80', '#FACC15', '#F472B6', '#A3F4C0', '#FEF08A', '#FBCFE8'];
+      let sparks   = [];
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function randomSpark() {
+        return {
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.8 + 0.4,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.008 + 0.003,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          drift: (Math.random() - 0.5) * 0.3,
+        };
+      }
+
+      function init() { sparks = Array.from({ length: 80 }, randomSpark); }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const t = Date.now() * 0.001;
+        sparks.forEach(s => {
+          const alpha = (Math.sin(t * s.speed * 40 + s.phase) + 1) / 2;
+          s.x += s.drift;
+          s.y -= 0.15;
+          if (s.y < -5) { s.y = canvas.height + 5; s.x = Math.random() * canvas.width; }
+          if (s.x < -5 || s.x > canvas.width + 5) s.x = Math.random() * canvas.width;
+          ctx.save();
+          ctx.globalAlpha = alpha * 0.75;
+          ctx.fillStyle   = s.color;
+          ctx.shadowColor = s.color;
+          ctx.shadowBlur  = s.r * 4;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        });
+      }
+
+      resize();
+      init();
+      window.addEventListener('resize', () => { resize(); init(); });
+      setInterval(draw, 33);
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.service-item, .social-link');
+      items.forEach((el, i) => {
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(8px)';
+        el.style.transition = `opacity 0.3s ease ${0.5 + i * 0.06}s, transform 0.3s ease ${0.5 + i * 0.06}s`;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.opacity   = '1';
+          el.style.transform = 'translateY(0)';
+        }));
+      });
+    });
+  </script>
+</body>
+</html>
