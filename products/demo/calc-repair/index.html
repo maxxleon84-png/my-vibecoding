@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор ремонта — СтройПро</title>
+  <meta name="description" content="Рассчитайте стоимость ремонта онлайн за 30 секунд">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- Шапка -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🏗️</span>
+        <span class="logo-text">СтройПро</span>
+      </div>
+      <p class="header-sub">Ремонт квартир и офисов в Москве</p>
+    </header>
+
+    <!-- Калькулятор -->
+    <main class="calc-card">
+
+      <h1 class="calc-title">Рассчитайте стоимость ремонта</h1>
+      <p class="calc-subtitle">Заполните 3 параметра — получите смету за 30 секунд</p>
+
+      <!-- Шаг 1: Тип помещения -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">1</span> Тип помещения</h2>
+        <div class="btn-group" id="room-type">
+          <button class="option-btn active" data-value="apartment">🏠 Квартира</button>
+          <button class="option-btn" data-value="house">🏡 Дом</button>
+          <button class="option-btn" data-value="office">🏢 Офис</button>
+        </div>
+      </section>
+
+      <!-- Шаг 2: Площадь -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">2</span> Площадь помещения</h2>
+        <div class="area-control">
+          <button class="area-btn" id="area-minus">−</button>
+          <div class="area-display">
+            <span id="area-value">50</span>
+            <span class="area-unit">м²</span>
+          </div>
+          <button class="area-btn" id="area-plus">+</button>
+        </div>
+        <input type="range" id="area-range" min="10" max="300" value="50" step="5" class="area-slider">
+        <div class="area-hints">
+          <span>10 м²</span>
+          <span>300 м²</span>
+        </div>
+      </section>
+
+      <!-- Шаг 3: Тип ремонта -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">3</span> Тип ремонта</h2>
+        <div class="repair-types" id="repair-type">
+
+          <button class="repair-btn active" data-value="cosmetic" data-price="1500">
+            <span class="repair-icon">🖌️</span>
+            <span class="repair-name">Косметический</span>
+            <span class="repair-price">от 1 500 ₽/м²</span>
+            <span class="repair-desc">Покраска, обои, пол</span>
+          </button>
+
+          <button class="repair-btn" data-value="standard" data-price="3500">
+            <span class="repair-icon">🔨</span>
+            <span class="repair-name">Стандарт</span>
+            <span class="repair-price">от 3 500 ₽/м²</span>
+            <span class="repair-desc">Полный ремонт «под ключ»</span>
+          </button>
+
+          <button class="repair-btn" data-value="premium" data-price="7000">
+            <span class="repair-icon">💎</span>
+            <span class="repair-name">Премиум</span>
+            <span class="repair-price">от 7 000 ₽/м²</span>
+            <span class="repair-desc">Дизайн-проект, элитные материалы</span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- Результат -->
+      <section class="result" id="result">
+        <h2 class="result-title">Предварительная смета</h2>
+        <div class="result-rows">
+          <div class="result-row">
+            <span>Материалы (~40%)</span>
+            <span id="r-materials" class="result-val">—</span>
+          </div>
+          <div class="result-row">
+            <span>Работа (~60%)</span>
+            <span id="r-work" class="result-val">—</span>
+          </div>
+          <div class="result-row result-row--total">
+            <span>Итого</span>
+            <span id="r-total" class="result-val result-val--total">—</span>
+          </div>
+          <div class="result-row result-row--meta">
+            <span>⏱ Срок</span>
+            <span id="r-days" class="result-val">—</span>
+          </div>
+        </div>
+        <p class="result-note">* Точная стоимость определяется после осмотра объекта</p>
+      </section>
+
+      <!-- CTA -->
+      <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="cta-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/>
+        </svg>
+        Получить точный расчёт
+      </a>
+
+      <p class="demo-badge">Демо-проект · Разработка: Максим Леонидов</p>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

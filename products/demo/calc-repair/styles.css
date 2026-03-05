@@ -1,0 +1,389 @@
+/* demo/calc-repair/styles.css */
+
+:root {
+  --bg:        #0C0C0C;
+  --surface:   #161616;
+  --surface2:  #1F1F1F;
+  --primary:   #F59E0B;
+  --primary-d: #D97706;
+  --accent:    #FB923C;
+  --border:    #2A2A2A;
+  --text:      #F5F5F5;
+  --muted:     #888;
+  --green:     #4ADE80;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px 48px;
+}
+
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ---- Шапка ---- */
+.header {
+  text-align: center;
+  padding: 32px 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.logo-icon { font-size: 1.6rem; }
+
+.logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.header-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---- Карточка калькулятора ---- */
+.calc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.calc-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.calc-subtitle {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: -20px;
+}
+
+/* ---- Шаги ---- */
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---- Тип помещения ---- */
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.option-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.option-btn:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.option-btn.active {
+  border-color: var(--primary);
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ---- Площадь ---- */
+.area-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.area-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.area-display {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+#area-value {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 80px;
+  text-align: center;
+  line-height: 1;
+}
+
+.area-unit {
+  font-size: 1.1rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.area-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+
+.area-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+.area-hints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ---- Тип ремонта ---- */
+.repair-types {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.repair-btn {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface2);
+  color: var(--text);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.repair-btn:hover {
+  border-color: var(--primary);
+}
+
+.repair-btn.active {
+  border-color: var(--primary);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.repair-icon {
+  font-size: 1.4rem;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+}
+
+.repair-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.repair-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  grid-row: 1;
+  white-space: nowrap;
+}
+
+.repair-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  grid-column: 2;
+}
+
+/* ---- Результат ---- */
+.result {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.result-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.result-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.result-row--total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  padding-top: 4px;
+}
+
+.result-row--meta {
+  border-bottom: none;
+}
+
+.result-val {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.result-val--total {
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.result-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 12px;
+  opacity: 0.7;
+}
+
+/* ---- CTA ---- */
+.cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-d) 100%);
+  color: #000;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.35);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(245, 158, 11, 0.5);
+}
+
+.demo-badge {
+  text-align: center;
+  font-size: 0.72rem;
+  color: rgba(136, 136, 136, 0.5);
+}
+
+/* ---- Адаптив ---- */
+@media (max-width: 480px) {
+  .calc-card { padding: 24px 18px; }
+  .btn-group { flex-direction: column; }
+  .repair-btn { grid-template-columns: 32px 1fr; }
+  .repair-price { grid-column: 2; grid-row: 2; }
+  .repair-desc { grid-row: 3; }
+}
