@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Максим Леонидов — Разработчик цифровых решений</title>
+  <meta name="description" content="Делаю сайты с помощью AI: визитки, лендинги, квизы, калькуляторы. Быстро, красиво, недорого.">
+
+  <meta property="og:title" content="Максим Леонидов — Разработчик цифровых решений">
+  <meta property="og:description" content="Визитки, лендинги, квизы, калькуляторы. Пишите в Telegram.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23070D1F'/><text x='50%25' y='54%25' font-family='monospace' font-weight='bold' font-size='13' fill='%2300D4FF' text-anchor='middle' dominant-baseline='middle'>ML</text></svg>">
+
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Навигация -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="#hero" class="nav-logo">ML<span class="nav-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#how">Как работаю</a></li>
+        <li><a href="#portfolio">Портфолио</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#quiz">Квиз</a></li>
+      </ul>
+      <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="nav-cta">Написать</a>
+      <button class="nav-burger" id="nav-burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services" class="mobile-link">Услуги</a>
+    <a href="#how" class="mobile-link">Как работаю</a>
+    <a href="#portfolio" class="mobile-link">Портфолио</a>
+    <a href="#reviews" class="mobile-link">Отзывы</a>
+    <a href="#quiz" class="mobile-link">Квиз</a>
+    <a href="https://t.me/maxxleon927" target="_blank" class="mobile-link mobile-link--cta">Написать в Telegram</a>
+  </div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-overlay"></div>
+      <div class="hero-inner container">
+        <div class="hero-photo-wrap">
+          <img src="../../shared/assets/images/photo.png" alt="Максим Леонидов" class="hero-photo">
+        </div>
+        <div class="hero-text">
+          <p class="hero-label">Вайбкодинг · AI-разработка</p>
+          <h1 class="hero-name">Максим<br>Леонидов</h1>
+          <p class="hero-tagline">Ваш сайт за 3 дня — без агентства и огромных бюджетов</p>
+          <p class="hero-desc">Делаю визитки, лендинги, квизы и калькуляторы для мастеров,<br>экспертов и малого бизнеса. С AI-инструментами — быстро и качественно.</p>
+          <div class="hero-actions">
+            <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
+              Написать в Telegram
+            </a>
+            <a href="#services" class="btn-outline">Посмотреть услуги</a>
+          </div>
+        </div>
+      </div>
+      <a href="#services" class="hero-scroll" aria-label="Вниз">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </section>
+
+    <!-- Услуги -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Что делаю</p>
+          <h2 class="section-title">Услуги</h2>
+          <p class="section-sub">Каждый продукт — под конкретную задачу бизнеса</p>
+        </div>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon">🪪</div>
+            <h3 class="service-name">Цифровая визитка</h3>
+            <p class="service-desc">Страница-визитка с фото, соцсетями и кнопкой записи. Делитесь ссылкой вместо бумажной карточки.</p>
+            <ul class="service-features">
+              <li>Адаптив под мобильный</li>
+              <li>Анимации и эффекты</li>
+              <li>Ссылки на все соцсети</li>
+            </ul>
+            <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="service-cta">Узнать стоимость →</a>
+          </div>
+
+          <div class="service-card service-card--featured">
+            <div class="service-badge">Популярно</div>
+            <div class="service-icon">🚀</div>
+            <h3 class="service-name">Лендинг</h3>
+            <p class="service-desc">Продающая страница с секциями: о вас, услуги, портфолио, отзывы, форма заявки.</p>
+            <ul class="service-features">
+              <li>Квиз для лидогенерации</li>
+              <li>SEO-оптимизация</li>
+              <li>Интеграция с Telegram</li>
+            </ul>
+            <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="service-cta">Узнать стоимость →</a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🎯</div>
+            <h3 class="service-name">Квиз</h3>
+            <p class="service-desc">Интерактивный опрос, который помогает клиенту выбрать услугу и оставить заявку.</p>
+            <ul class="service-features">
+              <li>3–7 вопросов</li>
+              <li>Рекомендация услуги</li>
+              <li>CTA в Telegram/WhatsApp</li>
+            </ul>
+            <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="service-cta">Узнать стоимость →</a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon">🧮</div>
+            <h3 class="service-name">Калькулятор</h3>
+            <p class="service-desc">Интерактивный расчёт стоимости прямо на сайте. Клиент видит цену — и сразу пишет.</p>
+            <ul class="service-features">
+              <li>Расчёт в реальном времени</li>
+              <li>Любые параметры</li>
+              <li>Ведёт к заявке</li>
+            </ul>
+            <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="service-cta">Узнать стоимость →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Как работаю -->
+    <section class="section section--dark" id="how">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Процесс</p>
+          <h2 class="section-title">Как работаю</h2>
+          <p class="section-sub">От заявки до готового сайта за несколько дней</p>
+        </div>
+        <div class="steps-grid">
+
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3 class="step-title">Заявка</h3>
+            <p class="step-desc">Пишете в Telegram, описываете задачу. Обсуждаем детали, определяем нужный продукт.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3 class="step-title">Бриф</h3>
+            <p class="step-desc">Заполняете простую форму: стиль, цвета, тексты, фото. Я предлагаю структуру.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3 class="step-title">Разработка</h3>
+            <p class="step-desc">Разрабатываю с помощью AI-инструментов. Показываю промежуточный результат на каждом шаге.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h3 class="step-title">Готово</h3>
+            <p class="step-desc">Публикую сайт на хостинге, передаю ссылку. Вношу правки в течение 7 дней бесплатно.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Примеры работ</p>
+          <h2 class="section-title">Портфолио</h2>
+          <p class="section-sub">Живые демо — можно открыть и потрогать</p>
+        </div>
+        <div class="portfolio-grid">
+
+          <a href="../business-card/" target="_blank" class="portfolio-card">
+            <div class="portfolio-preview portfolio-preview--blue">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <div class="preview-content">
+                <div class="preview-circle"></div>
+                <div class="preview-lines">
+                  <div class="preview-line preview-line--lg"></div>
+                  <div class="preview-line preview-line--sm"></div>
+                  <div class="preview-line preview-line--md"></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <span class="portfolio-tag">Визитка</span>
+              <h3 class="portfolio-name">Максим Леонидов</h3>
+              <p class="portfolio-desc">Цифровая визитка разработчика с matrix-эффектом</p>
+            </div>
+          </a>
+
+          <a href="../clients/sasha-nails/sasha-nails.html" target="_blank" class="portfolio-card">
+            <div class="portfolio-preview portfolio-preview--pink">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <div class="preview-content">
+                <div class="preview-circle preview-circle--pink"></div>
+                <div class="preview-lines">
+                  <div class="preview-line preview-line--lg"></div>
+                  <div class="preview-line preview-line--sm"></div>
+                  <div class="preview-line preview-line--md"></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <span class="portfolio-tag portfolio-tag--pink">Визитка</span>
+              <h3 class="portfolio-name">Александра Леонидова</h3>
+              <p class="portfolio-desc">Визитка мастера маникюра с блёстками</p>
+            </div>
+          </a>
+
+          <a href="../demo/calc-repair/" target="_blank" class="portfolio-card">
+            <div class="portfolio-preview portfolio-preview--amber">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <div class="preview-content">
+                <div class="preview-bar"></div>
+                <div class="preview-bar preview-bar--sm"></div>
+                <div class="preview-bar preview-bar--md"></div>
+              </div>
+            </div>
+            <div class="portfolio-info">
+              <span class="portfolio-tag portfolio-tag--amber">Калькулятор</span>
+              <h3 class="portfolio-name">СтройПро</h3>
+              <p class="portfolio-desc">Калькулятор стоимости ремонта онлайн</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Клиенты</p>
+          <h2 class="section-title">Отзывы</h2>
+          <p class="section-sub">Что говорят те, кто уже работал со мной</p>
+        </div>
+        <div class="reviews-grid">
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">«Максим сделал мне визитку за два дня. Красиво, всё работает, клиенты сразу пишут в Telegram. Очень довольна результатом!»</p>
+            <div class="review-author">
+              <div class="review-avatar">АЛ</div>
+              <div>
+                <p class="review-name">Александра Леонидова</p>
+                <p class="review-role">Мастер маникюра · Баранчинский</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card review-card--placeholder">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">«Здесь будет ваш отзыв. Напишите мне — сделаем сайт, и я размещу ваш отклик на этом месте.»</p>
+            <div class="review-author">
+              <div class="review-avatar review-avatar--muted">?</div>
+              <div>
+                <p class="review-name">Ваш отзыв</p>
+                <p class="review-role">Следующий клиент</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Квиз -->
+    <section class="section section--dark" id="quiz">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-label">Подбор услуги</p>
+          <h2 class="section-title">Что вам нужно?</h2>
+          <p class="section-sub">Ответьте на 3 вопроса — подберу подходящий продукт</p>
+        </div>
+
+        <div class="quiz-wrap">
+          <!-- Шаг 1 -->
+          <div class="quiz-step active" data-step="1">
+            <p class="quiz-q">Какая у вас цель?</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-next="2" data-val="presence">📍 Просто быть в сети</button>
+              <button class="quiz-opt" data-next="2" data-val="leads">💼 Получать заявки</button>
+              <button class="quiz-opt" data-next="2" data-val="price">💰 Показывать цены</button>
+            </div>
+          </div>
+
+          <!-- Шаг 2 -->
+          <div class="quiz-step" data-step="2">
+            <p class="quiz-q">Какой у вас бизнес?</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-next="3" data-val="solo">👤 Работаю один (мастер, эксперт)</button>
+              <button class="quiz-opt" data-next="3" data-val="small">🏪 Малый бизнес / ИП</button>
+              <button class="quiz-opt" data-next="3" data-val="service">🔧 Услуги (ремонт, доставка и т.д.)</button>
+            </div>
+          </div>
+
+          <!-- Шаг 3 -->
+          <div class="quiz-step" data-step="3">
+            <p class="quiz-q">Когда нужен результат?</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-next="result" data-val="asap">⚡ Как можно быстрее</button>
+              <button class="quiz-opt" data-next="result" data-val="week">📅 В течение недели</button>
+              <button class="quiz-opt" data-next="result" data-val="month">🗓 Не срочно</button>
+            </div>
+          </div>
+
+          <!-- Результат -->
+          <div class="quiz-step" data-step="result">
+            <div class="quiz-result">
+              <div class="quiz-result-icon">✅</div>
+              <h3 class="quiz-result-title" id="quiz-result-title">Визитка</h3>
+              <p class="quiz-result-desc" id="quiz-result-desc">Это лучший вариант для вашей ситуации</p>
+              <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
+                Обсудить в Telegram
+              </a>
+              <button class="quiz-restart" id="quiz-restart">← Пройти заново</button>
+            </div>
+          </div>
+
+          <!-- Прогресс -->
+          <div class="quiz-progress">
+            <div class="quiz-bar" id="quiz-bar"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Контакт -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <h2 class="contact-title">Готовы начать?</h2>
+          <p class="contact-sub">Напишите в Telegram — отвечу в течение часа и обсудим детали</p>
+          <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary--lg">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
+            Написать в Telegram
+          </a>
+          <div class="contact-socials">
+            <a href="https://instagram.com/maxx.leonidov" target="_blank" rel="noopener noreferrer" class="contact-social">Instagram</a>
+            <span class="contact-divider">·</span>
+            <a href="https://t.me/my_way_in_wibecoding" target="_blank" rel="noopener noreferrer" class="contact-social">Telegram-канал</a>
+            <span class="contact-divider">·</span>
+            <a href="https://github.com/maxxleon84-png" target="_blank" rel="noopener noreferrer" class="contact-social">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Футер -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Максим Леонидов · Разработка с ❤️ и AI</p>
+      <a href="../business-card/" class="footer-card-link">← Визитка</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 {
+  "outputDirectory": "products/landing",
   "buildCommand": null,
-  "outputDirectory": ".",
-  "installCommand": null,
-  "framework": null
+  "installCommand": null
 }

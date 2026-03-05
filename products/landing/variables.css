@@ -1,0 +1,215 @@
+/* =============================================================
+   shared/css/variables.css
+   Единая цветовая и типографическая система
+   Максим Леонидов — my-vibecoding
+
+   Стиль: Технологичный · Цифровой · Тёмный · Футуристичный
+   Палитра: тёмно-синий фон + электрический синий + циан
+   ============================================================= */
+
+/* ---- Google Fonts — подключать в каждом HTML файле ----
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+--------------------------------------------------------- */
+
+:root {
+  /* ============ ЦВЕТА ============ */
+
+  /* Фоны */
+  --color-bg:         #070D1F;   /* Основной фон — почти чёрный синий */
+  --color-bg-surface: #0D1B3E;   /* Карточки, блоки */
+  --color-bg-light:   #112454;   /* Hover-состояния, светлее */
+
+  /* Акценты */
+  --color-primary:    #0077FF;   /* Основной синий — кнопки, заголовки */
+  --color-accent:     #00D4FF;   /* Циан — highlights, иконки, glow */
+  --color-glow:       #0055CC;   /* Тёмный синий для box-shadow */
+
+  /* Текст */
+  --color-white:      #FFFFFF;   /* Основной текст */
+  --color-text-muted: #6B9ECC;   /* Второстепенный текст, подписи */
+
+  /* Граница */
+  --color-border:     #1A3A6B;   /* Разделители, border карточек */
+
+  /* ============ ШРИФТЫ ============ */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'Roboto Mono', monospace;
+
+  /* ============ РАЗМЕРЫ ШРИФТОВ ============ */
+  --fs-xs:   0.75rem;   /* 12px */
+  --fs-sm:   0.875rem;  /* 14px */
+  --fs-base: 1rem;      /* 16px */
+  --fs-md:   1.125rem;  /* 18px */
+  --fs-lg:   1.25rem;   /* 20px */
+  --fs-xl:   1.5rem;    /* 24px */
+  --fs-2xl:  2rem;      /* 32px */
+  --fs-3xl:  2.5rem;    /* 40px */
+  --fs-4xl:  3rem;      /* 48px */
+
+  /* ============ ОТСТУПЫ ============ */
+  --space-xs:  0.25rem;   /* 4px */
+  --space-sm:  0.5rem;    /* 8px */
+  --space-md:  1rem;      /* 16px */
+  --space-lg:  1.5rem;    /* 24px */
+  --space-xl:  2rem;      /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4rem;      /* 64px */
+  --space-4xl: 6rem;      /* 96px */
+
+  /* ============ РАДИУСЫ ============ */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ============ ТЕНИ И СВЕЧЕНИЕ ============ */
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md:    0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg:    0 8px 24px rgba(0, 0, 0, 0.6);
+  --glow-primary: 0 0 20px rgba(0, 119, 255, 0.4);
+  --glow-accent:  0 0 15px rgba(0, 212, 255, 0.5);
+  --glow-text:    0 0 20px rgba(0, 212, 255, 0.6);
+
+  /* ============ ГРАДИЕНТЫ ============ */
+  --gradient-bg:     linear-gradient(135deg, #070D1F 0%, #0D1B3E 50%, #070D1F 100%);
+  --gradient-btn:    linear-gradient(135deg, #0077FF, #00D4FF);
+  --gradient-glow:   linear-gradient(135deg, rgba(0,119,255,0.15), rgba(0,212,255,0.05));
+
+  /* ============ ПЕРЕХОДЫ ============ */
+  --transition:      0.2s ease;
+  --transition-slow: 0.4s ease;
+
+  /* ============ КОНТЕЙНЕР ============ */
+  --container-max:     1200px;
+  --container-padding: var(--space-md);
+}
+
+/* ---- Мобильные переопределения ---- */
+@media (max-width: 768px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-4xl: 2.25rem;
+  }
+}
+
+/* ============================================================
+   БАЗОВЫЕ СТИЛИ (применяются глобально)
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Контейнер */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--color-white);
+}
+
+/* Ссылки */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover {
+  color: var(--color-white);
+}
+
+/* Кнопка primary */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--gradient-btn);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--glow-primary);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 119, 255, 0.6);
+  color: var(--color-white);
+}
+
+/* Кнопка outline */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: transparent;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-outline:hover {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: var(--glow-accent);
+  color: var(--color-accent);
+}
+
+/* Карточка */
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition);
+}
+.card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--glow-primary);
+  transform: translateY(-4px);
+}
+
+/* Акцентный текст */
+.text-accent {
+  color: var(--color-accent);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+/* Glow-заголовок */
+.heading-glow {
+  text-shadow: var(--glow-text);
+}
