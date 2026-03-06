@@ -5,8 +5,8 @@
 Всё на HTML/CSS/JS, деплой на Vercel.
 
 **Живые ссылки:**
-- Лендинг: https://my-vibecoding.vercel.app
-- Визитка: https://my-vibecoding-card.vercel.app
+- Лендинг: https://maxxleon.vercel.app
+- Визитка: https://ml-vibecoder.vercel.app
 - Клиент Саша: https://sasha-nails.vercel.app
 - GitHub: https://github.com/maxxleon84-png/my-vibecoding
 
@@ -33,7 +33,7 @@
 
 ### ✅ Этап 2: Цифровая визитка
 **Папка:** `products/business-card/`
-**URL:** https://my-vibecoding-card.vercel.app
+**URL:** https://ml-vibecoder.vercel.app
 
 - [x] `index.html` — фото, имя (Orbitron), теглайн, 4 услуги, TG CTA, 6 соцсетей
 - [x] `styles.css` — Matrix rain фон, многослойный контур фото, адаптив
@@ -56,7 +56,7 @@
 
 ### ✅ Этап 3: Лендинг
 **Папка:** `products/landing/`
-**URL:** https://my-vibecoding.vercel.app
+**URL:** https://maxxleon.vercel.app
 
 - [x] `index.html` — hero, услуги, как работаю, портфолио, отзывы, квиз, контакт
 - [x] `styles.css` — полный стиль, адаптив, неон-навигация
@@ -88,13 +88,15 @@
 
 - [x] Инициализировать git-репозиторий
 - [x] GitHub: https://github.com/maxxleon84-png/my-vibecoding
-- [x] Деплой лендинга на Vercel → https://my-vibecoding.vercel.app
-- [x] Деплой визитки на Vercel → https://my-vibecoding-card.vercel.app
+- [x] Деплой лендинга на Vercel → https://maxxleon.vercel.app
+- [x] Деплой визитки на Vercel → https://ml-vibecoder.vercel.app
 - [x] Деплой sasha-nails на Vercel → https://sasha-nails.vercel.app
 - [x] GitHub CLI установлен (scoop)
 - [x] Vercel API токен настроен
 - [ ] Добавить ссылки в шапку Telegram-канала
-- [ ] Проверить все внутренние ссылки после деплоя
+- [x] Проверить все внутренние ссылки после деплоя
+- [x] Переименовать проекты: my-vibecoding → maxxleon, my-vibecoding-card → ml-vibecoder
+- [x] Исправить ссылку «Подробнее об услугах» в визитке
 
 ---
 
@@ -115,4 +117,4 @@
 ✅ Этап 0 → ✅ Этап 1 → ✅ Этап 2 → ✅ Этап 2.5 → ✅ Этап 3 → 📋 Этап 4 → ✅ Этап 5 → 📋 Этап 6
 
 ## Обновлено
-2026-03-06
+2026-03-06 (переименованы Vercel-проекты)
