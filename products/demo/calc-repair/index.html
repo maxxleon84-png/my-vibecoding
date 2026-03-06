@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор ремонта — СтройПро</title>
-  <meta name="description" content="Рассчитайте стоимость ремонта онлайн за 30 секунд">
+  <title>Калькулятор кровли — КровляПро Екатеринбург</title>
+  <meta name="description" content="Рассчитайте стоимость кровельных работ в Екатеринбурге и области онлайн за 1 минуту">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,97 +17,163 @@
     <!-- Шапка -->
     <header class="header">
       <div class="logo">
-        <span class="logo-icon">🏗️</span>
-        <span class="logo-text">СтройПро</span>
+        <span class="logo-icon">🏠</span>
+        <span class="logo-text">КровляПро</span>
       </div>
-      <p class="header-sub">Ремонт квартир и офисов в Москве</p>
+      <p class="header-sub">Кровельные работы в Екатеринбурге и области</p>
     </header>
 
     <!-- Калькулятор -->
     <main class="calc-card">
 
-      <h1 class="calc-title">Рассчитайте стоимость ремонта</h1>
-      <p class="calc-subtitle">Заполните 3 параметра — получите смету за 30 секунд</p>
+      <h1 class="calc-title">Рассчитайте стоимость кровли</h1>
+      <p class="calc-subtitle">Укажите параметры — получите предварительную смету за минуту</p>
 
-      <!-- Шаг 1: Тип помещения -->
+      <!-- Шаг 1: Тип работ -->
       <section class="step">
-        <h2 class="step-label"><span class="step-num">1</span> Тип помещения</h2>
-        <div class="btn-group" id="room-type">
-          <button class="option-btn active" data-value="apartment">🏠 Квартира</button>
-          <button class="option-btn" data-value="house">🏡 Дом</button>
-          <button class="option-btn" data-value="office">🏢 Офис</button>
+        <h2 class="step-label"><span class="step-num">1</span> Тип работ</h2>
+        <div class="btn-group" id="work-type">
+          <button class="option-btn active" data-value="replace">🔄 Перекрыть старую</button>
+          <button class="option-btn" data-value="new">🏗 Новая кровля</button>
         </div>
       </section>
 
       <!-- Шаг 2: Площадь -->
       <section class="step">
-        <h2 class="step-label"><span class="step-num">2</span> Площадь помещения</h2>
+        <h2 class="step-label"><span class="step-num">2</span> Площадь кровли</h2>
         <div class="area-control">
           <button class="area-btn" id="area-minus">−</button>
           <div class="area-display">
-            <span id="area-value">50</span>
+            <span id="area-value">80</span>
             <span class="area-unit">м²</span>
           </div>
           <button class="area-btn" id="area-plus">+</button>
         </div>
-        <input type="range" id="area-range" min="10" max="300" value="50" step="5" class="area-slider">
+        <input type="range" id="area-range" min="20" max="500" value="80" step="5" class="area-slider">
         <div class="area-hints">
-          <span>10 м²</span>
-          <span>300 м²</span>
+          <span>20 м²</span>
+          <span>500 м²</span>
         </div>
       </section>
 
-      <!-- Шаг 3: Тип ремонта -->
+      <!-- Шаг 3: Материал кровли -->
       <section class="step">
-        <h2 class="step-label"><span class="step-num">3</span> Тип ремонта</h2>
-        <div class="repair-types" id="repair-type">
+        <h2 class="step-label"><span class="step-num">3</span> Материал кровли</h2>
+        <div class="material-types" id="material-type">
 
-          <button class="repair-btn active" data-value="cosmetic" data-price="1500">
-            <span class="repair-icon">🖌️</span>
-            <span class="repair-name">Косметический</span>
-            <span class="repair-price">от 1 500 ₽/м²</span>
-            <span class="repair-desc">Покраска, обои, пол</span>
+          <button class="material-btn" data-value="profile" data-mat="280" data-work="320" data-days="0.04">
+            <span class="material-icon">🔩</span>
+            <div class="material-info">
+              <span class="material-name">Профнастил</span>
+              <span class="material-desc">Бюджетно, долговечно</span>
+            </div>
+            <span class="material-price">от 280 ₽/м²</span>
           </button>
 
-          <button class="repair-btn" data-value="standard" data-price="3500">
-            <span class="repair-icon">🔨</span>
-            <span class="repair-name">Стандарт</span>
-            <span class="repair-price">от 3 500 ₽/м²</span>
-            <span class="repair-desc">Полный ремонт «под ключ»</span>
+          <button class="material-btn active" data-value="metal" data-mat="450" data-work="420" data-days="0.05">
+            <span class="material-icon">🏆</span>
+            <div class="material-info">
+              <span class="material-name">Металлочерепица</span>
+              <span class="material-desc">Популярно · Эстетично</span>
+            </div>
+            <span class="material-price">от 450 ₽/м²</span>
           </button>
 
-          <button class="repair-btn" data-value="premium" data-price="7000">
-            <span class="repair-icon">💎</span>
-            <span class="repair-name">Премиум</span>
-            <span class="repair-price">от 7 000 ₽/м²</span>
-            <span class="repair-desc">Дизайн-проект, элитные материалы</span>
+          <button class="material-btn" data-value="soft" data-mat="580" data-work="500" data-days="0.06">
+            <span class="material-icon">🧱</span>
+            <div class="material-info">
+              <span class="material-name">Мягкая кровля</span>
+              <span class="material-desc">Бесшумно · Тёплый чердак</span>
+            </div>
+            <span class="material-price">от 580 ₽/м²</span>
           </button>
 
+          <button class="material-btn" data-value="seam" data-mat="850" data-work="680" data-days="0.07">
+            <span class="material-icon">✨</span>
+            <div class="material-info">
+              <span class="material-name">Фальцевая кровля</span>
+              <span class="material-desc">Премиум · 50+ лет</span>
+            </div>
+            <span class="material-price">от 850 ₽/м²</span>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- Шаг 4: Сложность -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">4</span> Сложность крыши</h2>
+        <div class="btn-group" id="complexity-type">
+          <button class="option-btn active" data-value="simple" data-coef="1.0">Простая<br><small>Двускатная</small></button>
+          <button class="option-btn" data-value="medium" data-coef="1.35">Средняя<br><small>Вальмовая</small></button>
+          <button class="option-btn" data-value="hard" data-coef="1.7">Сложная<br><small>Многощипцовая</small></button>
+        </div>
+      </section>
+
+      <!-- Шаг 5: Доп. работы -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">5</span> Дополнительные работы</h2>
+        <div class="extras" id="extras">
+          <label class="extra-item">
+            <input type="checkbox" id="extra-sheathing" data-price="280">
+            <span class="extra-check"></span>
+            <span class="extra-label">
+              <span class="extra-name">Замена обрешётки</span>
+              <span class="extra-hint">280 ₽/м²</span>
+            </span>
+          </label>
+          <label class="extra-item">
+            <input type="checkbox" id="extra-rafters" data-price="480">
+            <span class="extra-check"></span>
+            <span class="extra-label">
+              <span class="extra-name">Замена стропил</span>
+              <span class="extra-hint">480 ₽/м²</span>
+            </span>
+          </label>
+          <label class="extra-item">
+            <input type="checkbox" id="extra-insulation" data-price="380">
+            <span class="extra-check"></span>
+            <span class="extra-label">
+              <span class="extra-name">Утепление кровли</span>
+              <span class="extra-hint">380 ₽/м²</span>
+            </span>
+          </label>
+          <label class="extra-item">
+            <input type="checkbox" id="extra-snow" data-price="220">
+            <span class="extra-check"></span>
+            <span class="extra-label">
+              <span class="extra-name">Снегозадержатели</span>
+              <span class="extra-hint">220 ₽/м²</span>
+            </span>
+          </label>
+          <label class="extra-item">
+            <input type="checkbox" id="extra-trim" data-price="280" checked>
+            <span class="extra-check"></span>
+            <span class="extra-label">
+              <span class="extra-name">Доборные элементы</span>
+              <span class="extra-hint">Конёк, карнизы, ендова · 280 ₽/м²</span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Шаг 6: Район -->
+      <section class="step">
+        <h2 class="step-label"><span class="step-num">6</span> Ваш район</h2>
+        <div class="btn-group btn-group--col" id="location-type">
+          <button class="option-btn active" data-value="ekb" data-loc="1.0">📍 Екатеринбург</button>
+          <button class="option-btn" data-value="near" data-loc="1.1">🏘 Область (до 50 км) +10%</button>
+          <button class="option-btn" data-value="far" data-loc="1.2">🚗 Область (50+ км) +20%</button>
         </div>
       </section>
 
       <!-- Результат -->
       <section class="result" id="result">
         <h2 class="result-title">Предварительная смета</h2>
-        <div class="result-rows">
-          <div class="result-row">
-            <span>Материалы (~40%)</span>
-            <span id="r-materials" class="result-val">—</span>
-          </div>
-          <div class="result-row">
-            <span>Работа (~60%)</span>
-            <span id="r-work" class="result-val">—</span>
-          </div>
-          <div class="result-row result-row--total">
-            <span>Итого</span>
-            <span id="r-total" class="result-val result-val--total">—</span>
-          </div>
-          <div class="result-row result-row--meta">
-            <span>⏱ Срок</span>
-            <span id="r-days" class="result-val">—</span>
-          </div>
+        <div class="result-rows" id="result-rows">
+          <!-- заполняется JS -->
         </div>
-        <p class="result-note">* Точная стоимость определяется после осмотра объекта</p>
+        <p class="result-note">* Точная стоимость определяется после выезда замерщика (бесплатно)</p>
       </section>
 
       <!-- CTA -->
