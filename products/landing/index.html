@@ -295,58 +295,76 @@
         <div class="section-head">
           <p class="section-label">Подбор услуги</p>
           <h2 class="section-title">Что вам нужно?</h2>
-          <p class="section-sub">Ответьте на 3 вопроса — подберу подходящий продукт</p>
+          <p class="section-sub">Ответьте на 4 вопроса — подберу подходящий продукт и назову цену</p>
         </div>
 
         <div class="quiz-wrap">
+          <!-- Прогресс -->
+          <div class="quiz-progress">
+            <div class="quiz-bar" id="quiz-bar"></div>
+          </div>
+          <p class="quiz-counter" id="quiz-counter">Шаг 1 из 4</p>
+
           <!-- Шаг 1 -->
           <div class="quiz-step active" data-step="1">
-            <p class="quiz-q">Какая у вас цель?</p>
+            <p class="quiz-q">Кто вы?</p>
             <div class="quiz-options">
-              <button class="quiz-opt" data-next="2" data-val="presence">📍 Просто быть в сети</button>
-              <button class="quiz-opt" data-next="2" data-val="leads">💼 Получать заявки</button>
-              <button class="quiz-opt" data-next="2" data-val="price">💰 Показывать цены</button>
+              <button class="quiz-opt" data-next="2" data-val="solo">👤 Мастер или эксперт</button>
+              <button class="quiz-opt" data-next="2" data-val="small">🏪 Малый бизнес / ИП</button>
+              <button class="quiz-opt" data-next="2" data-val="service">🔧 Сервисная компания</button>
+              <button class="quiz-opt" data-next="2" data-val="new">🆕 Только начинаю</button>
             </div>
           </div>
 
           <!-- Шаг 2 -->
           <div class="quiz-step" data-step="2">
-            <p class="quiz-q">Какой у вас бизнес?</p>
+            <p class="quiz-q">Что главное для вашего сайта?</p>
             <div class="quiz-options">
-              <button class="quiz-opt" data-next="3" data-val="solo">👤 Работаю один (мастер, эксперт)</button>
-              <button class="quiz-opt" data-next="3" data-val="small">🏪 Малый бизнес / ИП</button>
-              <button class="quiz-opt" data-next="3" data-val="service">🔧 Услуги (ремонт, доставка и т.д.)</button>
+              <button class="quiz-opt" data-next="3" data-val="leads">📨 Получать заявки от клиентов</button>
+              <button class="quiz-opt" data-next="3" data-val="portfolio">🖼 Показать работы / портфолио</button>
+              <button class="quiz-opt" data-next="3" data-val="price">💰 Онлайн-расчёт стоимости</button>
+              <button class="quiz-opt" data-next="3" data-val="presence">📍 Просто быть в интернете</button>
             </div>
+            <button class="quiz-back" data-prev="1">← Назад</button>
           </div>
 
           <!-- Шаг 3 -->
           <div class="quiz-step" data-step="3">
+            <p class="quiz-q">Есть ли готовые тексты и фото?</p>
+            <div class="quiz-options">
+              <button class="quiz-opt" data-next="4" data-val="ready">✅ Да, всё готово</button>
+              <button class="quiz-opt" data-next="4" data-val="partial">📝 Частично, нужна помощь</button>
+              <button class="quiz-opt" data-next="4" data-val="none">❌ Нет, нужно с нуля</button>
+            </div>
+            <button class="quiz-back" data-prev="2">← Назад</button>
+          </div>
+
+          <!-- Шаг 4 -->
+          <div class="quiz-step" data-step="4">
             <p class="quiz-q">Когда нужен результат?</p>
             <div class="quiz-options">
-              <button class="quiz-opt" data-next="result" data-val="asap">⚡ Как можно быстрее</button>
+              <button class="quiz-opt" data-next="result" data-val="asap">⚡ Как можно скорее</button>
               <button class="quiz-opt" data-next="result" data-val="week">📅 В течение недели</button>
               <button class="quiz-opt" data-next="result" data-val="month">🗓 Не срочно</button>
             </div>
+            <button class="quiz-back" data-prev="3">← Назад</button>
           </div>
 
           <!-- Результат -->
           <div class="quiz-step" data-step="result">
             <div class="quiz-result">
-              <div class="quiz-result-icon">✅</div>
+              <div class="quiz-result-icon" id="quiz-result-icon">✅</div>
               <h3 class="quiz-result-title" id="quiz-result-title">Визитка</h3>
               <p class="quiz-result-desc" id="quiz-result-desc">Это лучший вариант для вашей ситуации</p>
-              <a href="https://t.me/maxxleon927" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.43 13.932l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.836.954l-.45-.3z"/></svg>
-                Обсудить в Telegram
-              </a>
+              <div class="quiz-result-meta">
+                <span class="quiz-result-price" id="quiz-result-price">от 5 000 ₽</span>
+                <span class="quiz-result-time" id="quiz-result-time">2–3 дня</span>
+              </div>
+              <button class="btn-primary" id="quiz-order-btn">Заказать этот продукт →</button>
               <button class="quiz-restart" id="quiz-restart">← Пройти заново</button>
             </div>
           </div>
 
-          <!-- Прогресс -->
-          <div class="quiz-progress">
-            <div class="quiz-bar" id="quiz-bar"></div>
-          </div>
         </div>
 
       </div>

@@ -102,52 +102,77 @@ document.querySelectorAll('.service-card, .step-card, .portfolio-card, .review-c
 
 /* ---- Квиз ---- */
 const answers  = {};
-const PROGRESS = { 1: 33, 2: 66, 3: 100, result: 100 };
+const PROGRESS = { 1: 25, 2: 50, 3: 75, 4: 100, result: 100 };
+const COUNTER  = { 1: 'Шаг 1 из 4', 2: 'Шаг 2 из 4', 3: 'Шаг 3 из 4', 4: 'Шаг 4 из 4', result: 'Готово!' };
 
 const RESULTS = {
-  presence_solo:    { title: 'Цифровая визитка', desc: 'Идеально для эксперта или мастера — страница с вашими контактами, услугами и соцсетями.' },
-  presence_small:   { title: 'Цифровая визитка', desc: 'Быстрый способ заявить о себе онлайн и получить первых клиентов.' },
-  presence_service: { title: 'Лендинг', desc: 'Для сервисного бизнеса важна полноценная страница с описанием услуг и формой заявки.' },
-  leads_solo:       { title: 'Лендинг + Квиз', desc: 'Квиз поможет клиенту выбрать услугу, а лендинг — убедить написать.' },
-  leads_small:      { title: 'Лендинг', desc: 'Продающая страница с портфолио, отзывами и CTA — лучший инструмент для заявок.' },
-  leads_service:    { title: 'Лендинг + Квиз', desc: 'Квиз отфильтрует нужных клиентов и сразу доведёт их до заявки.' },
-  price_solo:       { title: 'Квиз', desc: 'Квиз поможет клиенту подобрать услугу и узнать примерную стоимость.' },
-  price_small:      { title: 'Калькулятор', desc: 'Интерактивный расчёт прямо на сайте — клиент видит цену и сразу пишет.' },
-  price_service:    { title: 'Калькулятор', desc: 'Лучший инструмент для сервисного бизнеса: клиент считает стоимость и оставляет заявку.' },
+  solo_leads:      { icon: '🚀', title: 'Лендинг + Квиз',    desc: 'Квиз поможет клиенту выбрать услугу, а лендинг — убедить написать вам.',  price: 'от 15 000 ₽', time: '5–7 дней',  service: 'Лендинг' },
+  solo_portfolio:  { icon: '🪪', title: 'Цифровая визитка',  desc: 'Страница с вашими работами, контактами и кнопкой записи.',                 price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
+  solo_price:      { icon: '🎯', title: 'Квиз',              desc: 'Клиент отвечает на вопросы — и узнаёт стоимость вашей услуги.',            price: 'от 8 000 ₽',  time: '3–5 дней',  service: 'Квиз' },
+  solo_presence:   { icon: '🪪', title: 'Цифровая визитка',  desc: 'Минимально — максимально. Ссылка, которую не стыдно дать любому.',         price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
+  small_leads:     { icon: '🚀', title: 'Лендинг',           desc: 'Продающая страница с портфолио, отзывами и формой заявки.',                price: 'от 10 000 ₽', time: '3–5 дней',  service: 'Лендинг' },
+  small_portfolio: { icon: '🚀', title: 'Лендинг',           desc: 'Полноценная страница с галереей работ и контактами.',                      price: 'от 10 000 ₽', time: '3–5 дней',  service: 'Лендинг' },
+  small_price:     { icon: '🧮', title: 'Калькулятор',       desc: 'Клиент считает стоимость онлайн — и сразу оставляет заявку.',              price: 'от 8 000 ₽',  time: '3–5 дней',  service: 'Калькулятор' },
+  small_presence:  { icon: '🪪', title: 'Цифровая визитка',  desc: 'Быстрый и недорогой старт. Всегда можно расширить позже.',                 price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
+  service_leads:   { icon: '🚀', title: 'Лендинг + Квиз',   desc: 'Квиз отфильтрует клиентов и доведёт до заявки.',                           price: 'от 15 000 ₽', time: '5–7 дней',  service: 'Лендинг' },
+  service_portfolio:{ icon: '🚀', title: 'Лендинг',          desc: 'Страница услуг с примерами работ и формой заявки.',                        price: 'от 10 000 ₽', time: '3–5 дней',  service: 'Лендинг' },
+  service_price:   { icon: '🧮', title: 'Калькулятор',       desc: 'Клиент вводит параметры — видит цену — пишет вам.',                        price: 'от 8 000 ₽',  time: '3–5 дней',  service: 'Калькулятор' },
+  service_presence:{ icon: '🚀', title: 'Лендинг',           desc: 'Для сервисного бизнеса нужна страница с описанием услуг.',                 price: 'от 10 000 ₽', time: '3–5 дней',  service: 'Лендинг' },
+  new_leads:       { icon: '🪪', title: 'Цифровая визитка',  desc: 'Начните с малого — визитка даст первых клиентов. Лендинг сделаем потом.',  price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
+  new_portfolio:   { icon: '🪪', title: 'Цифровая визитка',  desc: 'Идеальный старт: показать себя и собрать первых клиентов.',                price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
+  new_price:       { icon: '🎯', title: 'Квиз',              desc: 'Помогает клиентам разобраться в ваших услугах и ценах.',                   price: 'от 8 000 ₽',  time: '3–5 дней',  service: 'Квиз' },
+  new_presence:    { icon: '🪪', title: 'Цифровая визитка',  desc: 'Простой и быстрый старт в интернете.',                                     price: 'от 5 000 ₽',  time: '2–3 дня',   service: 'Цифровая визитка' },
 };
 
 function getResult() {
   const key = `${answers[1]}_${answers[2]}`;
-  return RESULTS[key] || { title: 'Лендинг', desc: 'Универсальный выбор для большинства бизнесов.' };
+  return RESULTS[key] || { icon: '🚀', title: 'Лендинг', desc: 'Универсальный выбор для большинства бизнесов.', price: 'от 10 000 ₽', time: '3–5 дней', service: 'Лендинг' };
 }
 
 function showStep(step) {
   document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
   const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
-  if (target) {
-    target.classList.add('active');
-    document.getElementById('quiz-bar').style.width = (PROGRESS[step] || 0) + '%';
-  }
+  if (!target) return;
+  target.classList.add('active');
+  document.getElementById('quiz-bar').style.width = (PROGRESS[step] || 0) + '%';
+  document.getElementById('quiz-counter').textContent = COUNTER[step] || '';
 
   if (step === 'result') {
     const r = getResult();
+    document.getElementById('quiz-result-icon').textContent  = r.icon;
     document.getElementById('quiz-result-title').textContent = r.title;
     document.getElementById('quiz-result-desc').textContent  = r.desc;
+    document.getElementById('quiz-result-price').textContent = r.price;
+    document.getElementById('quiz-result-time').textContent  = r.time;
   }
 }
 
 document.querySelectorAll('.quiz-opt').forEach(btn => {
   btn.addEventListener('click', () => {
-    const step = +btn.closest('.quiz-step').dataset.step;
+    const stepEl = btn.closest('.quiz-step');
+    stepEl.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('quiz-opt--selected'));
+    btn.classList.add('quiz-opt--selected');
+    const step = +stepEl.dataset.step;
     answers[step] = btn.dataset.val;
-    showStep(btn.dataset.next);
+    setTimeout(() => showStep(btn.dataset.next), 150);
   });
+});
+
+document.querySelectorAll('.quiz-back').forEach(btn => {
+  btn.addEventListener('click', () => showStep(btn.dataset.prev));
+});
+
+document.getElementById('quiz-order-btn').addEventListener('click', () => {
+  const r = getResult();
+  const sel = document.getElementById('form-service');
+  if (sel) sel.value = r.service;
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
 });
 
 document.getElementById('quiz-restart').addEventListener('click', () => {
   Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('quiz-opt--selected'));
   showStep(1);
-  document.getElementById('quiz-bar').style.width = '0%';
 });
 
 /* ---- Форма заявки → Telegram ---- */
