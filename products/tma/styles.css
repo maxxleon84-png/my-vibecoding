@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #070D1F;
+  --surface: #0D1B3E;
+  --surface2: #112244;
+  --primary: #0077FF;
+  --accent: #00D4FF;
+  --border: #1A3A6B;
+  --text: #E8F4FD;
+  --muted: #7A9EC0;
+  --success: #00E676;
+  --gold: #FFD700;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding-bottom: 80px;
+}
+
+/* ШАПКА */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.header-rate {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+#rate {
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* СЧЁТЧИК */
+.counter-section {
+  text-align: center;
+  padding: 24px 16px 8px;
+}
+
+.counter-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.counter {
+  font-size: 56px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  transition: transform 0.05s;
+}
+
+.counter.bump {
+  transform: scale(1.08);
+}
+
+/* ПЕРСОНАЖ */
+.click-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.character-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.character-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,119,255,0.25) 0%, transparent 70%);
+  transition: all 0.15s;
+}
+
+.character-wrap:active .character-glow {
+  background: radial-gradient(circle, rgba(0,212,255,0.4) 0%, transparent 70%);
+  transform: scale(1.2);
+}
+
+.character-emoji {
+  font-size: 80px;
+  transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.character-wrap:active .character-emoji {
+  transform: scale(0.88) rotate(-5deg);
+}
+
+.character-wrap.clicked .character-emoji {
+  transform: scale(1.12) rotate(3deg);
+}
+
+.click-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* FLOAT ЧИСЛА */
+#float-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.float-num {
+  position: absolute;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0,212,255,0.6);
+  animation: floatUp 0.9s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.6); }
+}
+
+/* АПГРЕЙДЫ */
+.upgrades-section {
+  padding: 8px 16px 0;
+}
+
+.upgrades-title {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.upgrade-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.upgrade-card:active {
+  transform: scale(0.96);
+}
+
+.upgrade-card:not(:disabled):hover {
+  border-color: var(--primary);
+  background: var(--surface2);
+}
+
+.upgrade-card:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.upgrade-card.bought {
+  border-color: var(--success);
+  background: rgba(0, 230, 118, 0.06);
+}
+
+.upg-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.upg-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.upg-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upg-desc {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.upg-cost {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.upgrade-card.bought .upg-cost {
+  color: var(--success);
+}
+
+/* ДОСТИЖЕНИЯ */
+.achievements-section {
+  padding: 16px 16px 0;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+
+.achievement {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 6px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--muted);
+  transition: all 0.3s;
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+
+.achievement.unlocked {
+  color: var(--text);
+  border-color: var(--gold);
+  filter: grayscale(0);
+  opacity: 1;
+  background: rgba(255, 215, 0, 0.06);
+  animation: achievePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes achievePop {
+  0%   { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}
+
+/* УВЕДОМЛЕНИЕ */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface2);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--accent);
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 200;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Вайбкодер рубит хардкор</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="header">
+    <div class="header-name" id="user-greeting">Привет, вайбкодер!</div>
+    <div class="header-rate">
+      <span id="rate">0</span> сайтов/сек
+    </div>
+  </header>
+
+  <!-- Счётчик -->
+  <section class="counter-section">
+    <div class="counter-label">Сайтов создано</div>
+    <div class="counter" id="counter">0</div>
+  </section>
+
+  <!-- Персонаж (кликабельный) -->
+  <section class="click-zone">
+    <div class="character-wrap" id="character" onclick="handleClick(event)">
+      <div class="character-emoji" id="char-emoji">🧑‍💻</div>
+      <div class="character-glow"></div>
+    </div>
+    <p class="click-hint">Нажми на разработчика!</p>
+  </section>
+
+  <!-- Апгрейды -->
+  <section class="upgrades-section">
+    <h2 class="upgrades-title">Апгрейды</h2>
+    <div class="upgrades-grid" id="upgrades-grid">
+
+      <button class="upgrade-card" id="upg-ai" onclick="buyUpgrade('ai')">
+        <div class="upg-icon">🤖</div>
+        <div class="upg-info">
+          <div class="upg-name">AI-ассистент</div>
+          <div class="upg-desc">+1 клик</div>
+        </div>
+        <div class="upg-cost" id="cost-ai">50 🌐</div>
+      </button>
+
+      <button class="upgrade-card" id="upg-screen" onclick="buyUpgrade('screen')">
+        <div class="upg-icon">🖥</div>
+        <div class="upg-info">
+          <div class="upg-name">Второй экран</div>
+          <div class="upg-desc">+1/сек</div>
+        </div>
+        <div class="upg-cost" id="cost-screen">200 🌐</div>
+      </button>
+
+      <button class="upgrade-card" id="upg-codegen" onclick="buyUpgrade('codegen')">
+        <div class="upg-icon">⚡</div>
+        <div class="upg-info">
+          <div class="upg-name">Кодогенератор</div>
+          <div class="upg-desc">+3 клик</div>
+        </div>
+        <div class="upg-cost" id="cost-codegen">500 🌐</div>
+      </button>
+
+      <button class="upgrade-card" id="upg-5g" onclick="buyUpgrade('5g')">
+        <div class="upg-icon">📡</div>
+        <div class="upg-info">
+          <div class="upg-name">Интернет 5G</div>
+          <div class="upg-desc">+5/сек</div>
+        </div>
+        <div class="upg-cost" id="cost-5g">1000 🌐</div>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- Достижения -->
+  <section class="achievements-section">
+    <h2 class="upgrades-title">Достижения</h2>
+    <div class="achievements-grid" id="achievements-grid">
+      <div class="achievement" id="ach-first">🏆 Первый сайт</div>
+      <div class="achievement" id="ach-10">🎯 10 сайтов</div>
+      <div class="achievement" id="ach-100">🚀 100 сайтов</div>
+      <div class="achievement" id="ach-upgrade">🛠 Первый апгрейд</div>
+      <div class="achievement" id="ach-1000">💎 1000 сайтов</div>
+      <div class="achievement" id="ach-pro">👑 Вайбкодер Про</div>
+    </div>
+  </section>
+
+  <!-- Float числа при клике (контейнер) -->
+  <div id="float-container"></div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
