@@ -604,6 +604,18 @@ body {
 .preview-bar--sm { height: 18px; width: 80%; }
 .preview-bar--md { height: 20px; width: 90%; }
 
+.preview-screenshot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 28px);
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  display: block;
+}
+
 .portfolio-info {
   padding: 20px;
 }
