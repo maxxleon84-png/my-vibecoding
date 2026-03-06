@@ -364,6 +364,42 @@ body {
   color: var(--muted);
 }
 
+.snow-meters {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.meters-input {
+  width: 60px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.meters-input::-webkit-outer-spin-button,
+.meters-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.meters-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.meters-unit {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 /* ---- Результат ---- */
 .result {
   background: var(--surface2);

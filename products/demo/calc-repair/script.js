@@ -14,7 +14,7 @@ const DEMOLISH_PRICE   = 150;  // демонтаж ₽/м²
 const SHEATHING_PRICE  = 280;
 const RAFTERS_PRICE    = 480;
 const INSULATION_PRICE = 380;
-const SNOW_PRICE       = 220;
+const SNOW_PRICE_PM    = 350;  // снегозадержатели ₽/п.м.
 const TRIM_PRICE       = 280;
 
 function fmt(n) {
@@ -52,7 +52,8 @@ function calculate() {
     lines.push({ label: 'Утепление кровли', val: a * INSULATION_PRICE });
   }
   if (document.getElementById('extra-snow').checked) {
-    lines.push({ label: 'Снегозадержатели', val: a * SNOW_PRICE });
+    const pm = Math.max(1, +document.getElementById('snow-meters').value || 20);
+    lines.push({ label: `Снегозадержатели (${pm} п.м.)`, val: pm * SNOW_PRICE_PM });
   }
   if (document.getElementById('extra-trim').checked) {
     lines.push({ label: 'Доборные элементы', val: a * TRIM_PRICE });
@@ -132,6 +133,7 @@ document.getElementById('complexity-type').addEventListener('click', e => {
 
 /* ---- Доп. работы ---- */
 document.getElementById('extras').addEventListener('change', calculate);
+document.getElementById('snow-meters').addEventListener('input', calculate);
 
 /* ---- Район ---- */
 document.getElementById('location-type').addEventListener('click', e => {
