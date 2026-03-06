@@ -443,6 +443,14 @@ body {
 
 .service-cta:hover { color: var(--color-primary); }
 
+.service-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-top: auto;
+  padding-top: 12px;
+}
+
 /* ============================================================
    HOW I WORK
    ============================================================ */
