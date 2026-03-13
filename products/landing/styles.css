@@ -1186,7 +1186,8 @@ body {
   .nav-links, .nav-cta { display: none; }
   .nav-burger { display: flex; }
 
-  .hero-inner { flex-direction: column; text-align: center; gap: 32px; }
+  .hero { padding-top: 80px; }
+  .hero-inner { flex-direction: column; text-align: center; gap: 32px; padding-top: 40px; }
   .hero-actions { justify-content: center; }
   .hero-photo-wrap, .hero-photo { width: 160px; height: 160px; }
   .hero-desc { margin: 0 auto 32px; }
