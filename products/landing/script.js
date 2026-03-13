@@ -64,7 +64,7 @@ mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
 /* ---- Навигация: подсветка при скролле ---- */
 const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-const sections = ['services', 'how', 'portfolio', 'reviews', 'quiz'].map(id => document.getElementById(id));
+const sections = ['services', 'why', 'portfolio', 'faq', 'quiz'].map(id => document.getElementById(id));
 
 function updateActiveNav() {
   nav.style.background = window.scrollY > 40
@@ -94,10 +94,13 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.service-card, .step-card, .portfolio-card, .review-card').forEach((el, i) => {
-  el.style.transition = `opacity 0.5s ease ${i * 0.08}s, transform 0.5s ease ${i * 0.08}s`;
-  el.classList.add('anim-target');
-  observer.observe(el);
+document.querySelectorAll('section').forEach(section => {
+  const cards = section.querySelectorAll('.service-card, .step-card, .portfolio-card, .review-card, .problem-card, .why-item, .faq-item');
+  cards.forEach((el, i) => {
+    el.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+    el.classList.add('anim-target');
+    observer.observe(el);
+  });
 });
 
 /* ---- Квиз ---- */
@@ -130,10 +133,29 @@ function getResult() {
 }
 
 function showStep(step) {
-  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  const current = document.querySelector('.quiz-step.active');
   const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
   if (!target) return;
-  target.classList.add('active');
+
+  if (current && current !== target) {
+    current.style.opacity = '0';
+    current.style.transform = 'translateX(-20px)';
+    setTimeout(() => {
+      current.classList.remove('active');
+      current.style.opacity = '';
+      current.style.transform = '';
+      target.classList.add('active');
+      target.style.opacity = '0';
+      target.style.transform = 'translateX(20px)';
+      requestAnimationFrame(() => {
+        target.style.opacity = '1';
+        target.style.transform = 'translateX(0)';
+      });
+    }, 200);
+  } else {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    target.classList.add('active');
+  }
   document.getElementById('quiz-bar').style.width = (PROGRESS[step] || 0) + '%';
   document.getElementById('quiz-counter').textContent = COUNTER[step] || '';
 
@@ -175,6 +197,28 @@ document.getElementById('quiz-restart').addEventListener('click', () => {
   showStep(1);
 });
 
+/* ---- FAQ аккордеон ---- */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    // Закрыть все
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // Открыть текущий (если был закрыт)
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ---- Плавные переходы квиза ---- */
+const quizWrap = document.querySelector('.quiz-wrap');
+
+/* ---- Динамический месяц в hero ---- */
+(function () {
+  const months = ['январе','феврале','марте','апреле','мае','июне','июле','августе','сентябре','октябре','ноябре','декабре'];
+  const el = document.querySelector('.hero-slots');
+  if (el) el.textContent = '🔥 Свободно 2 слота в ' + months[new Date().getMonth()];
+})();
+
 /* ---- Форма заявки → Telegram ---- */
 const TG_TOKEN   = '8637033664:AAEcbBM7CfvQtvsN0sXS12CHPb8Ni6NAL94';
 const TG_CHAT_ID = '322353894';
@@ -190,7 +234,14 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
   const service = document.getElementById('form-service').value;
   const msg     = document.getElementById('form-msg').value.trim();
 
-  const text = `🔔 *Новая заявка с лендинга*\n\n👤 Имя: ${name}\n📞 Контакт: ${phone || '—'}\n💼 Услуга: ${service || '—'}\n💬 Сообщение: ${msg || '—'}`;
+  const text = [
+    '🔔 Новая заявка с лендинга',
+    '',
+    '👤 Имя: ' + name,
+    '📞 Контакт: ' + (phone || '—'),
+    '💼 Услуга: ' + (service || '—'),
+    '💬 Сообщение: ' + (msg || '—'),
+  ].join('\n');
 
   btn.disabled = true;
   btn.textContent = 'Отправляю...';
@@ -201,7 +252,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: 'Markdown' }),
+      body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
     });
     const data = await res.json();
     if (data.ok) {
