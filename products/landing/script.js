@@ -97,7 +97,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('section').forEach(section => {
   const cards = section.querySelectorAll('.service-card, .step-card, .portfolio-card, .review-card, .problem-card, .why-item, .faq-item');
   cards.forEach((el, i) => {
-    el.style.transition = `opacity 0.4s ease ${i * 0.06}s, transform 0.4s ease ${i * 0.06}s`;
+    el.style.transition = `opacity 0.25s ease ${i * 0.03}s, transform 0.25s ease ${i * 0.03}s`;
     el.classList.add('anim-target');
     observer.observe(el);
   });
