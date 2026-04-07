@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- Запрещаем масштабирование — мобильное приложение, не сайт -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Учим вместе</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 1: ПРИВЕТСТВИЕ — показывается только при первом входе
+       Родитель выбирает класс ребёнка один раз
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-welcome" class="screen active">
+    <div class="welcome-wrap">
+      <div class="welcome-owl">🦉</div>
+      <h1 class="welcome-title">Учим вместе!</h1>
+      <p class="welcome-sub">Твой умный помощник по школьным урокам</p>
+      <p class="welcome-question">В каком классе учится ребёнок?</p>
+      <div class="grade-buttons">
+        <!-- onclick пока не работает — JS будет в следующем шаге -->
+        <button class="grade-btn" onclick="selectGrade(2)">
+          <span class="grade-num">2</span>
+          <span class="grade-label">класс</span>
+        </button>
+        <button class="grade-btn" onclick="selectGrade(3)">
+          <span class="grade-num">3</span>
+          <span class="grade-label">класс</span>
+        </button>
+      </div>
+      <p class="welcome-note">Можно изменить в настройках</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 2: ГЛАВНАЯ — открывается каждый день
+       Показывает прогресс и мотивирует заниматься
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-home" class="screen">
+
+    <!-- Шапка с именем и классом -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="header-greeting" id="header-greeting">Привет, ученик!</div>
+        <div class="header-grade" id="header-grade">2 класс</div>
+      </div>
+      <!-- Значок Premium показывается только у подписчиков -->
+      <div class="premium-badge" id="premium-badge" style="display:none">
+        ⭐ Премиум
+      </div>
+    </header>
+
+    <!-- Карточка стрика — серия дней подряд -->
+    <!-- Стрик — главный мотиватор. Duolingo доказал: 10-дневный стрик снижает отток в 2 раза -->
+    <div class="streak-card">
+      <div class="streak-flame">🔥</div>
+      <div class="streak-info">
+        <div class="streak-num" id="streak-num">0</div>
+        <div class="streak-label">дней подряд</div>
+      </div>
+      <div class="streak-message" id="streak-message">Начни сегодня!</div>
+    </div>
+
+    <!-- Прогресс дня -->
+    <div class="today-card">
+      <div class="today-header">
+        <span class="today-title">Сегодня пройдено</span>
+        <span class="today-count">
+          <span id="today-done">0</span>/<span id="today-limit">5</span> заданий
+        </span>
+      </div>
+      <!-- Полоска прогресса — заполняется по мере выполнения заданий -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="today-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Большая кнопка "Учиться" — главное действие -->
+    <button class="btn-primary btn-big" onclick="showScreen('subjects')">
+      Учиться сейчас 📚
+    </button>
+
+    <!-- Для бесплатных пользователей: напоминание и кнопка подписки -->
+    <div id="free-banner" class="free-banner">
+      <div class="free-banner-text">Бесплатно: математика, 5 заданий/день</div>
+      <button class="btn-subscribe" onclick="showScreen('paywall')">
+        ⭐ Открыть все предметы — 149 ₽/мес
+      </button>
+    </div>
+
+    <!-- Миниатюры предметов — быстрый доступ к любому -->
+    <div class="subjects-mini">
+      <div class="section-title">Предметы</div>
+      <div class="subjects-mini-grid" id="subjects-mini-grid">
+        <!-- Заполняется через JS из tasks.js -->
+        <!-- Пока показываем заглушки для красоты -->
+        <div class="subject-mini math" onclick="startSubject('math')">
+          <span class="subject-mini-emoji">🔢</span>
+          <span class="subject-mini-name">Математика</span>
+          <span class="subject-mini-progress">0%</span>
+        </div>
+        <div class="subject-mini russian subject-locked" onclick="showScreen('paywall')">
+          <span class="subject-mini-emoji">✏️</span>
+          <span class="subject-mini-name">Русский</span>
+          <span class="subject-mini-lock">🔒</span>
+        </div>
+        <div class="subject-mini world subject-locked" onclick="showScreen('paywall')">
+          <span class="subject-mini-emoji">🌍</span>
+          <span class="subject-mini-name">Окр. мир</span>
+          <span class="subject-mini-lock">🔒</span>
+        </div>
+        <div class="subject-mini english subject-locked" onclick="showScreen('paywall')">
+          <span class="subject-mini-emoji">🔤</span>
+          <span class="subject-mini-name">Английский</span>
+          <span class="subject-mini-lock">🔒</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 3: ПРЕДМЕТЫ — выбор предмета
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-subjects" class="screen">
+
+    <div class="screen-header">
+      <button class="back-btn" onclick="goBack()">← Назад</button>
+      <h2 class="screen-title">Что учим?</h2>
+    </div>
+
+    <div class="subjects-list" id="subjects-list">
+
+      <!-- Каждая карточка предмета — кнопка перехода к темам -->
+      <div class="subject-card math" onclick="startSubject('math')">
+        <div class="subject-card-icon">🔢</div>
+        <div class="subject-card-info">
+          <div class="subject-card-name">Математика</div>
+          <div class="subject-card-desc">Числа, счёт, задачи</div>
+          <!-- Полоска общего прогресса по предмету -->
+          <div class="progress-bar thin">
+            <div class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="subject-card-arrow">›</div>
+      </div>
+
+      <div class="subject-card russian" onclick="startSubject('russian')">
+        <div class="subject-card-icon">✏️</div>
+        <div class="subject-card-info">
+          <div class="subject-card-name">Русский язык</div>
+          <div class="subject-card-desc">Правила, слова, письмо</div>
+          <div class="progress-bar thin">
+            <div class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <!-- Замочек для бесплатных пользователей -->
+        <div class="subject-card-lock">🔒</div>
+      </div>
+
+      <div class="subject-card world" onclick="startSubject('world')">
+        <div class="subject-card-icon">🌍</div>
+        <div class="subject-card-info">
+          <div class="subject-card-name">Окружающий мир</div>
+          <div class="subject-card-desc">Природа, наука, история</div>
+          <div class="progress-bar thin">
+            <div class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="subject-card-lock">🔒</div>
+      </div>
+
+      <div class="subject-card english" onclick="startSubject('english')">
+        <div class="subject-card-icon">🔤</div>
+        <div class="subject-card-info">
+          <div class="subject-card-name">Английский язык</div>
+          <div class="subject-card-desc">Слова, фразы, алфавит</div>
+          <div class="progress-bar thin">
+            <div class="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div class="subject-card-lock">🔒</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 4: ТЕМЫ — список тем выбранного предмета
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-topics" class="screen">
+
+    <div class="screen-header">
+      <button class="back-btn" onclick="goBack()">← Назад</button>
+      <!-- Название предмета подставляется через JS -->
+      <h2 class="screen-title" id="topics-title">Математика</h2>
+    </div>
+
+    <!-- Список тем заполняется через JS из tasks.js -->
+    <div class="topics-list" id="topics-list">
+
+      <!-- Пример одной темы (потом будет генерироваться JS) -->
+      <div class="topic-card" onclick="startTopic('math', 'addition')">
+        <div class="topic-card-left">
+          <div class="topic-card-name">Сложение до 100</div>
+          <div class="topic-card-sub">7 заданий · не начато</div>
+        </div>
+        <div class="topic-card-right">
+          <!-- Кружок с процентом правильных ответов -->
+          <div class="topic-score new">Новая</div>
+        </div>
+      </div>
+
+      <div class="topic-card topic-done" onclick="startTopic('math', 'subtraction')">
+        <div class="topic-card-left">
+          <div class="topic-card-name">Вычитание до 100</div>
+          <div class="topic-card-sub">7 заданий · пройдено</div>
+        </div>
+        <div class="topic-card-right">
+          <div class="topic-score done">100%</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 5: ОБЪЯСНЕНИЕ ТЕМЫ
+       Ребёнок читает перед заданиями. Язык — как для 7-летнего.
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-explain" class="screen">
+
+    <div class="screen-header">
+      <button class="back-btn" onclick="goBack()">← Назад</button>
+      <div class="explain-subject-badge math" id="explain-badge">🔢 Математика</div>
+    </div>
+
+    <!-- Название темы -->
+    <h2 class="explain-title" id="explain-title">Сложение до 100</h2>
+
+    <!-- Сам текст объяснения — заполняется через JS -->
+    <div class="explain-body" id="explain-body">
+      <p>
+        Когда мы складываем числа до 100, удобно работать отдельно
+        с <strong>десятками</strong> и <strong>единицами</strong>.
+      </p>
+      <div class="explain-example">
+        <div class="example-title">Пример:</div>
+        <div class="example-text">35 + 47 = ?</div>
+        <div class="example-steps">
+          <div>Шаг 1: складываем десятки → 30 + 40 = 70</div>
+          <div>Шаг 2: складываем единицы → 5 + 7 = 12</div>
+          <div>Шаг 3: складываем результаты → 70 + 12 = <strong>82</strong></div>
+        </div>
+      </div>
+      <p>
+        Попробуй сам! Сначала всегда разбивай число на десятки и единицы —
+        так гораздо проще не ошибиться.
+      </p>
+    </div>
+
+    <!-- Большая кнопка перехода к заданиям -->
+    <button class="btn-primary btn-big" onclick="startQuiz()">
+      Понял, поехали! 🚀
+    </button>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 6: ЗАДАНИЕ (QUIZ)
+       Один вопрос + 4 варианта. Показывается по одному.
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-quiz" class="screen screen-quiz">
+
+    <!-- Прогресс: сколько вопросов из скольких -->
+    <div class="quiz-header">
+      <button class="back-btn" onclick="confirmLeaveQuiz()">✕</button>
+      <div class="quiz-progress-wrap">
+        <!-- Полоска заполняется с каждым вопросом -->
+        <div class="progress-bar quiz-bar">
+          <div class="progress-fill" id="quiz-fill" style="width: 20%"></div>
+        </div>
+        <div class="quiz-counter" id="quiz-counter">1 / 5</div>
+      </div>
+    </div>
+
+    <!-- Текст вопроса -->
+    <div class="question-card">
+      <div class="question-text" id="question-text">
+        Сколько будет 35 + 47?
+      </div>
+    </div>
+
+    <!-- 4 кнопки ответов -->
+    <div class="options-grid" id="options-grid">
+      <button class="option-btn" onclick="selectAnswer(0)">72</button>
+      <button class="option-btn" onclick="selectAnswer(1)">82</button>
+      <button class="option-btn" onclick="selectAnswer(2)">73</button>
+      <button class="option-btn" onclick="selectAnswer(3)">81</button>
+    </div>
+
+    <!-- Блок с объяснением — скрыт до ответа -->
+    <!-- После ответа появляется с разбором и кнопкой "Следующий" -->
+    <div class="hint-block" id="hint-block" style="display: none">
+      <div class="hint-header">
+        <!-- Иконка меняется: ✅ если правильно, ❌ если нет -->
+        <span class="hint-icon" id="hint-icon">✅</span>
+        <span class="hint-title" id="hint-title">Правильно!</span>
+      </div>
+      <div class="hint-text" id="hint-text">
+        Складываем десятки: 30+40=70. Складываем единицы: 5+7=12. Итого: 70+12=82.
+      </div>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">
+        Следующий →
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 7: РЕЗУЛЬТАТ СЕССИИ
+       Показывается после последнего вопроса
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-result" class="screen">
+
+    <!-- Большой эмодзи-реакция (меняется в зависимости от результата) -->
+    <div class="result-icon" id="result-icon">🎉</div>
+    <div class="result-title" id="result-title">Молодец!</div>
+
+    <!-- Счёт: X из Y -->
+    <div class="result-score-wrap">
+      <div class="result-score" id="result-score">5</div>
+      <div class="result-score-label">из <span id="result-total">5</span></div>
+    </div>
+
+    <!-- Звёздочки (1-5 в зависимости от % правильных) -->
+    <div class="result-stars" id="result-stars">⭐⭐⭐⭐⭐</div>
+
+    <!-- Мотивационное сообщение -->
+    <div class="result-message" id="result-message">
+      Все задания решены правильно! Ты отлично знаешь эту тему!
+    </div>
+
+    <!-- Кнопки: на главную или ещё раз -->
+    <div class="result-buttons">
+      <button class="btn-primary" onclick="showScreen('home')">
+        На главную 🏠
+      </button>
+      <button class="btn-secondary" onclick="repeatTopic()">
+        Ещё раз
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 8: PAYWALL — лимит или попытка открыть платный предмет
+       Не навязчиво: показываем ценность, не давим
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-paywall" class="screen">
+
+    <div class="paywall-wrap">
+      <div class="paywall-icon">⭐</div>
+      <h2 class="paywall-title" id="paywall-title">
+        Открой все предметы
+      </h2>
+      <p class="paywall-sub" id="paywall-sub">
+        Бесплатно доступна только математика (5 заданий в день).
+      </p>
+
+      <!-- Что получает подписчик -->
+      <div class="paywall-perks">
+        <div class="perk">✅ Все 4 предмета: математика, русский, окружающий мир, английский</div>
+        <div class="perk">✅ 2 и 3 класс — всё без ограничений</div>
+        <div class="perk">✅ Подробные объяснения к каждому заданию</div>
+        <div class="perk">✅ Статистика прогресса</div>
+        <div class="perk">✅ Значки и достижения</div>
+      </div>
+
+      <!-- Цена и кнопка -->
+      <div class="paywall-price">149 ₽ в месяц</div>
+      <div class="paywall-compare">Репетитор стоит 500–1500 ₽ за один урок</div>
+
+      <button class="btn-primary btn-big btn-stars" onclick="subscribe()">
+        ⭐ Оформить подписку
+      </button>
+
+      <button class="btn-ghost" onclick="goBack()">
+        Попробовать бесплатно
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ЭКРАН 9: СТАТИСТИКА
+  ════════════════════════════════════════════════════════════════ -->
+  <div id="screen-stats" class="screen">
+
+    <div class="screen-header no-back">
+      <h2 class="screen-title">Мои успехи</h2>
+    </div>
+
+    <!-- Три главных числа -->
+    <div class="stats-overview">
+      <div class="stat-item">
+        <div class="stat-num" id="stat-total">0</div>
+        <div class="stat-label">заданий решено</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-correct">0%</div>
+        <div class="stat-label">правильных</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-maxstreak">0</div>
+        <div class="stat-label">макс. серия</div>
+      </div>
+    </div>
+
+    <!-- Прогресс по каждому предмету -->
+    <div class="section-title">Прогресс по предметам</div>
+    <div class="subject-progress" id="subject-progress">
+
+      <div class="subject-prog-item">
+        <div class="subject-prog-header">
+          <span>🔢 Математика</span>
+          <span class="subject-prog-pct">0 заданий · 0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill math-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div class="subject-prog-item">
+        <div class="subject-prog-header">
+          <span>✏️ Русский язык</span>
+          <span class="subject-prog-pct">0 заданий · 0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill russian-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Достижения -->
+    <div class="section-title">Достижения</div>
+    <div class="achievements-grid" id="achievements-grid">
+
+      <div class="achievement locked">
+        <div class="ach-icon">🎯</div>
+        <div class="ach-name">Первый шаг</div>
+        <div class="ach-desc">Реши первое задание</div>
+      </div>
+
+      <div class="achievement locked">
+        <div class="ach-icon">🔥</div>
+        <div class="ach-name">5 дней подряд</div>
+        <div class="ach-desc">Занимайся 5 дней</div>
+      </div>
+
+      <div class="achievement unlocked">
+        <div class="ach-icon">🌟</div>
+        <div class="ach-name">Отличник</div>
+        <div class="ach-desc">Всё правильно в сессии</div>
+      </div>
+
+      <div class="achievement locked">
+        <div class="ach-icon">📚</div>
+        <div class="ach-name">Все темы</div>
+        <div class="ach-desc">Пройди все темы математики</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       НИЖНЯЯ НАВИГАЦИЯ — видна на главных экранах
+       Скрыта во время прохождения теста
+  ════════════════════════════════════════════════════════════════ -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="showScreen('home')">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Главная</span>
+    </button>
+    <button class="nav-btn" id="nav-subjects" onclick="showScreen('subjects')">
+      <span class="nav-icon">📚</span>
+      <span class="nav-label">Предметы</span>
+    </button>
+    <button class="nav-btn" id="nav-stats" onclick="showScreen('stats')">
+      <span class="nav-icon">📊</span>
+      <span class="nav-label">Успехи</span>
+    </button>
+  </nav>
+
+  <!-- Toast-уведомление: появляется снизу и исчезает через 2.5 сек -->
+  <!-- Используется для достижений, ошибок, подтверждений -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Подключаем Telegram SDK — должен быть раньше нашего script.js -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- База заданий — должна быть раньше script.js -->
+  <script src="tasks.js"></script>
+  <!-- Наша логика — всегда последней -->
+  <script src="script.js"></script>
+
+</body>
+</html>

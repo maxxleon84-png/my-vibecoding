@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#070D1F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Подберём решение для вашего бизнеса</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Matrix rain фон -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Circuit trace декор — угловые элементы -->
+  <div class="circuit-corner circuit-top-left"></div>
+  <div class="circuit-corner circuit-bottom-right"></div>
+
+  <!-- ══════════════════════════════════════════════
+       ЭКРАН 1: ПРИВЕТСТВИЕ
+  ══════════════════════════════════════════════ -->
+  <div id="screen-welcome" class="screen active">
+    <div class="screen-inner">
+      <div class="welcome-icon">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <rect width="80" height="80" rx="20" fill="#0D1B3E"/>
+          <text x="40" y="46" font-family="monospace" font-weight="bold" font-size="28" fill="#00D4FF" text-anchor="middle" dominant-baseline="middle">ML</text>
+        </svg>
+      </div>
+      <h1 class="welcome-title">Подберём решение<br>для вашего бизнеса</h1>
+      <p class="welcome-sub">Ответьте на 4 вопроса — и я предложу<br>подходящий продукт с ценой и примером</p>
+      <button class="btn-primary btn-lg" onclick="startQuiz()">Начать</button>
+      <p class="welcome-note">Займёт меньше минуты</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ЭКРАН 2: КВИЗ (вопросы по очереди)
+  ══════════════════════════════════════════════ -->
+  <div id="screen-quiz" class="screen">
+    <div class="screen-inner">
+      <!-- Шапка: кнопка назад + прогресс-бар -->
+      <div class="quiz-header">
+        <button class="quiz-back hidden" id="quiz-back" onclick="goBack()">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="quiz-progress">
+          <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+        </div>
+      </div>
+      <div class="quiz-step" id="quiz-step">Вопрос 1 из 4</div>
+
+      <!-- Анимируемый контейнер -->
+      <div class="quiz-body" id="quiz-body">
+        <h2 class="quiz-question" id="quiz-question"></h2>
+        <div class="quiz-options" id="quiz-options"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ЭКРАН 3: РЕЗУЛЬТАТ — рекомендация
+  ══════════════════════════════════════════════ -->
+  <div id="screen-result" class="screen">
+    <div class="screen-inner">
+      <div class="result-badge">Рекомендация для вас</div>
+
+      <div class="result-reason" id="result-reason"></div>
+
+      <div class="result-card" id="result-card">
+        <div class="result-icon" id="result-icon"></div>
+        <h2 class="result-title" id="result-title"></h2>
+        <p class="result-desc" id="result-desc"></p>
+        <div class="result-price" id="result-price"></div>
+        <div class="result-features" id="result-features"></div>
+      </div>
+
+      <div class="result-example" id="result-example">
+        <span class="result-example-label">Пример работы:</span>
+        <a href="#" id="result-example-link" target="_blank" rel="noopener noreferrer"></a>
+      </div>
+
+      <button class="btn-primary btn-lg" onclick="showForm()">Оставить заявку</button>
+      <button class="btn-ghost" onclick="restartQuiz()">Пройти заново</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ЭКРАН 4: ФОРМА ЗАЯВКИ
+  ══════════════════════════════════════════════ -->
+  <div id="screen-form" class="screen">
+    <div class="screen-inner">
+      <h2 class="form-title">Оставьте заявку</h2>
+      <p class="form-sub">Я свяжусь с вами в Telegram в течение дня</p>
+
+      <!-- Мини-карточка выбранного продукта -->
+      <div class="form-product" id="form-product">
+        <span class="form-product-icon" id="form-product-icon"></span>
+        <div class="form-product-info">
+          <span class="form-product-title" id="form-product-title"></span>
+          <span class="form-product-price" id="form-product-price"></span>
+        </div>
+      </div>
+
+      <form id="order-form" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label for="input-name">Ваше имя</label>
+          <input type="text" id="input-name" placeholder="Как к вам обращаться?" required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-contact">Telegram или телефон</label>
+          <input type="text" id="input-contact" placeholder="@username или +7..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-comment">Комментарий <span class="optional">(необязательно)</span></label>
+          <textarea id="input-comment" rows="3" placeholder="Расскажите подробнее о задаче..."></textarea>
+        </div>
+
+        <input type="hidden" id="input-product" value="">
+        <input type="hidden" id="input-answers" value="">
+
+        <button type="submit" class="btn-primary btn-lg btn-full" id="btn-submit">Отправить заявку</button>
+      </form>
+
+      <button class="btn-ghost" onclick="showResult()">Назад к результату</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ЭКРАН 5: УСПЕХ
+  ══════════════════════════════════════════════ -->
+  <div id="screen-success" class="screen">
+    <div class="screen-inner screen-center">
+      <div class="success-icon">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="38" stroke="#00D4FF" stroke-width="3" fill="none"/>
+          <path d="M24 40 L35 51 L56 30" stroke="#00D4FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <h2 class="success-title">Заявка отправлена!</h2>
+      <p class="success-sub">Максим свяжется с вами в ближайшее время</p>
+      <a href="https://t.me/my_way_in_wibecoding" target="_blank" rel="noopener noreferrer" class="btn-outline btn-lg">Подписаться на канал</a>
+      <button class="btn-ghost" onclick="restartQuiz()">Подобрать ещё решение</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
