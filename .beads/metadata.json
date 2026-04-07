@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "vibe",
+  "project_id": "ee8bb76a-12b6-4b4a-a29a-fb958fa0bfdf"
+}
