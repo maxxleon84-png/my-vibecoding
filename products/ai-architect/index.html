@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архитектор Нейросистем — Максим Леонидов</title>
+<meta name="description" content="Проектирую ИИ-системы для бизнеса: нейроагенты, автоматизация продаж и поддержки, комплексные решения. Работа 24/7 без больничных и отпусков.">
+<meta name="theme-color" content="#050505">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Архитектор Нейросистем — Максим Леонидов">
+<meta property="og:description" content="ИИ-системы для бизнеса. Нейроагенты, автоматизация, архитектура решений.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23050505'/%3E%3Cg stroke='%23A3FF12' stroke-width='6' fill='none' stroke-linecap='round'%3E%3Cline x1='80' y1='120' x2='159' y2='41'/%3E%3Cline x1='174' y1='41' x2='200' y2='67'/%3E%3Cline x1='146' y1='200' x2='80' y2='134'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#050505;--green:#A3FF12;--green-mid:#7ACC0E;--green-dim:rgba(163,255,18,.12);
+  --green-glow:rgba(163,255,18,.45);--white:#F0F0F0;--gray:#888;--gray-dim:#2A2A2A;
+  --border:rgba(163,255,18,.07);--border-h:rgba(163,255,18,.3);
+  --fh:'Chakra Petch',sans-serif;--fb:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+
+/* Custom cursor */
+.cursor{position:fixed;width:20px;height:20px;border:2px solid var(--green);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .08s ease-out;mix-blend-mode:difference}
+.cursor-dot{position:fixed;width:5px;height:5px;background:var(--green);border-radius:50%;pointer-events:none;z-index:99999;box-shadow:0 0 10px var(--green-glow)}
+
+/* ═══ BACKGROUND LAYERS ═══ */
+#flythrough{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;display:none}
+.bg-grid::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(163,255,18,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(163,255,18,.02) 1px,transparent 1px);background-size:72px 72px;animation:gridMove 30s linear infinite}
+@keyframes gridMove{to{transform:translate(72px,72px)}}
+
+.orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(100px);z-index:0}
+.orb-1{top:-10%;left:20%;width:700px;height:700px;background:radial-gradient(circle,rgba(163,255,18,.06),transparent 65%);animation:ob1 14s ease-in-out infinite}
+.orb-2{bottom:-5%;right:15%;width:500px;height:500px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 65%);animation:ob2 18s ease-in-out infinite}
+@keyframes ob1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,50px) scale(1.15)}}
+@keyframes ob2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-60px) scale(1.2)}}
+
+.noise{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+/* Floating geo shapes */
+.geo{position:fixed;pointer-events:none;z-index:0;opacity:.15}
+.geo-hex{top:15%;right:8%;width:80px;height:80px;border:1px solid rgba(163,255,18,.2);animation:geoSpin1 25s linear infinite,geoFloat1 8s ease-in-out infinite;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.geo-tri{bottom:20%;left:6%;width:0;height:0;border-left:40px solid transparent;border-right:40px solid transparent;border-bottom:70px solid rgba(163,255,18,.08);animation:geoSpin2 30s linear infinite,geoFloat2 10s ease-in-out infinite}
+.geo-diamond{top:60%;right:20%;width:50px;height:50px;border:1px solid rgba(163,255,18,.15);transform:rotate(45deg);animation:geoSpin3 20s linear infinite,geoFloat3 7s ease-in-out infinite}
+.geo-ring{top:35%;left:15%;width:100px;height:100px;border:1px solid rgba(163,255,18,.1);border-radius:50%;animation:geoSpin1 35s linear infinite,geoFloat2 12s ease-in-out infinite}
+@keyframes geoSpin1{to{transform:rotateX(360deg) rotateY(180deg)}}
+@keyframes geoSpin2{to{transform:rotateY(360deg) rotateZ(180deg)}}
+@keyframes geoSpin3{to{transform:rotate(45deg) rotateX(360deg)}}
+@keyframes geoFloat1{0%,100%{translate:0 0}50%{translate:15px -20px}}
+@keyframes geoFloat2{0%,100%{translate:0 0}50%{translate:-20px 15px}}
+@keyframes geoFloat3{0%,100%{translate:0 0}50%{translate:10px 18px}}
+
+/* Particles */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;width:3px;height:3px;background:var(--green);border-radius:50%;opacity:0;animation:particleUp var(--dur) var(--delay) linear infinite}
+@keyframes particleUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:var(--op)}90%{opacity:var(--op)}100%{transform:translateY(-20vh) scale(1);opacity:0}}
+
+/* ═══ HEADER ═══ */
+header{position:fixed;top:0;width:100%;z-index:1000;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,5,.6);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border);animation:hdIn .6s ease-out}
+@keyframes hdIn{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-icon{width:48px;height:48px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-name{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.logo-role{font-family:var(--fb);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(163,255,18,.5);margin-top:2px}
+@media(max-width:768px){.logo-text{display:none}}
+nav{display:flex;align-items:center;gap:4px}
+nav a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;padding:8px 18px;border-radius:6px;transition:.3s}
+nav a:hover{color:var(--white);background:rgba(163,255,18,.05)}
+.nav-cta{background:var(--green)!important;color:var(--bg)!important;font-weight:700!important;padding:10px 22px!important}
+.nav-cta:hover{box-shadow:0 0 28px rgba(163,255,18,.35)!important;transform:translateY(-1px)!important}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-start;max-width:1400px;margin:0 auto;padding:140px 48px 60px}
+.hero-text{position:relative;z-index:2;max-width:900px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:24px;opacity:0;transform:translateY(28px)}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green-glow);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 12px var(--green-glow)}50%{box-shadow:0 0 24px var(--green-glow),0 0 48px rgba(163,255,18,.15)}}
+
+h1{font-family:var(--fh);font-weight:700;text-transform:uppercase;line-height:.92;margin-bottom:28px;opacity:0;transform:translateY(28px);text-shadow:0 4px 40px rgba(5,13,31,.9)}
+.line1{display:block;font-size:clamp(44px,6.5vw,88px);letter-spacing:2px}
+.line2{display:block;font-size:clamp(44px,6.5vw,88px);letter-spacing:2px;background:linear-gradient(90deg,var(--green),#C8FF60,var(--green));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 0 36px rgba(163,255,18,.12))}
+@keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.hero-sub{font-size:17px;font-weight:400;color:rgba(255,255,255,.9);line-height:1.75;max-width:520px;margin-bottom:44px;opacity:0;transform:translateY(28px);text-shadow:0 2px 20px rgba(5,5,5,.95)}
+.hero-actions{display:flex;align-items:center;gap:20px;opacity:0;transform:translateY(28px)}
+
+.btn-p{display:inline-flex;align-items:center;gap:12px;padding:16px 34px;background:var(--green);color:var(--bg);text-decoration:none;font-family:var(--fh);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;position:relative;overflow:hidden;transition:.4s cubic-bezier(.16,1,.3,1)}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .6s}
+.btn-p:hover::before{transform:translateX(100%)}
+.btn-p:hover{box-shadow:0 0 48px rgba(163,255,18,.35),0 8px 28px rgba(0,0,0,.5);transform:translateY(-2px)}
+.btn-p .arr{font-size:18px;transition:transform .3s}.btn-p:hover .arr{transform:translateX(4px)}
+.btn-g{color:var(--gray);text-decoration:none;font-size:14px;font-weight:500;padding:16px 24px;border:1px solid var(--gray-dim);transition:.3s}
+.btn-g:hover{color:var(--green);border-color:var(--green-dim);background:rgba(163,255,18,.03)}
+
+/* Stats */
+.stats{grid-column:1/-1;display:flex;gap:56px;padding-top:48px;border-top:1px solid var(--border);opacity:0;transform:translateY(28px)}
+.stat-val{font-family:var(--fh);font-size:40px;font-weight:700;color:var(--green);text-shadow:0 0 24px rgba(163,255,18,.15)}
+.stat-lbl{font-size:13px;color:var(--gray);margin-top:6px;font-weight:500}
+
+/* ═══ NEUROAGENT SPOTLIGHT ═══ */
+.spotlight{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:100px 48px}
+.spotlight-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:60px;border:1px solid var(--border-h);background:rgba(10,10,14,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;overflow:hidden}
+.spotlight-inner::before{content:'';position:absolute;top:-50%;right:-30%;width:600px;height:600px;background:radial-gradient(circle,rgba(163,255,18,.06),transparent 60%);border-radius:50%;filter:blur(60px)}
+.spotlight-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+
+.spot-ey{display:inline-flex;align-items:center;gap:10px;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:20px}
+.spot-ey::before{content:'';width:28px;height:2px;background:var(--green);box-shadow:0 0 8px var(--green-glow)}
+.spot-title{font-family:var(--fh);font-size:clamp(28px,3.5vw,44px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.1;margin-bottom:20px}
+.spot-title .g{color:var(--green);text-shadow:0 0 30px rgba(163,255,18,.2)}
+.spot-desc{font-size:16px;color:var(--gray);line-height:1.7;margin-bottom:36px;max-width:460px}
+
+.spot-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px}
+.spot-stat{padding:18px 20px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);transition:.3s}
+.spot-stat:hover{border-color:var(--border-h);background:rgba(163,255,18,.05);transform:translateY(-2px)}
+.spot-stat-v{font-family:var(--fh);font-size:22px;font-weight:700;color:var(--green)}
+.spot-stat-l{font-size:12px;color:var(--gray);margin-top:4px;font-weight:500}
+
+.spot-ch{display:flex;gap:10px;flex-wrap:wrap}
+.ch-tag{padding:8px 16px;border:1px solid var(--gray-dim);font-size:12px;font-weight:600;color:var(--gray);letter-spacing:.5px;transition:.3s}
+.ch-tag:hover{border-color:var(--green);color:var(--green);background:rgba(163,255,18,.04)}
+
+/* 3D Chat Demo */
+.chat-demo{position:relative;z-index:2;background:rgba(10,10,10,.85);border:1px solid var(--gray-dim);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 60px rgba(163,255,18,.03);transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s ease}
+
+.chat-hd{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--gray-dim);background:rgba(163,255,18,.03)}
+.chat-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-mid));display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:14px;font-weight:700;color:var(--bg);box-shadow:0 0 16px rgba(163,255,18,.2)}
+.chat-nm{font-family:var(--fh);font-size:14px;font-weight:600}
+.chat-st{font-size:11px;color:var(--green);display:flex;align-items:center;gap:5px}
+.chat-st::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green-glow)}
+
+.chat-bd{padding:20px;display:flex;flex-direction:column;gap:16px;min-height:280px}
+.msg{max-width:85%;padding:14px 18px;font-size:14px;line-height:1.6;opacity:0;transform:translateX(0) translateY(20px) rotateX(-10deg);transition:none}
+.msg.visible{opacity:1;transform:translateX(0) translateY(0) rotateX(0);transition:all .5s cubic-bezier(.16,1,.3,1)}
+.msg-u{align-self:flex-end;background:var(--gray-dim);color:var(--white);border-radius:16px 16px 4px 16px}
+.msg-u.visible{transform:translateX(0) translateY(0) rotateX(0)}
+.msg-b{align-self:flex-start;background:rgba(163,255,18,.08);color:var(--white);border:1px solid rgba(163,255,18,.12);border-radius:16px 16px 16px 4px}
+.msg-time{font-size:11px;color:var(--gray);margin-top:6px}
+
+.typing{align-self:flex-start;display:flex;gap:5px;padding:14px 20px;background:rgba(163,255,18,.05);border-radius:16px;opacity:0;transition:opacity .3s}
+.typing.visible{opacity:1}
+.typing span{width:7px;height:7px;background:var(--green);border-radius:50%;opacity:.4;animation:typeDot 1.4s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typeDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+
+.chat-inp{display:flex;align-items:center;gap:10px;padding:14px 20px;border-top:1px solid var(--gray-dim);background:rgba(5,5,5,.6)}
+.chat-inp input{flex:1;padding:10px 16px;background:var(--gray-dim);border:1px solid rgba(255,255,255,.05);color:var(--gray);font-size:13px;font-family:var(--fb);outline:none}
+.chat-inp button{width:36px;height:36px;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--bg);transition:.3s}
+.chat-inp button:hover{box-shadow:0 0 20px rgba(163,255,18,.3)}
+
+/* ═══ MARQUEE ═══ */
+.marq-wrap{position:relative;z-index:1;overflow:hidden;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);perspective:400px}
+.marq{display:flex;gap:48px;animation:marqScroll 22s linear infinite;width:max-content;transform-style:preserve-3d}
+.marq span{font-family:var(--fh);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:3px;white-space:nowrap;color:rgba(255,255,255,.85);text-shadow:0 2px 20px rgba(5,5,5,.9)}
+.marq .hl{color:var(--green);text-shadow:0 0 16px rgba(163,255,18,.2)}
+.marq .depth{transform:translateZ(-40px);opacity:.75}
+.marq .near{transform:translateZ(20px)}
+@keyframes marqScroll{to{transform:translateX(-50%)}}
+
+/* ═══ SERVICES ═══ */
+.section{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:100px 48px}
+.s-ey{display:inline-flex;align-items:center;gap:12px;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,.55);margin-bottom:20px}
+.s-ey::before{content:'';width:28px;height:2px;background:var(--green);box-shadow:0 0 8px var(--green-glow)}
+.s-title{font-family:var(--fh);font-size:clamp(30px,3.5vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.05;margin-bottom:56px}
+
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:800px}
+
+/* Cards with spotlight + tilt */
+.srv-card{position:relative;perspective:600px;cursor:pointer}
+.card-inner{position:relative;padding:34px 28px;background:rgba(10,10,14,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);overflow:hidden;transition:.5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d}
+.card-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .4s}
+.srv-card:hover .card-inner{border-color:var(--border-h);background:rgba(10,10,14,.9)}
+.srv-card:hover .card-inner::after{opacity:1}
+
+/* Spotlight glow that follows mouse */
+.card-spotlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;z-index:0}
+.srv-card:hover .card-spotlight{opacity:1}
+
+.c-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;position:relative;z-index:1}
+.c-num{font-family:var(--fh);font-size:11px;font-weight:700;color:var(--gray-dim);letter-spacing:1px;transition:color .3s}
+.srv-card:hover .c-num{color:var(--green)}
+.c-ico{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:rgba(163,255,18,.03);font-size:18px;transition:.3s}
+.srv-card:hover .c-ico{border-color:var(--border-h);background:rgba(163,255,18,.08);box-shadow:0 0 16px rgba(163,255,18,.08)}
+.c-title{font-family:var(--fh);font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;line-height:1.3;transition:color .3s;position:relative;z-index:1}
+.srv-card:hover .c-title{color:var(--green)}
+.c-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:24px;position:relative;z-index:1}
+.c-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--border);position:relative;z-index:1}
+.c-price{font-family:var(--fh);font-size:14px;font-weight:700;color:var(--green);text-shadow:0 0 16px rgba(163,255,18,.12)}
+.c-arr{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--gray-dim);color:var(--gray-dim);font-size:13px;transition:.3s}
+.srv-card:hover .c-arr{border-color:var(--green);color:var(--bg);background:var(--green);box-shadow:0 0 12px rgba(163,255,18,.25)}
+
+/* Featured card */
+.srv-featured .card-inner{border-color:var(--border-h)!important;background:linear-gradient(180deg,rgba(10,10,14,.92),rgba(10,10,14,.8))!important}
+.srv-featured .card-inner::before{content:'ХИТ';position:absolute;top:16px;right:16px;font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 12px;background:var(--green);color:var(--bg);text-transform:uppercase;box-shadow:0 0 20px rgba(163,255,18,.3);animation:featP 3s ease-in-out infinite;z-index:2}
+@keyframes featP{0%,100%{box-shadow:0 0 20px rgba(163,255,18,.3)}50%{box-shadow:0 0 32px rgba(163,255,18,.5)}}
+
+/* ═══ PRICING ═══ */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:800px}
+.price-card{position:relative;perspective:600px}
+.price-inner{position:relative;padding:40px 32px;background:rgba(10,10,14,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);overflow:hidden;transition:.5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d;display:flex;flex-direction:column;height:100%}
+.price-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .4s}
+.price-card:hover .price-inner{border-color:var(--border-h);background:rgba(10,10,14,.9)}
+.price-card:hover .price-inner::after{opacity:1}
+.price-spotlight{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;z-index:0}
+.price-card:hover .price-spotlight{opacity:1}
+
+/* Featured pricing */
+.price-featured .price-inner{border-color:var(--border-h)!important;background:linear-gradient(180deg,rgba(10,10,14,.92),rgba(10,10,14,.82))!important}
+.price-featured .price-inner::before{content:'ПОПУЛЯРНЫЙ';position:absolute;top:16px;right:16px;font-family:var(--fh);font-size:9px;font-weight:700;letter-spacing:2px;padding:4px 12px;background:var(--green);color:var(--bg);text-transform:uppercase;box-shadow:0 0 20px rgba(163,255,18,.3);animation:featP 3s ease-in-out infinite;z-index:2}
+
+.price-name{font-family:var(--fh);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gray);margin-bottom:16px;position:relative;z-index:1}
+.price-amount{font-family:var(--fh);font-size:36px;font-weight:700;color:var(--green);text-shadow:0 0 24px rgba(163,255,18,.15);margin-bottom:8px;position:relative;z-index:1}
+.price-for{font-size:13px;color:var(--gray);margin-bottom:28px;position:relative;z-index:1}
+.price-list{list-style:none;margin-bottom:32px;flex:1;position:relative;z-index:1}
+.price-list li{font-size:14px;color:var(--gray);padding:10px 0;border-bottom:1px solid rgba(163,255,18,.05);display:flex;align-items:center;gap:10px}
+.price-list li::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px rgba(163,255,18,.3);flex-shrink:0}
+.price-btn{display:block;text-align:center;padding:16px;background:transparent;border:1px solid var(--border-h);color:var(--green);text-decoration:none;font-family:var(--fh);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:.4s;position:relative;z-index:1}
+.price-btn:hover{background:var(--green);color:var(--bg);box-shadow:0 0 30px rgba(163,255,18,.3)}
+.price-featured .price-btn{background:var(--green);color:var(--bg)}
+.price-featured .price-btn:hover{box-shadow:0 0 40px rgba(163,255,18,.4);transform:translateY(-2px)}
+
+/* ═══ CONTACT FORM ═══ */
+.contact-inner{max-width:640px;margin:0 auto;padding:48px;border:1px solid var(--border-h);background:rgba(10,10,14,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;overflow:hidden}
+.contact-inner::before{content:'';position:absolute;top:-40%;right:-30%;width:400px;height:400px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 60%);border-radius:50%;filter:blur(60px)}
+.contact-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.contact-sub{font-size:15px;color:var(--gray);margin-bottom:36px;position:relative;z-index:1}
+
+.form-group{margin-bottom:20px;position:relative;z-index:1}
+.form-label{display:block;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gray);margin-bottom:8px}
+.form-input,.form-select,.form-textarea{width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:var(--white);font-family:var(--fb);font-size:14px;outline:none;transition:.3s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);box-shadow:0 0 16px rgba(163,255,18,.1);background:rgba(255,255,255,.05)}
+.form-input::placeholder,.form-textarea::placeholder{color:#555}
+.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888'%3E%3Cpath d='M6 9L1 4h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-select option{background:var(--bg);color:var(--white)}
+.form-textarea{min-height:100px;resize:vertical}
+
+.form-submit{width:100%;padding:18px;background:var(--green);color:var(--bg);border:none;font-family:var(--fh);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:.4s;position:relative;overflow:hidden;z-index:1}
+.form-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .6s}
+.form-submit:hover::before{transform:translateX(100%)}
+.form-submit:hover{box-shadow:0 0 40px rgba(163,255,18,.35);transform:translateY(-2px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+.form-status{text-align:center;padding:16px;margin-top:16px;font-size:14px;font-weight:500;display:none;position:relative;z-index:1}
+.form-status.success{display:block;color:var(--green);border:1px solid var(--green-dim);background:rgba(163,255,18,.05)}
+.form-status.error{display:block;color:#ff5555;border:1px solid rgba(255,85,85,.2);background:rgba(255,85,85,.05)}
+
+/* ═══ FOOTER ═══ */
+footer{position:relative;z-index:1;padding:60px 48px 40px;border-top:1px solid var(--border)}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.footer-brand .logo{margin-bottom:12px}
+.footer-tagline{font-size:13px;color:var(--gray);max-width:280px;line-height:1.6}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;transition:.3s;display:flex;align-items:center;gap:6px}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{width:100%;text-align:center;padding-top:32px;margin-top:32px;border-top:1px solid var(--border);font-size:12px;color:var(--gray-dim);letter-spacing:1px}
+
+/* Scroll reveal base */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .hero{padding:120px 32px 48px}
+  .spotlight-inner{grid-template-columns:1fr;gap:40px}
+  .chat-demo{max-width:460px;margin:0 auto}
+  .srv-grid,.pricing-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
+@media(max-width:768px){
+  body{cursor:auto}
+  .cursor,.cursor-dot{display:none}
+  header{padding:0 20px}
+  nav a:not(.nav-cta){display:none}
+  .hero{padding:100px 20px 40px}
+  .section,.spotlight{padding-left:20px;padding-right:20px}
+  .spotlight-inner{padding:32px 24px}
+  .contact-inner{padding:28px 20px}
+  .stats{flex-wrap:wrap;gap:28px;padding-top:36px}
+  .stat-val{font-size:30px}
+  .spot-stats{grid-template-columns:1fr 1fr}
+  .srv-grid,.pricing-grid{grid-template-columns:1fr}
+  .geo{display:none}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center}
+  .footer-tagline{text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  #flythrough,.orb,.geo,.noise,.particles{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<canvas id="flythrough" aria-hidden="true"></canvas>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем">
+      <!-- Outer diamond with broken corners -->
+      <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+        <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+        <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+        <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+        <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+        <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+      </g>
+      <!-- ML + AN -->
+      <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+      <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+      <!-- Pins -->
+      <g stroke="#A3FF12" stroke-width="3.5" stroke-linecap="square">
+        <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+        <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+        <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+        <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+        <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+        <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>
+        <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>
+        <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>
+        <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>
+        <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>
+      </g>
+      <!-- Solder pads -->
+      <g fill="#A3FF12" opacity=".7">
+        <rect x="121.9" y="54.3" width="5" height="5" transform="rotate(45 123.9 56.3)"/>
+        <rect x="131.23" y="44.97" width="5" height="5" transform="rotate(45 133.23 46.97)"/>
+        <rect x="140.57" y="35.64" width="5" height="5" transform="rotate(45 142.57 37.64)"/>
+        <rect x="185.03" y="32.32" width="5" height="5" transform="rotate(45 187.03 34.32)"/>
+        <rect x="194.36" y="41.65" width="5" height="5" transform="rotate(45 196.36 43.65)"/>
+        <rect x="75.22" y="148.77" width="5" height="5" transform="rotate(45 77.22 150.77)"/>
+        <rect x="87.35" y="160.90" width="5" height="5" transform="rotate(45 89.35 162.90)"/>
+        <rect x="99.47" y="173.02" width="5" height="5" transform="rotate(45 101.47 175.02)"/>
+        <rect x="111.59" y="185.14" width="5" height="5" transform="rotate(45 113.59 187.14)"/>
+        <rect x="123.72" y="197.27" width="5" height="5" transform="rotate(45 125.72 199.27)"/>
+      </g>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">Максим Леонидов</span>
+      <span class="logo-role">Архитектор нейросистем</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#services">Услуги</a>
+    <a href="#pricing">Тарифы</a>
+    <a href="neuroagents.html">Нейроагенты</a>
+    <a href="#contact" class="nav-cta">Связаться</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <div class="hero-text" id="heroText">
+    <div class="hero-badge reveal">Максим Леонидов</div>
+    <h1 class="reveal">
+      <span class="line1">Архитектор</span>
+      <span class="line2">Нейросистем</span>
+    </h1>
+    <p class="hero-sub reveal">Ваш бизнес работает 24/7&nbsp;— без выходных, больничных и&nbsp;отпусков. Проектирую ИИ&#8209;системы, которые автоматизируют продажи, поддержку и&nbsp;управление.</p>
+    <div class="hero-actions reveal">
+      <a href="#contact" class="btn-p">Обсудить проект <span class="arr">→</span></a>
+      <a href="neuroagents.html" class="btn-g">Подробнее о нейроагентах</a>
+    </div>
+  </div>
+
+  <div class="stats reveal">
+    <div><div class="stat-val" data-target="30" data-suffix="+">0</div><div class="stat-lbl">Проектов</div></div>
+    <div><div class="stat-val" data-target="24" data-suffix="/7">0</div><div class="stat-lbl">Работа систем</div></div>
+    <div><div class="stat-val" data-target="6" data-suffix="">0</div><div class="stat-lbl">Направлений</div></div>
+  </div>
+</section>
+
+<!-- NEUROAGENT SPOTLIGHT -->
+<section class="spotlight reveal">
+  <div class="spotlight-inner">
+    <div>
+      <div class="spot-ey">Флагманский продукт</div>
+      <h2 class="spot-title">НЕЙРО<span class="g">АГЕНТЫ</span></h2>
+      <p class="spot-desc">ИИ&#8209;сотрудник, который продаёт, консультирует и записывает клиентов вместо менеджера. Работает мгновенно, не устаёт, не ошибается.</p>
+      <div class="spot-stats">
+        <div class="spot-stat"><div class="spot-stat-v">15 сек</div><div class="spot-stat-l">Время ответа</div></div>
+        <div class="spot-stat"><div class="spot-stat-v">24/7</div><div class="spot-stat-l">Без перерывов</div></div>
+        <div class="spot-stat"><div class="spot-stat-v">3+</div><div class="spot-stat-l">Канала связи</div></div>
+        <div class="spot-stat"><div class="spot-stat-v">30 000 ₽</div><div class="spot-stat-l">Стоимость от</div></div>
+      </div>
+      <div class="spot-ch">
+        <span class="ch-tag">Telegram</span><span class="ch-tag">WhatsApp</span><span class="ch-tag">Avito</span><span class="ch-tag">VK</span><span class="ch-tag">Сайт</span>
+      </div>
+    </div>
+    <div class="chat-demo" id="chatDemo">
+      <div class="chat-hd">
+        <div class="chat-av">AI</div>
+        <div><div class="chat-nm">НейроАгент</div><div class="chat-st">Онлайн</div></div>
+      </div>
+      <div class="chat-bd" id="chatBody">
+        <div class="msg msg-u">Здравствуйте! Сколько стоит ваша услуга?<div class="msg-time">14:32</div></div>
+        <div class="msg msg-b">Добрый день! Стоимость базовой услуги — от 15 000 ₽. Для точного расчёта подскажите, какой объём работ вас интересует? Могу подобрать оптимальный вариант 🎯<div class="msg-time">14:32</div></div>
+        <div class="msg msg-u">А скидки есть при заказе нескольких услуг?<div class="msg-time">14:33</div></div>
+        <div class="msg msg-b">Да, при комплексном заказе — скидка до 20%. Давайте я подготовлю персональное предложение? Оставьте номер, и менеджер свяжется в течение 5 минут ✅<div class="msg-time">14:33</div></div>
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>
+      <div class="chat-inp"><input placeholder="Написать сообщение..." disabled><button>→</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq-wrap">
+  <div class="marq">
+    <span>Нейроагенты</span><span class="hl">●</span>
+    <span class="depth">Автоматизация</span><span class="hl">●</span>
+    <span class="near">Комплексные системы</span><span class="hl">●</span>
+    <span>Искусственный интеллект</span><span class="hl">●</span>
+    <span class="depth">Архитектура</span><span class="hl">●</span>
+    <span class="near">Масштабирование</span><span class="hl">●</span>
+    <span>Нейроагенты</span><span class="hl">●</span>
+    <span class="depth">Автоматизация</span><span class="hl">●</span>
+    <span class="near">Комплексные системы</span><span class="hl">●</span>
+    <span>Искусственный интеллект</span><span class="hl">●</span>
+    <span class="depth">Архитектура</span><span class="hl">●</span>
+    <span class="near">Масштабирование</span><span class="hl">●</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section reveal" id="services">
+  <div class="s-ey">Услуги</div>
+  <h2 class="s-title">Все<br>направления</h2>
+  <div class="srv-grid">
+    <div class="srv-card"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">01</span><div class="c-ico">⬡</div></div><div class="c-title">Сайты и лендинги</div><p class="c-desc">Лендинги, визитки, корпоративные сайты. Чистый код, быстрая загрузка, адаптация.</p><div class="c-foot"><span class="c-price">от 30 000 ₽</span><span class="c-arr">→</span></div></div></div>
+    <div class="srv-card"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">02</span><div class="c-ico">◈</div></div><div class="c-title">Интернет-магазины</div><p class="c-desc">Каталог, корзина, оплата, доставка. Всё для онлайн-продаж.</p><div class="c-foot"><span class="c-price">от 80 000 ₽</span><span class="c-arr">→</span></div></div></div>
+    <div class="srv-card"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">03</span><div class="c-ico">◎</div></div><div class="c-title">Приложения</div><p class="c-desc">Веб-приложения, Telegram Mini Apps, PWA. Все устройства.</p><div class="c-foot"><span class="c-price">от 50 000 ₽</span><span class="c-arr">→</span></div></div></div>
+    <div class="srv-card srv-featured"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">04</span><div class="c-ico">⬢</div></div><div class="c-title">Нейроагенты</div><p class="c-desc">ИИ-продавцы, ИИ-поддержка, ИИ-администраторы. 24/7 в мессенджерах.</p><div class="c-foot"><span class="c-price">от 30 000 ₽</span><span class="c-arr">→</span></div></div></div>
+    <div class="srv-card"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">05</span><div class="c-ico">⏣</div></div><div class="c-title">Комплексная система</div><p class="c-desc">Аудит → архитектура → агенты → воронка → CRM → аналитика.</p><div class="c-foot"><span class="c-price">от 80 000 ₽</span><span class="c-arr">→</span></div></div></div>
+    <div class="srv-card"><div class="card-spotlight"></div><div class="card-inner"><div class="c-head"><span class="c-num">06</span><div class="c-ico">△</div></div><div class="c-title">Обучение</div><p class="c-desc">Консультации, воркшопы, наставничество. Работа с ИИ.</p><div class="c-foot"><span class="c-price">от 5 000 ₽</span><span class="c-arr">→</span></div></div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section reveal" id="pricing">
+  <div class="s-ey">Тарифы</div>
+  <h2 class="s-title">Выберите<br>пакет</h2>
+  <div class="pricing-grid">
+    <div class="price-card"><div class="price-spotlight"></div><div class="price-inner">
+      <div class="price-name">Старт</div>
+      <div class="price-amount">от 30 000 ₽</div>
+      <div class="price-for">Малый бизнес, 1-2 человека</div>
+      <ul class="price-list">
+        <li>Сайт или лендинг</li>
+        <li>1 нейроагент в 1 канале</li>
+        <li>Базовая настройка</li>
+        <li>2 недели поддержки</li>
+      </ul>
+      <a href="#contact" class="price-btn">Выбрать →</a>
+    </div></div>
+
+    <div class="price-card price-featured"><div class="price-spotlight"></div><div class="price-inner">
+      <div class="price-name">Бизнес</div>
+      <div class="price-amount">от 80 000 ₽</div>
+      <div class="price-for">Компании с отделом продаж</div>
+      <ul class="price-list">
+        <li>Сайт + приложение</li>
+        <li>2-3 нейроагента в 3+ каналах</li>
+        <li>CRM-интеграция</li>
+        <li>Воронка продаж</li>
+        <li>1 месяц поддержки</li>
+      </ul>
+      <a href="#contact" class="price-btn">Выбрать →</a>
+    </div></div>
+
+    <div class="price-card"><div class="price-spotlight"></div><div class="price-inner">
+      <div class="price-name">Премиум</div>
+      <div class="price-amount">от 150 000 ₽</div>
+      <div class="price-for">Масштабирование бизнеса</div>
+      <ul class="price-list">
+        <li>Комплексная система</li>
+        <li>Команда нейроагентов</li>
+        <li>Автоматизация + аналитика</li>
+        <li>Обучение команды</li>
+        <li>3 месяца поддержки</li>
+      </ul>
+      <a href="#contact" class="price-btn">Выбрать →</a>
+    </div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section reveal" id="contact">
+  <div class="s-ey">Контакт</div>
+  <h2 class="s-title">Обсудить<br>проект</h2>
+  <div class="contact-inner">
+    <p class="contact-sub">Оставьте заявку — свяжусь в течение 2 часов</p>
+    <form id="contactForm">
+      <div class="form-group">
+        <label class="form-label">Имя</label>
+        <input class="form-input" type="text" name="name" placeholder="Как к вам обращаться?" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон или Telegram</label>
+        <input class="form-input" type="text" name="contact" placeholder="+7... или @username" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Что нужно</label>
+        <select class="form-select" name="service" required>
+          <option value="" disabled selected>Выберите услугу</option>
+          <option value="Сайт">Сайт или лендинг</option>
+          <option value="Интернет-магазин">Интернет-магазин</option>
+          <option value="Приложение">Приложение</option>
+          <option value="Нейроагент">Нейроагент</option>
+          <option value="Комплексная система">Комплексная система</option>
+          <option value="Обучение">Обучение</option>
+          <option value="Другое">Другое</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Комментарий (необязательно)</label>
+        <textarea class="form-textarea" name="comment" placeholder="Расскажите подробнее о проекте..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Отправить заявку →</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем" style="width:40px;height:40px">
+          <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+            <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+            <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+            <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+            <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+            <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+            <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+          </g>
+          <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+          <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">Максим Леонидов</span>
+          <span class="logo-role">Архитектор нейросистем</span>
+        </div>
+      </a>
+      <p class="footer-tagline">Проектирую ИИ-системы для бизнеса: нейроагенты, автоматизация, архитектура решений</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://t.me/maxxleon927" target="_blank">Telegram</a>
+      <a href="https://instagram.com/maxx.leonidov" target="_blank">Instagram</a>
+      <a href="https://github.com/maxxleon84-png" target="_blank">GitHub</a>
+      <a href="https://vk.com/maxx.leonidov" target="_blank">VK</a>
+    </div>
+    <div class="footer-copy">© 2026 Максим Леонидов. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+/* ═══ CUSTOM CURSOR ═══ */
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursorDot');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx - 2.5 + 'px';
+  dot.style.top = my - 2.5 + 'px';
+  cursor.style.left = mx - 10 + 'px';
+  cursor.style.top = my - 10 + 'px';
+});
+document.querySelectorAll('a,button,.srv-card,.price-card,.spot-stat,.ch-tag,.form-input,.form-select,.form-textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.8)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+/* ═══ PARTICLES ═══ */
+const pc = document.getElementById('particles');
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.setProperty('--dur', (6 + Math.random() * 10) + 's');
+  p.style.setProperty('--delay', (Math.random() * 10) + 's');
+  p.style.setProperty('--op', (0.15 + Math.random() * 0.35));
+  p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+  pc.appendChild(p);
+}
+
+/* ═══ HERO PARALLAX ON MOUSE ═══ */
+const heroText = document.getElementById('heroText');
+if (heroText) {
+  document.addEventListener('mousemove', e => {
+    const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+    const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+    heroText.style.transform = `translate(${-cx * 8}px, ${-cy * 5}px)`;
+  });
+}
+
+/* ═══ 3D CARD TILT + SPOTLIGHT ═══ */
+document.querySelectorAll('.srv-card').forEach(card => {
+  const inner = card.querySelector('.card-inner');
+  const spotlight = card.querySelector('.card-spotlight');
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    const tiltX = (y - 0.5) * 16;
+    const tiltY = (x - 0.5) * -16;
+    inner.style.transform = `perspective(600px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(8px)`;
+    inner.style.boxShadow = `${(x-0.5)*-20}px ${(y-0.5)*-20}px 40px rgba(0,0,0,.4), 0 0 30px rgba(163,255,18,.03)`;
+    if (spotlight) spotlight.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(163,255,18,.08), transparent 60%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateZ(0)';
+    inner.style.boxShadow = 'none';
+    if (spotlight) spotlight.style.background = 'none';
+  });
+});
+
+/* ═══ 3D CHAT DEMO TILT ═══ */
+const chatDemo = document.getElementById('chatDemo');
+if (chatDemo) {
+  chatDemo.parentElement.addEventListener('mousemove', e => {
+    const r = chatDemo.getBoundingClientRect();
+    const cx = (e.clientX - r.left - r.width/2) / r.width;
+    const cy = (e.clientY - r.top - r.height/2) / r.height;
+    chatDemo.style.transform = `perspective(800px) rotateY(${cx*8}deg) rotateX(${-cy*6}deg)`;
+    chatDemo.style.boxShadow = `${cx*-15}px ${cy*-15}px 60px rgba(0,0,0,.5), 0 0 40px rgba(163,255,18,.03)`;
+  });
+  chatDemo.parentElement.addEventListener('mouseleave', () => {
+    chatDemo.style.transform = 'perspective(800px) rotateY(0) rotateX(0)';
+    chatDemo.style.boxShadow = '0 30px 80px rgba(0,0,0,.5)';
+  });
+}
+
+/* ═══ SCROLL REVEAL + COUNTER ═══ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Counter animation for stat values
+      entry.target.querySelectorAll('.stat-val[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        let current = 0;
+        const step = Math.ceil(target / 30);
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) { current = target; clearInterval(timer); }
+          el.textContent = current + suffix;
+        }, 40);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ═══ CHAT MESSAGES STAGGERED REVEAL ═══ */
+const chatObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const msgs = entry.target.querySelectorAll('.msg');
+      const typing = entry.target.querySelector('.typing');
+      msgs.forEach((m, i) => {
+        setTimeout(() => m.classList.add('visible'), 400 * i);
+      });
+      if (typing) setTimeout(() => typing.classList.add('visible'), 400 * msgs.length + 200);
+      chatObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+const chatBody = document.getElementById('chatBody');
+if (chatBody) chatObs.observe(chatBody);
+
+/* ═══ PRICING CARD TILT + SPOTLIGHT ═══ */
+document.querySelectorAll('.price-card').forEach(card => {
+  const inner = card.querySelector('.price-inner');
+  const spotlight = card.querySelector('.price-spotlight');
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    const tiltX = (y - 0.5) * 12;
+    const tiltY = (x - 0.5) * -12;
+    inner.style.transform = `perspective(600px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(6px)`;
+    inner.style.boxShadow = `${(x-0.5)*-16}px ${(y-0.5)*-16}px 40px rgba(0,0,0,.4), 0 0 20px rgba(163,255,18,.03)`;
+    if (spotlight) spotlight.style.background = `radial-gradient(circle at ${x*100}% ${y*100}%, rgba(163,255,18,.08), transparent 60%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateZ(0)';
+    inner.style.boxShadow = 'none';
+    if (spotlight) spotlight.style.background = 'none';
+  });
+});
+
+/* ═══ CONTACT FORM → TELEGRAM ═══ */
+const form = document.getElementById('contactForm');
+const statusEl = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Отправка...';
+  statusEl.className = 'form-status';
+
+  const data = new FormData(form);
+  const payload = {
+    name: data.get('name'),
+    contact: data.get('contact'),
+    service: data.get('service'),
+    comment: data.get('comment') || ''
+  };
+
+  try {
+    const res = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      statusEl.className = 'form-status success';
+      statusEl.textContent = 'Заявка отправлена! Свяжусь в течение 2 часов.';
+      form.reset();
+    } else {
+      throw new Error('Ошибка');
+    }
+  } catch {
+    statusEl.className = 'form-status error';
+    statusEl.textContent = 'Ошибка отправки. Напишите напрямую в Telegram: @maxxleon927';
+  }
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Отправить заявку →';
+});
+
+/* ═══ PARALLAX SCROLL LAYERS ═══ */
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const sy = window.scrollY;
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+/* ═══ 3D FLYTHROUGH GRID BACKGROUND ═══ */
+(function(){
+  const canvas = document.getElementById('flythrough');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const G = [163, 255, 18];
+  const FOV = 600;
+  const DEPTH = 3000;
+  const SPEED = 20;
+  const NODE_COUNT = 700;
+  const CONNECT_DIST = 300;
+  const SPREAD_X = 900;
+  const SPREAD_Y = 600;
+
+  let mx = 0, my = 0, camX = 0, camY = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / W - 0.5) * 120;
+    my = (e.clientY / H - 0.5) * 80;
+  });
+
+  class Node {
+    constructor(fz){ this.reset(fz); }
+    reset(fz){
+      this.x = (Math.random() - 0.5) * SPREAD_X * 2;
+      this.y = (Math.random() - 0.5) * SPREAD_Y * 2;
+      this.z = fz !== undefined ? fz : Math.random() * DEPTH;
+      this.size = Math.random() * 1.5 + 1;
+      this.dx = (Math.random() - 0.5) * 0.15;
+      this.dy = (Math.random() - 0.5) * 0.15;
+    }
+    update(){
+      this.z -= SPEED; this.x += this.dx; this.y += this.dy;
+      if (this.z < -100) this.reset(DEPTH + Math.random() * 200);
+    }
+    project(){
+      const px = this.x - camX, py = this.y - camY;
+      const d = FOV / (FOV + this.z);
+      if (this.z < -50) return null;
+      return { sx: W/2 + px*d, sy: H/2 + py*d, d, z: this.z, alpha: Math.min(1, Math.max(0, 1 - this.z/DEPTH)) };
+    }
+  }
+
+  const nodes = [];
+  for (let i = 0; i < NODE_COUNT; i++) nodes.push(new Node());
+
+  function getConnections(proj){
+    const conns = [], cs = 100, grid = new Map();
+    for (let i = 0; i < proj.length; i++) {
+      const p = proj[i]; if (!p) continue;
+      const k = Math.floor(p.sx/cs) + ',' + Math.floor(p.sy/cs);
+      if (!grid.has(k)) grid.set(k, []);
+      grid.get(k).push(i);
+    }
+    for (let i = 0; i < proj.length; i++) {
+      const p = proj[i]; if (!p) continue;
+      const cx = Math.floor(p.sx/cs), cy = Math.floor(p.sy/cs);
+      for (let dx = -2; dx <= 2; dx++) for (let dy = -2; dy <= 2; dy++) {
+        const cell = grid.get((cx+dx) + ',' + (cy+dy));
+        if (!cell) continue;
+        for (const j of cell) {
+          if (j <= i) continue;
+          const q = proj[j]; if (!q) continue;
+          const ni = nodes[i], nj = nodes[j];
+          const dSq = (ni.x-nj.x)**2 + (ni.y-nj.y)**2 + (ni.z-nj.z)**2;
+          if (dSq < CONNECT_DIST*CONNECT_DIST) conns.push([i, j, 1 - Math.sqrt(dSq)/CONNECT_DIST]);
+        }
+      }
+    }
+    return conns;
+  }
+
+  let rafId = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    else if (!document.hidden && !rafId) draw();
+  });
+
+  function draw(){
+    camX += (mx - camX) * 0.04;
+    camY += (my - camY) * 0.04;
+    ctx.fillStyle = 'rgba(5,5,5,0.25)';
+    ctx.fillRect(0, 0, W, H);
+    nodes.forEach(n => n.update());
+    const proj = nodes.map(n => n.project());
+    const conns = getConnections(proj);
+
+    for (const [i, j, s] of conns) {
+      const p = proj[i], q = proj[j];
+      const a = s * Math.min(p.alpha, q.alpha) * 0.4;
+      if (a < 0.01) continue;
+      ctx.beginPath(); ctx.moveTo(p.sx, p.sy); ctx.lineTo(q.sx, q.sy);
+      ctx.strokeStyle = `rgba(${G[0]},${G[1]},${G[2]},${a})`;
+      ctx.lineWidth = s * Math.min(p.d, q.d) * 1.5;
+      ctx.stroke();
+    }
+
+    const sorted = proj.map((p, i) => [p, i]).filter(([p]) => p).sort((a, b) => b[0].z - a[0].z);
+    for (const [p, i] of sorted) {
+      const sz = Math.max(0.8, nodes[i].size * p.d * 2), a = p.alpha;
+      ctx.beginPath(); ctx.arc(p.sx, p.sy, sz, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${G[0]},${G[1]},${G[2]},${a*0.9})`;
+      ctx.fill();
+      if (a > 0.6) {
+        ctx.beginPath(); ctx.arc(p.sx, p.sy, sz*4, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${G[0]},${G[1]},${G[2]},${(a-0.6)*0.2})`;
+        ctx.fill();
+      }
+      if (a > 0.9) {
+        ctx.beginPath(); ctx.arc(p.sx, p.sy, sz*8, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${G[0]},${G[1]},${G[2]},${(a-0.9)*0.3})`;
+        ctx.fill();
+      }
+    }
+
+    const vg = ctx.createRadialGradient(W/2, H/2, W*0.3, W/2, H/2, W*0.7);
+    vg.addColorStop(0, 'transparent'); vg.addColorStop(1, 'rgba(5,5,5,0.4)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+
+    rafId = requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

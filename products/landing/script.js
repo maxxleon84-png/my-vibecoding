@@ -219,29 +219,19 @@ const quizWrap = document.querySelector('.quiz-wrap');
   if (el) el.textContent = '🔥 Свободно 2 слота в ' + months[new Date().getMonth()];
 })();
 
-/* ---- Форма заявки → Telegram ---- */
-const TG_TOKEN   = '8637033664:AAEcbBM7CfvQtvsN0sXS12CHPb8Ni6NAL94';
-const TG_CHAT_ID = '322353894';
-
+/* ---- Форма заявки → /api/telegram (Vercel Function) ---- */
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn     = document.getElementById('form-btn');
   const success = document.getElementById('form-success');
   const error   = document.getElementById('form-error');
 
-  const name    = document.getElementById('form-name').value.trim();
-  const phone   = document.getElementById('form-phone').value.trim();
-  const service = document.getElementById('form-service').value;
-  const msg     = document.getElementById('form-msg').value.trim();
-
-  const text = [
-    '🔔 Новая заявка с лендинга',
-    '',
-    '👤 Имя: ' + name,
-    '📞 Контакт: ' + (phone || '—'),
-    '💼 Услуга: ' + (service || '—'),
-    '💬 Сообщение: ' + (msg || '—'),
-  ].join('\n');
+  const payload = {
+    name:    document.getElementById('form-name').value.trim(),
+    phone:   document.getElementById('form-phone').value.trim(),
+    service: document.getElementById('form-service').value,
+    msg:     document.getElementById('form-msg').value.trim()
+  };
 
   btn.disabled = true;
   btn.textContent = 'Отправляю...';
@@ -249,17 +239,16 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
   error.style.display   = 'none';
 
   try {
-    const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    const res = await fetch('/api/telegram', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: TG_CHAT_ID, text }),
+      body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (data.ok) {
+    if (res.ok) {
       success.style.display = 'block';
       e.target.reset();
     } else {
-      throw new Error(data.description);
+      throw new Error('send failed');
     }
   } catch {
     error.style.display = 'block';
