@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Логотип v13 — Неполный ромб</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#050505;color:#fff;font-family:'Outfit',sans-serif;padding:40px 24px;display:flex;flex-direction:column;align-items:center;gap:48px}
+h1{font-size:22px;font-weight:300;color:#555;letter-spacing:4px;text-transform:uppercase}
+.sub{color:#444;font-size:12px;margin-top:8px}
+.main{
+  background:#0a0a0a;border:1px solid rgba(163,255,18,.08);border-radius:20px;
+  padding:56px;display:flex;flex-direction:column;align-items:center;gap:36px;max-width:700px;width:100%
+}
+.logos{display:flex;gap:48px;align-items:center;flex-wrap:wrap;justify-content:center}
+.on-light{background:#f0f0f0;border-radius:14px;padding:24px}
+.sizes{display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;padding-top:24px;border-top:1px solid rgba(163,255,18,.08);width:100%}
+.with-text{display:flex;align-items:center;gap:14px}
+.t-name{font-weight:700;font-size:15px;letter-spacing:2px;text-transform:uppercase;color:#A3FF12;line-height:1.1;display:block}
+.t-role{font-weight:300;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(163,255,18,.45);margin-top:3px;display:block}
+.p{font-size:12px;color:#555;text-align:center;line-height:1.6;max-width:440px}
+</style>
+</head>
+<body>
+
+<div>
+  <h1>Неполный ромб</h1>
+  <p class="sub">Смещение вправо-вниз · ML пробивает левый контур · AN внутри</p>
+</div>
+
+<div class="main">
+  <div class="logos">
+
+    <!-- ========== BIG LOGO ========== -->
+    <svg width="220" height="220" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- The diamond is a rotated rect offset from viewBox center.
+           Rect x=100 y=6 w=132 h=132 rx=8 rotate(45 100 100)
+           After rotation: center at (166.46, 126.86).
+           Right vertex and bottom vertex are OFF-SCREEN → "incomplete" look. -->
+
+      <!-- === OUTER DIAMOND — only visible portions, as edges + arcs === -->
+      <g stroke="#A3FF12" stroke-width="2.5" fill="none" stroke-linecap="round">
+        <!-- TL edge (full) — from left vertex to top vertex, shortened 2u each end -->
+        <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+
+        <!-- TR edge (visible portion) — from top-arc exit to viewBox right edge -->
+        <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+
+        <!-- BL edge (visible portion) — from viewBox bottom edge to left-arc bottom -->
+        <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+
+        <!-- TOP corner arc -->
+        <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+
+        <!-- LEFT corner arc -->
+        <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+
+        <!-- Tiny bottom-right sliver (BR edge enters viewBox at corner) -->
+        <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+      </g>
+
+      <!-- === INNER DOUBLE (subtle, thin, scaled-down version) === -->
+      <g stroke="#A3FF12" stroke-width=".7" fill="none" opacity=".3" stroke-linecap="round">
+        <!-- Inner TL edge -->
+        <line x1="91.50" y1="125.47" x2="165.09" y2="51.88"/>
+        <!-- Inner TR edge (partial) -->
+        <line x1="167.83" y1="51.88" x2="200" y2="84.05"/>
+        <!-- Inner BL edge (partial) -->
+        <line x1="158.08" y1="200" x2="91.50" y2="133.41"/>
+        <!-- Inner top arc -->
+        <path d="M 166.10 49.50 A 4 4 0 0 1 170.83 49.50"/>
+        <!-- Inner left arc -->
+        <path d="M 90.10 132.00 A 4 4 0 0 1 90.10 126.87"/>
+      </g>
+
+      <!-- === ML — big, left side, breaking through the TL edge === -->
+      <text x="94" y="98" font-family="Orbitron" font-weight="900" font-size="44" fill="#A3FF12" text-anchor="middle" letter-spacing="-1">ML</text>
+
+      <!-- === AN — bigger, below ML, inside diamond === -->
+      <text x="104" y="134" font-family="Orbitron" font-weight="500" font-size="24" fill="#A3FF12" text-anchor="middle" opacity=".55" letter-spacing="4">AN</text>
+
+      <!-- === PINS — all free zones === -->
+      <g stroke="#A3FF12" stroke-width="2.5" stroke-linecap="square">
+        <!-- TL edge — above ML -->
+        <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+        <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+        <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+
+        <!-- TR edge visible portion -->
+        <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+        <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+
+        <!-- BL edge — from upper portion (after left corner arc) to near bottom -->
+        <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>    <!-- s=0.15 -->
+        <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>    <!-- s=0.28 -->
+        <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>  <!-- s=0.41 -->
+        <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>  <!-- s=0.54 -->
+        <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>  <!-- s=0.67 -->
+      </g>
+
+      <!-- === Solder pads on pin tips === -->
+      <g fill="#A3FF12" opacity=".7">
+        <!-- TL edge pads -->
+        <rect x="121.9" y="54.3" width="4" height="4" transform="rotate(45 123.9 56.3)"/>
+        <rect x="131.23" y="44.97" width="4" height="4" transform="rotate(45 133.23 46.97)"/>
+        <rect x="140.57" y="35.64" width="4" height="4" transform="rotate(45 142.57 37.64)"/>
+        <!-- TR edge pads -->
+        <rect x="185.03" y="32.32" width="4" height="4" transform="rotate(45 187.03 34.32)"/>
+        <rect x="194.36" y="41.65" width="4" height="4" transform="rotate(45 196.36 43.65)"/>
+        <!-- BL edge pads -->
+        <rect x="75.22" y="148.77" width="4" height="4" transform="rotate(45 77.22 150.77)"/>
+        <rect x="87.35" y="160.90" width="4" height="4" transform="rotate(45 89.35 162.90)"/>
+        <rect x="99.47" y="173.02" width="4" height="4" transform="rotate(45 101.47 175.02)"/>
+        <rect x="111.59" y="185.14" width="4" height="4" transform="rotate(45 113.59 187.14)"/>
+        <rect x="123.72" y="197.27" width="4" height="4" transform="rotate(45 125.72 199.27)"/>
+      </g>
+
+      <!-- Corner-break dots (tiny accents where edges meet arcs, optional) -->
+      <g fill="#A3FF12" opacity=".5">
+        <circle cx="78.79" cy="126.87" r="1.3"/>  <!-- left vertex center -->
+        <circle cx="166.46" cy="39.2" r="1.3"/>    <!-- top vertex center -->
+      </g>
+    </svg>
+
+    <!-- ========== LIGHT VERSION ========== -->
+    <div class="on-light">
+      <svg width="140" height="140" viewBox="0 0 200 200" fill="none">
+        <g stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round">
+          <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+          <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+          <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+          <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+          <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+          <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+        </g>
+        <g stroke="#1a1a1a" stroke-width=".7" fill="none" opacity=".25" stroke-linecap="round">
+          <line x1="91.50" y1="125.47" x2="165.09" y2="51.88"/>
+          <line x1="167.83" y1="51.88" x2="200" y2="84.05"/>
+          <line x1="158.08" y1="200" x2="91.50" y2="133.41"/>
+        </g>
+        <text x="94" y="98" font-family="Orbitron" font-weight="900" font-size="44" fill="#1a1a1a" text-anchor="middle" letter-spacing="-1">ML</text>
+        <text x="104" y="134" font-family="Orbitron" font-weight="500" font-size="24" fill="#1a1a1a" text-anchor="middle" opacity=".5" letter-spacing="4">AN</text>
+        <g stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="square">
+          <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+          <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+          <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+          <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+          <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+          <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>
+          <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>
+          <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>
+          <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>
+          <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>
+        </g>
+        <g fill="#1a1a1a" opacity=".6">
+          <rect x="121.9" y="54.3" width="4" height="4" transform="rotate(45 123.9 56.3)"/>
+          <rect x="131.23" y="44.97" width="4" height="4" transform="rotate(45 133.23 46.97)"/>
+          <rect x="140.57" y="35.64" width="4" height="4" transform="rotate(45 142.57 37.64)"/>
+          <rect x="185.03" y="32.32" width="4" height="4" transform="rotate(45 187.03 34.32)"/>
+          <rect x="194.36" y="41.65" width="4" height="4" transform="rotate(45 196.36 43.65)"/>
+          <rect x="75.22" y="148.77" width="4" height="4" transform="rotate(45 77.22 150.77)"/>
+          <rect x="87.35" y="160.90" width="4" height="4" transform="rotate(45 89.35 162.90)"/>
+          <rect x="99.47" y="173.02" width="4" height="4" transform="rotate(45 101.47 175.02)"/>
+          <rect x="111.59" y="185.14" width="4" height="4" transform="rotate(45 113.59 187.14)"/>
+          <rect x="123.72" y="197.27" width="4" height="4" transform="rotate(45 125.72 199.27)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- === Sizes === -->
+  <div class="sizes">
+    <!-- 64px version -->
+    <svg width="64" height="64" viewBox="0 0 200 200" fill="none">
+      <g stroke="#A3FF12" stroke-width="4" fill="none" stroke-linecap="round">
+        <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+        <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+        <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+        <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+        <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+        <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+      </g>
+      <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+      <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+    </svg>
+
+    <!-- With text -->
+    <div class="with-text">
+      <svg width="48" height="48" viewBox="0 0 200 200" fill="none">
+        <g stroke="#A3FF12" stroke-width="5" fill="none" stroke-linecap="round">
+          <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+          <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+          <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+          <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+          <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+        </g>
+        <text x="94" y="102" font-family="Orbitron" font-weight="900" font-size="48" fill="#A3FF12" text-anchor="middle">ML</text>
+        <text x="104" y="138" font-family="Orbitron" font-weight="500" font-size="28" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+      </svg>
+      <div>
+        <span class="t-name">Максим Леонидов</span>
+        <span class="t-role">Архитектор нейросистем</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="p">Ромб смещён вправо-вниз, правый и нижний углы уходят за кадр. ML слева, левая часть буквы L пробивает наклонный контур. AN мельче и глубже внутри ромба. Ножки только в свободных зонах — выше ML на верхне-левой грани и на верхне-правой.</p>
+</div>
+
+</body>
+</html>

@@ -3,3 +3,7 @@
 .dolt/
 *.db
 .beads-credential-key
+
+# Local tooling / scratch
+.claude/settings.local.json
+audio*.mp3
