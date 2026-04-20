@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Услуги — Максим Леонидов | AI-архитектор</title>
+<meta name="description" content="Каталог услуг: сайты от 30к, интернет-магазины от 80к, приложения от 50к, нейроагенты от 30к, комплексные системы от 80к, обучение от 5к.">
+<meta name="theme-color" content="#050505">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Услуги — Максим Леонидов | AI-архитектор">
+<meta property="og:description" content="Сайты, магазины, приложения, нейроагенты, комплексные системы и обучение. Цены и сроки по каждой услуге.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23050505'/%3E%3Cg stroke='%23A3FF12' stroke-width='6' fill='none' stroke-linecap='round'%3E%3Cline x1='80' y1='120' x2='159' y2='41'/%3E%3Cline x1='174' y1='41' x2='200' y2='67'/%3E%3Cline x1='146' y1='200' x2='80' y2='134'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#050505;--green:#A3FF12;--green-mid:#7ACC0E;--green-dim:rgba(163,255,18,.12);
+  --green-glow:rgba(163,255,18,.45);--white:#F0F0F0;--gray:#888;--gray-dim:#2A2A2A;
+  --border:rgba(163,255,18,.07);--border-h:rgba(163,255,18,.3);
+  --fh:'Chakra Petch',sans-serif;--fb:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+
+.cursor{position:fixed;width:20px;height:20px;border:2px solid var(--green);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .08s ease-out;mix-blend-mode:difference}
+.cursor-dot{position:fixed;width:5px;height:5px;background:var(--green);border-radius:50%;pointer-events:none;z-index:99999;box-shadow:0 0 10px var(--green-glow)}
+
+#flythrough{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+.orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(100px);z-index:0}
+.orb-1{top:-10%;left:20%;width:700px;height:700px;background:radial-gradient(circle,rgba(163,255,18,.06),transparent 65%);animation:ob1 14s ease-in-out infinite}
+.orb-2{bottom:-5%;right:15%;width:500px;height:500px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 65%);animation:ob2 18s ease-in-out infinite}
+@keyframes ob1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,50px) scale(1.15)}}
+@keyframes ob2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-60px) scale(1.2)}}
+.noise{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+/* ═══ HEADER ═══ */
+header{position:fixed;top:0;width:100%;z-index:1000;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,5,.6);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border);animation:hdIn .6s ease-out}
+@keyframes hdIn{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-icon{width:48px;height:48px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-name{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.logo-role{font-family:var(--fb);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(163,255,18,.5);margin-top:2px}
+@media(max-width:768px){.logo-text{display:none}}
+nav{display:flex;align-items:center;gap:4px}
+nav a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;padding:8px 18px;border-radius:6px;transition:.3s}
+nav a:hover{color:var(--white);background:rgba(163,255,18,.05)}
+nav a.active{color:var(--green)}
+.nav-cta{background:var(--green)!important;color:var(--bg)!important;font-weight:700!important;padding:10px 22px!important}
+.nav-cta:hover{box-shadow:0 0 28px rgba(163,255,18,.35)!important;transform:translateY(-1px)!important}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:140px 48px 40px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:24px;opacity:0;transform:translateY(28px)}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green-glow);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 12px var(--green-glow)}50%{box-shadow:0 0 24px var(--green-glow),0 0 48px rgba(163,255,18,.15)}}
+h1{font-family:var(--fh);font-weight:700;text-transform:uppercase;line-height:.92;margin-bottom:28px;opacity:0;transform:translateY(28px);text-shadow:0 4px 40px rgba(5,13,31,.9)}
+.line1{display:block;font-size:clamp(44px,6vw,80px);letter-spacing:2px}
+.line2{display:block;font-size:clamp(44px,6vw,80px);letter-spacing:2px;background:linear-gradient(90deg,var(--green),#C8FF60,var(--green));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 0 36px rgba(163,255,18,.12))}
+@keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.hero-sub{font-size:17px;font-weight:400;color:rgba(255,255,255,.9);line-height:1.75;max-width:640px;margin-bottom:36px;opacity:0;transform:translateY(28px);text-shadow:0 2px 20px rgba(5,5,5,.95)}
+
+/* ═══ PILLS NAV ═══ */
+.pills{display:flex;flex-wrap:wrap;gap:10px;opacity:0;transform:translateY(28px);margin-bottom:20px}
+.pill{padding:10px 20px;background:rgba(10,10,14,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);color:var(--white);text-decoration:none;font-family:var(--fh);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;transition:.3s}
+.pill:hover{color:var(--green);border-color:var(--border-h);background:rgba(10,10,14,.92)}
+.pill-num{color:var(--gray);margin-right:8px}
+.pill:hover .pill-num{color:var(--green)}
+
+/* ═══ SERVICE BLOCK ═══ */
+.svc{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:80px 48px;scroll-margin-top:80px}
+.svc-card{padding:56px 52px;background:rgba(10,10,14,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:.8}
+.svc-featured .svc-card{border-color:var(--border-h);background:linear-gradient(180deg,rgba(10,10,14,.92),rgba(10,10,14,.82))}
+.svc-featured .svc-card::before{content:'ФЛАГМАН';position:absolute;top:24px;right:24px;font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:2px;padding:5px 14px;background:var(--green);color:var(--bg);text-transform:uppercase;box-shadow:0 0 20px rgba(163,255,18,.3);z-index:2}
+
+.svc-head{display:flex;align-items:flex-start;gap:24px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.svc-num{font-family:var(--fh);font-size:80px;font-weight:700;color:var(--green);line-height:.9;text-shadow:0 0 40px rgba(163,255,18,.2);flex-shrink:0;min-width:120px}
+.svc-head-text{flex:1}
+.svc-tag{display:inline-block;font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);padding:4px 12px;border:1px solid var(--border-h);margin-bottom:14px}
+.svc-title{font-family:var(--fh);font-size:clamp(28px,3.2vw,40px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.05;margin-bottom:16px}
+.svc-meta{display:flex;flex-wrap:wrap;gap:28px;align-items:baseline}
+.svc-price{font-family:var(--fh);font-size:22px;font-weight:700;color:var(--green);text-shadow:0 0 16px rgba(163,255,18,.15)}
+.svc-time{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:8px}
+.svc-time::before{content:'⏱';color:var(--green)}
+
+.svc-body{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:40px}
+.svc-col h3{font-family:var(--fh);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.svc-col h3::before{content:'';width:24px;height:2px;background:var(--green);box-shadow:0 0 6px var(--green-glow)}
+.svc-col h3:not(:first-child){margin-top:32px}
+.svc-col p{font-size:14px;color:var(--gray);line-height:1.75}
+.svc-col ul{list-style:none}
+.svc-col ul li{font-size:14px;color:var(--gray);padding:8px 0;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.svc-col ul li::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 8px rgba(163,255,18,.3);flex-shrink:0;margin-top:8px}
+.svc-col ol{list-style:none;counter-reset:sstep}
+.svc-col ol li{font-size:14px;color:var(--gray);padding:10px 0 10px 34px;position:relative;line-height:1.6;counter-increment:sstep}
+.svc-col ol li::before{content:'0' counter(sstep);position:absolute;left:0;top:10px;font-family:var(--fh);font-size:13px;font-weight:700;color:var(--green)}
+
+.svc-examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.svc-ex{padding:16px 20px;background:rgba(255,255,255,.02);border:1px solid var(--border);font-size:13px;color:var(--gray);line-height:1.5;transition:.3s}
+.svc-ex:hover{border-color:var(--border-h);background:rgba(163,255,18,.03);color:var(--white)}
+.svc-ex a{color:var(--green);text-decoration:none;font-weight:600}
+.svc-ex a:hover{text-decoration:underline}
+
+.svc-foot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--border)}
+.svc-note{font-size:13px;color:var(--gray);max-width:560px;line-height:1.5}
+
+.btn-p{display:inline-flex;align-items:center;gap:12px;padding:16px 34px;background:var(--green);color:var(--bg);text-decoration:none;font-family:var(--fh);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;position:relative;overflow:hidden;transition:.4s cubic-bezier(.16,1,.3,1);border:none;cursor:pointer}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .6s}
+.btn-p:hover::before{transform:translateX(100%)}
+.btn-p:hover{box-shadow:0 0 48px rgba(163,255,18,.35),0 8px 28px rgba(0,0,0,.5);transform:translateY(-2px)}
+.btn-p .arr{font-size:18px;transition:transform .3s}.btn-p:hover .arr{transform:translateX(4px)}
+.btn-g{color:var(--white);text-decoration:none;font-size:14px;font-weight:600;padding:16px 24px;border:1px solid rgba(255,255,255,.08);background:rgba(10,10,14,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:.3s;cursor:pointer;font-family:var(--fb);display:inline-flex;align-items:center;gap:10px}
+.btn-g:hover{color:var(--green);border-color:var(--border-h);background:rgba(10,10,14,.92)}
+
+/* ═══ CONTACT FORM ═══ */
+.contact-section{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:80px 48px 100px}
+.s-ey{display:inline-flex;align-items:center;gap:12px;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,.55);margin-bottom:20px}
+.s-ey::before{content:'';width:28px;height:2px;background:var(--green);box-shadow:0 0 8px var(--green-glow)}
+.s-title{font-family:var(--fh);font-size:clamp(30px,3.5vw,48px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.05;margin-bottom:40px}
+.s-title .g{color:var(--green);text-shadow:0 0 30px rgba(163,255,18,.2)}
+.contact-inner{max-width:640px;margin:0 auto;padding:48px;border:1px solid var(--border-h);background:rgba(10,10,14,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;overflow:hidden}
+.contact-inner::before{content:'';position:absolute;top:-40%;right:-30%;width:400px;height:400px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 60%);border-radius:50%;filter:blur(60px)}
+.contact-inner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.contact-sub{font-size:15px;color:var(--gray);margin-bottom:36px;position:relative;z-index:1}
+.form-group{margin-bottom:20px;position:relative;z-index:1}
+.form-label{display:block;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gray);margin-bottom:8px}
+.form-input,.form-select,.form-textarea{width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:var(--white);font-family:var(--fb);font-size:14px;outline:none;transition:.3s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--green);box-shadow:0 0 16px rgba(163,255,18,.1);background:rgba(255,255,255,.05)}
+.form-input::placeholder,.form-textarea::placeholder{color:#555}
+.form-select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888'%3E%3Cpath d='M6 9L1 4h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.form-select option{background:var(--bg);color:var(--white)}
+.form-textarea{min-height:100px;resize:vertical}
+.form-submit{width:100%;padding:18px;background:var(--green);color:var(--bg);border:none;font-family:var(--fh);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:.4s;position:relative;overflow:hidden;z-index:1}
+.form-submit::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-100%);transition:transform .6s}
+.form-submit:hover::before{transform:translateX(100%)}
+.form-submit:hover{box-shadow:0 0 40px rgba(163,255,18,.35);transform:translateY(-2px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.form-status{text-align:center;padding:16px;margin-top:16px;font-size:14px;font-weight:500;display:none;position:relative;z-index:1}
+.form-status.success{display:block;color:var(--green);border:1px solid var(--green-dim);background:rgba(163,255,18,.05)}
+.form-status.error{display:block;color:#ff5555;border:1px solid rgba(255,85,85,.2);background:rgba(255,85,85,.05)}
+
+/* ═══ FOOTER ═══ */
+footer{position:relative;z-index:1;padding:60px 48px 40px;border-top:1px solid var(--border)}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.footer-tagline{font-size:13px;color:var(--gray);max-width:280px;line-height:1.6;margin-top:12px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;transition:.3s}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{width:100%;text-align:center;padding-top:32px;margin-top:32px;border-top:1px solid var(--border);font-size:12px;color:var(--gray-dim);letter-spacing:1px}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.hero-badge.visible,h1.visible,.hero-sub.visible,.pills.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .svc{padding:60px 32px}
+  .svc-card{padding:40px 32px}
+  .svc-body{grid-template-columns:1fr;gap:32px}
+  .svc-num{font-size:60px;min-width:80px}
+}
+@media(hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
+@media(max-width:768px){
+  body{cursor:auto}.cursor,.cursor-dot{display:none}
+  header{padding:0 20px}
+  nav a:not(.nav-cta):not(.active){display:none}
+  .hero{padding:100px 20px 32px}
+  .svc,.contact-section{padding-left:20px;padding-right:20px}
+  .svc-card{padding:32px 22px}
+  .svc-head{flex-direction:column;gap:14px}
+  .svc-num{font-size:48px;min-width:0}
+  .contact-inner{padding:28px 20px}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  #flythrough,.orb,.noise{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<canvas id="flythrough" aria-hidden="true"></canvas>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем">
+      <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+        <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+        <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+        <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+        <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+        <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+      </g>
+      <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+      <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+      <g stroke="#A3FF12" stroke-width="3.5" stroke-linecap="square">
+        <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+        <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+        <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+        <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+        <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+        <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>
+        <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>
+        <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>
+        <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>
+        <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>
+      </g>
+      <g fill="#A3FF12" opacity=".7">
+        <rect x="121.9" y="54.3" width="5" height="5" transform="rotate(45 123.9 56.3)"/>
+        <rect x="131.23" y="44.97" width="5" height="5" transform="rotate(45 133.23 46.97)"/>
+        <rect x="140.57" y="35.64" width="5" height="5" transform="rotate(45 142.57 37.64)"/>
+        <rect x="185.03" y="32.32" width="5" height="5" transform="rotate(45 187.03 34.32)"/>
+        <rect x="194.36" y="41.65" width="5" height="5" transform="rotate(45 196.36 43.65)"/>
+        <rect x="75.22" y="148.77" width="5" height="5" transform="rotate(45 77.22 150.77)"/>
+        <rect x="87.35" y="160.90" width="5" height="5" transform="rotate(45 89.35 162.90)"/>
+        <rect x="99.47" y="173.02" width="5" height="5" transform="rotate(45 101.47 175.02)"/>
+        <rect x="111.59" y="185.14" width="5" height="5" transform="rotate(45 113.59 187.14)"/>
+        <rect x="123.72" y="197.27" width="5" height="5" transform="rotate(45 125.72 199.27)"/>
+      </g>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">Максим Леонидов</span>
+      <span class="logo-role">Архитектор нейросистем</span>
+    </div>
+  </a>
+  <nav>
+    <a href="services.html" class="active">Услуги</a>
+    <a href="index.html#pricing">Тарифы</a>
+    <a href="neuroagents.html">Нейроагенты</a>
+    <a href="#contact" class="nav-cta">Связаться</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge reveal">Каталог услуг</div>
+  <h1 class="reveal">
+    <span class="line1">Шесть</span>
+    <span class="line2">направлений</span>
+  </h1>
+  <p class="hero-sub reveal">От простого лендинга до комплексной ИИ&#8209;системы. Каждая услуга с ценой, сроками и&nbsp;этапами работы&nbsp;— без скрытых комиссий и&nbsp;«договорных» формулировок.</p>
+  <div class="pills reveal">
+    <a class="pill" href="#svc-1"><span class="pill-num">01</span>Сайты</a>
+    <a class="pill" href="#svc-2"><span class="pill-num">02</span>Магазины</a>
+    <a class="pill" href="#svc-3"><span class="pill-num">03</span>Приложения</a>
+    <a class="pill" href="#svc-4"><span class="pill-num">04</span>Нейроагенты</a>
+    <a class="pill" href="#svc-5"><span class="pill-num">05</span>Комплекс</a>
+    <a class="pill" href="#svc-6"><span class="pill-num">06</span>Обучение</a>
+  </div>
+</section>
+
+<!-- 01 — САЙТЫ -->
+<section class="svc reveal" id="svc-1">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">01</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">Web</span>
+        <h2 class="svc-title">Сайты и лендинги</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 30 000 ₽</span>
+          <span class="svc-time">5-10 дней</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Малый бизнес, эксперты, новые проекты, мастера услуг. Нужен цифровой фасад, куда можно привести клиента из рекламы или с визитки.</p>
+        <h3>Что входит</h3>
+        <ul>
+          <li>Лендинг (5-7 секций), визитка или корпоративный сайт (до 10 страниц)</li>
+          <li>Адаптив: мобильный, планшет, десктоп</li>
+          <li>Форма заявок с отправкой в Telegram, email или CRM</li>
+          <li>Базовое SEO: мета-теги, OG, sitemap, robots.txt</li>
+          <li>Бесплатный хостинг на Vercel или настройка вашего</li>
+          <li>Подключение домена, SSL, аналитики (Яндекс.Метрика / GA4)</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Этапы работы</h3>
+        <ol>
+          <li>Бриф и контент-план (1 день) — разбираем, что и для кого</li>
+          <li>Дизайн в стиле бренда (2-3 дня) — согласование до вёрстки</li>
+          <li>Вёрстка и интеграции (2-4 дня) — сборка под ключ</li>
+          <li>Запуск и 1 неделя поддержки — правки и мелкие задачи включены</li>
+        </ol>
+        <h3>Примеры работ</h3>
+        <div class="svc-examples">
+          <div class="svc-ex">Визитка разработчика — <a href="https://ml-vibecoder.vercel.app" target="_blank" rel="noopener">ml-vibecoder.vercel.app</a></div>
+          <div class="svc-ex">Лендинг услуг — <a href="https://maxxleon.vercel.app" target="_blank" rel="noopener">maxxleon.vercel.app</a></div>
+          <div class="svc-ex">Сайт мастера — <a href="https://sasha-nails.vercel.app" target="_blank" rel="noopener">sasha-nails.vercel.app</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <p class="svc-note">Точная цена зависит от объёма: простая визитка — 30 000 ₽, полноценный корпоративный сайт с CMS — до 120 000 ₽.</p>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — МАГАЗИНЫ -->
+<section class="svc reveal" id="svc-2">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">02</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">E-commerce</span>
+        <h2 class="svc-title">Интернет-магазины</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 80 000 ₽</span>
+          <span class="svc-time">3-4 недели</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Продавцы товаров с каталогом до 500 позиций: одежда, косметика, товары для дома, авторские изделия, продукты питания. Нужен нормальный онлайн-магазин, а не маркетплейсная ячейка.</p>
+        <h3>Что входит</h3>
+        <ul>
+          <li>Каталог с категориями, фильтрами, поиском</li>
+          <li>Корзина, оформление заказа, статусы заказа</li>
+          <li>Оплата: ЮKassa, Stripe, Robokassa или Тинькофф</li>
+          <li>Доставка: СДЭК, Почта России, курьеры, самовывоз</li>
+          <li>Личный кабинет клиента с историей заказов</li>
+          <li>Админ-панель для управления товарами и заказами</li>
+          <li>Интеграция с 1С или Excel для синхронизации остатков</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Этапы работы</h3>
+        <ol>
+          <li>Архитектура каталога и воронки покупки (2-3 дня)</li>
+          <li>Дизайн и прототип (5-7 дней) — макеты всех ключевых страниц</li>
+          <li>Разработка каталога и корзины (7-10 дней)</li>
+          <li>Настройка оплаты и доставки, тесты транзакций (3-5 дней)</li>
+          <li>Запуск + 2 недели поддержки — правки и обучение администратора</li>
+        </ol>
+        <h3>Чем отличается от конструкторов</h3>
+        <p>Свой код, свой дизайн, никаких комиссий платформе с каждого заказа. Вы владеете кодом и можете развивать проект сколько угодно.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <p class="svc-note">Цена растёт с объёмом каталога и сложностью интеграций. Точную смету даю после бриф-разговора.</p>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — ПРИЛОЖЕНИЯ -->
+<section class="svc reveal" id="svc-3">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">03</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">Apps</span>
+        <h2 class="svc-title">Веб-приложения и Mini Apps</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 50 000 ₽</span>
+          <span class="svc-time">2-4 недели</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Проекты, где мобильный опыт важнее сайта: сервисы записи, калькуляторы стоимости, лояльность, онлайн-консультации, мини-игры и квизы для маркетинга.</p>
+        <h3>Что входит</h3>
+        <ul>
+          <li>Веб-приложение (SPA) — работает как сайт, но как приложение</li>
+          <li>Telegram Mini App — запускается прямо в Telegram</li>
+          <li>PWA — устанавливается на телефон из браузера</li>
+          <li>Интеграции с внешними API (Google, Яндекс, ваши сервисы)</li>
+          <li>Авторизация: Telegram, VK, Google, по номеру</li>
+          <li>Push-уведомления для PWA и Telegram</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Этапы работы</h3>
+        <ol>
+          <li>Сценарий использования и карта экранов (3-5 дней)</li>
+          <li>Прототип на React или Vue (5-7 дней)</li>
+          <li>Разработка функциональности (10-14 дней)</li>
+          <li>Тестирование на реальных устройствах</li>
+          <li>Публикация и 2 недели поддержки</li>
+        </ol>
+        <h3>Когда выбрать приложение, а не сайт</h3>
+        <p>Если клиент возвращается чаще раза в неделю, нужны уведомления, или работа идёт с шагами (например, запись через 5 экранов) — приложение. Во всех остальных случаях хватает сайта.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <p class="svc-note">Telegram Mini App — самый быстрый способ запустить мобильный опыт без публикации в сторах. Многие задачи решаются за 2 недели.</p>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — НЕЙРОАГЕНТЫ -->
+<section class="svc svc-featured reveal" id="svc-4">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">04</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">AI · Флагман</span>
+        <h2 class="svc-title">Нейроагенты</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 30 000 ₽</span>
+          <span class="svc-time">5 дней – 1 месяц</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Любой бизнес с потоком входящих сообщений: салоны, магазины, сервисы услуг, недвижимость, образование, медицина. Нужен ИИ-сотрудник, который отвечает 24/7 и не теряет заявки.</p>
+        <h3>Что входит</h3>
+        <ul>
+          <li>ИИ-продавец, ИИ-поддержка или ИИ-администратор — под задачу</li>
+          <li>Каналы: Telegram, WhatsApp, Avito, VK, чат на сайте</li>
+          <li>База знаний: прайс, услуги, график, адреса, типовые ответы</li>
+          <li>Интеграция с CRM (amoCRM, Bitrix24) или Google Sheets</li>
+          <li>Эскалация к живому менеджеру, когда агент не справляется</li>
+          <li>Соответствие 152-ФЗ: российские LLM (YandexGPT, GigaChat)</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Три тарифа</h3>
+        <ol>
+          <li><strong style="color:var(--white)">Базовый — 30 000 ₽:</strong> 1 агент, 1 канал, до 50 позиций базы знаний</li>
+          <li><strong style="color:var(--white)">Про — 60 000 ₽:</strong> до 3 агентов, 3+ канала, CRM, эскалация</li>
+          <li><strong style="color:var(--white)">Флот — от 150 000 ₽:</strong> команда агентов, своя LLM, аналитика</li>
+        </ol>
+        <h3>Типовой результат</h3>
+        <p>15 секунд среднее время ответа, +40% к конверсии в заявку, −80% нагрузки на администратора. Детали и живое демо — на отдельной странице.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <a href="neuroagents.html" class="btn-g">Подробнее о нейроагентах</a>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — КОМПЛЕКС -->
+<section class="svc reveal" id="svc-5">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">05</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">Systems</span>
+        <h2 class="svc-title">Комплексная ИИ-система</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 80 000 ₽</span>
+          <span class="svc-time">от 1 месяца</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Компании с оборотом от 1 млн ₽/мес, готовые к системному подходу. Нужен не отдельный инструмент, а выстроенная воронка: от первого касания клиента до сделки и повторных продаж.</p>
+        <h3>Что входит</h3>
+        <ul>
+          <li>Аудит текущей воронки: где теряете лиды, где сливаете время</li>
+          <li>Архитектурный документ: все компоненты системы и их связи</li>
+          <li>Разработка: сайт, агенты, CRM-интеграции, аналитика</li>
+          <li>Связка через webhooks, Zapier или n8n (low-code)</li>
+          <li>Обучение вашей команды работе с системой</li>
+          <li>Аналитика по всем этапам воронки — с прозрачными метриками</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Этапы работы</h3>
+        <ol>
+          <li>Аудит воронки и слабых мест (1 неделя)</li>
+          <li>Архитектура и техническое задание (1 неделя)</li>
+          <li>Параллельная разработка компонентов (2-4 недели)</li>
+          <li>Интеграция с CRM и настройка аналитики (1 неделя)</li>
+          <li>Запуск и обучение команды (1 неделя)</li>
+          <li>Сопровождение 3 месяца — доработки и оптимизация</li>
+        </ol>
+        <h3>Чем отличается от отдельных услуг</h3>
+        <p>Единое решение с общей логикой. Сайт знает про лиды, агент знает про сделки, CRM знает про историю диалогов. Ничего не теряется между системами.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <p class="svc-note">Проект от 1 месяца. Финальная смета собирается после аудита — зависит от объёма и сложности интеграций.</p>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — ОБУЧЕНИЕ -->
+<section class="svc reveal" id="svc-6">
+  <div class="svc-card">
+    <div class="svc-head">
+      <div class="svc-num">06</div>
+      <div class="svc-head-text">
+        <span class="svc-tag">Education</span>
+        <h2 class="svc-title">Обучение и сопровождение</h2>
+        <div class="svc-meta">
+          <span class="svc-price">от 5 000 ₽</span>
+          <span class="svc-time">разово или месяц</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-body">
+      <div class="svc-col">
+        <h3>Для кого</h3>
+        <p>Маркетологи, разработчики, владельцы бизнеса, которые хотят освоить работу с ИИ сами или прокачать свою команду. А не просто отдать подрядчику и не понимать, что происходит.</p>
+        <h3>Форматы</h3>
+        <ul>
+          <li><strong style="color:var(--white)">Разовая консультация (1-2 часа) — 5 000 ₽:</strong> Разбор вашей задачи, технические подсказки, план действий</li>
+          <li><strong style="color:var(--white)">Воркшоп для команды (4 часа) — 20 000 ₽:</strong> Практическое занятие с конкретными инструментами</li>
+          <li><strong style="color:var(--white)">Наставничество (месяц) — 30 000 ₽:</strong> Еженедельные созвоны, работа над вашим проектом</li>
+          <li><strong style="color:var(--white)">Курс по вайбкодингу (8 занятий) — 50 000 ₽:</strong> Разработка с AI-ассистентом с нуля до запуска продукта</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <h3>Популярные темы</h3>
+        <ul>
+          <li>Как внедрить AI в бизнес-процессы без разработчика</li>
+          <li>Вайбкодинг: разработка с Claude, Cursor, GitHub Copilot</li>
+          <li>Архитектура ИИ-систем — что, зачем и как связано</li>
+          <li>Промпт-инжиниринг для бизнеса (не для картинок)</li>
+          <li>Low-code автоматизации: Zapier, Make, n8n</li>
+          <li>Выбор LLM под задачу: open-source, российские, зарубежные</li>
+        </ul>
+        <h3>Формат</h3>
+        <p>Онлайн в Zoom или Telegram. Запись остаётся у вас. Материалы и конспект — тоже.</p>
+      </div>
+    </div>
+    <div class="svc-foot">
+      <p class="svc-note">Для корпоративных клиентов — индивидуальные программы под стек и уровень команды. Обсудим на созвоне.</p>
+      <a href="#contact" class="btn-p">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section reveal" id="contact">
+  <div class="s-ey">Контакт</div>
+  <h2 class="s-title">Обсудить<br><span class="g">проект</span></h2>
+  <div class="contact-inner">
+    <p class="contact-sub">Выберите услугу и опишите задачу — свяжусь в течение 2 часов.</p>
+    <form id="contactForm">
+      <div class="form-group">
+        <label class="form-label">Имя</label>
+        <input class="form-input" type="text" name="name" placeholder="Как к вам обращаться?" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон или Telegram</label>
+        <input class="form-input" type="text" name="contact" placeholder="+7... или @username" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Услуга</label>
+        <select class="form-select" name="service" id="serviceSelect" required>
+          <option value="Сайт или лендинг">01 · Сайт или лендинг</option>
+          <option value="Интернет-магазин">02 · Интернет-магазин</option>
+          <option value="Приложение">03 · Приложение</option>
+          <option value="Нейроагент">04 · Нейроагент</option>
+          <option value="Комплексная система">05 · Комплексная система</option>
+          <option value="Обучение">06 · Обучение</option>
+          <option value="Подобрать">Подобрать под задачу</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">О задаче (необязательно)</label>
+        <textarea class="form-textarea" name="comment" placeholder="Расскажите кратко, что нужно..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" id="submitBtn">Отправить заявку →</button>
+      <div class="form-status" id="formStatus"></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем" style="width:40px;height:40px">
+          <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+            <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+            <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+            <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+            <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+            <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+            <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+          </g>
+          <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+          <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">Максим Леонидов</span>
+          <span class="logo-role">Архитектор нейросистем</span>
+        </div>
+      </a>
+      <p class="footer-tagline">Проектирую ИИ-системы для бизнеса: нейроагенты, автоматизация, архитектура решений</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://t.me/maxxleon927" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://instagram.com/maxx.leonidov" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://github.com/maxxleon84-png" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://vk.com/maxx.leonidov" target="_blank" rel="noopener">VK</a>
+    </div>
+    <div class="footer-copy">© 2026 Максим Леонидов. Все права защищены.</div>
+  </div>
+</footer>
+
+<script>
+/* ═══ CURSOR ═══ */
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX - 2.5 + 'px';
+  dot.style.top = e.clientY - 2.5 + 'px';
+  cursor.style.left = e.clientX - 10 + 'px';
+  cursor.style.top = e.clientY - 10 + 'px';
+});
+document.querySelectorAll('a,button,.svc-card,.svc-ex,.form-input,.form-select,.form-textarea,.pill').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.8)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+/* ═══ REVEAL ═══ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ═══ PRESELECT SERVICE FROM URL HASH ═══ */
+const map = { '#svc-1':'Сайт или лендинг', '#svc-2':'Интернет-магазин', '#svc-3':'Приложение', '#svc-4':'Нейроагент', '#svc-5':'Комплексная система', '#svc-6':'Обучение' };
+const selectEl = document.getElementById('serviceSelect');
+document.querySelectorAll('.svc .btn-p, .pill').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href === '#contact') {
+      const svcSection = link.closest('.svc');
+      if (svcSection && map['#' + svcSection.id]) selectEl.value = map['#' + svcSection.id];
+    }
+  });
+});
+
+/* ═══ CONTACT FORM ═══ */
+const form = document.getElementById('contactForm');
+const statusEl = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Отправка...';
+  statusEl.className = 'form-status';
+  const data = new FormData(form);
+  const payload = { name: data.get('name'), contact: data.get('contact'), service: data.get('service'), comment: data.get('comment') || '' };
+  try {
+    const res = await fetch('/api/telegram', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    if (res.ok) {
+      statusEl.className = 'form-status success';
+      statusEl.textContent = 'Заявка отправлена! Свяжусь в течение 2 часов.';
+      form.reset();
+    } else { throw new Error('fail'); }
+  } catch {
+    statusEl.className = 'form-status error';
+    statusEl.textContent = 'Ошибка отправки. Напишите напрямую в Telegram: @maxxleon927';
+  }
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Отправить заявку →';
+});
+
+/* ═══ 3D FLYTHROUGH ═══ */
+(function(){
+  const canvas = document.getElementById('flythrough');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const G = [163, 255, 18], FOV = 600, DEPTH = 3000, SPEED = 20, NODE_COUNT = 700, CONNECT_DIST = 300, SPREAD_X = 900, SPREAD_Y = 600;
+  let mx = 0, my = 0, camX = 0, camY = 0;
+  document.addEventListener('mousemove', e => { mx = (e.clientX / W - 0.5) * 120; my = (e.clientY / H - 0.5) * 80; });
+  class Node {
+    constructor(fz){ this.reset(fz); }
+    reset(fz){ this.x=(Math.random()-0.5)*SPREAD_X*2;this.y=(Math.random()-0.5)*SPREAD_Y*2;this.z=fz!==undefined?fz:Math.random()*DEPTH;this.size=Math.random()*1.5+1;this.dx=(Math.random()-0.5)*0.15;this.dy=(Math.random()-0.5)*0.15; }
+    update(){ this.z-=SPEED; this.x+=this.dx; this.y+=this.dy; if (this.z<-100) this.reset(DEPTH+Math.random()*200); }
+    project(){ const px=this.x-camX,py=this.y-camY,d=FOV/(FOV+this.z); if (this.z<-50) return null; return { sx: W/2+px*d, sy: H/2+py*d, d, z: this.z, alpha: Math.min(1, Math.max(0, 1-this.z/DEPTH)) }; }
+  }
+  const nodes = []; for (let i = 0; i < NODE_COUNT; i++) nodes.push(new Node());
+  function getConnections(proj){
+    const conns=[],cs=100,grid=new Map();
+    for (let i=0;i<proj.length;i++){const p=proj[i];if(!p)continue;const k=Math.floor(p.sx/cs)+','+Math.floor(p.sy/cs);if(!grid.has(k))grid.set(k,[]);grid.get(k).push(i);}
+    for (let i=0;i<proj.length;i++){const p=proj[i];if(!p)continue;const cx=Math.floor(p.sx/cs),cy=Math.floor(p.sy/cs);
+      for (let dx=-2;dx<=2;dx++)for(let dy=-2;dy<=2;dy++){const cell=grid.get((cx+dx)+','+(cy+dy));if(!cell)continue;
+        for (const j of cell){if(j<=i)continue;const q=proj[j];if(!q)continue;const ni=nodes[i],nj=nodes[j];const dSq=(ni.x-nj.x)**2+(ni.y-nj.y)**2+(ni.z-nj.z)**2;if(dSq<CONNECT_DIST*CONNECT_DIST)conns.push([i,j,1-Math.sqrt(dSq)/CONNECT_DIST]);}}}
+    return conns;
+  }
+  let rafId = null;
+  document.addEventListener('visibilitychange', () => { if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId=null; } else if (!document.hidden && !rafId) draw(); });
+  function draw(){
+    camX += (mx-camX)*0.04; camY += (my-camY)*0.04;
+    ctx.fillStyle = 'rgba(5,5,5,0.25)'; ctx.fillRect(0,0,W,H);
+    nodes.forEach(n => n.update());
+    const proj = nodes.map(n => n.project());
+    const conns = getConnections(proj);
+    for (const [i,j,s] of conns){const p=proj[i],q=proj[j];const a=s*Math.min(p.alpha,q.alpha)*0.4;if(a<0.01)continue;ctx.beginPath();ctx.moveTo(p.sx,p.sy);ctx.lineTo(q.sx,q.sy);ctx.strokeStyle=`rgba(${G[0]},${G[1]},${G[2]},${a})`;ctx.lineWidth=s*Math.min(p.d,q.d)*1.5;ctx.stroke();}
+    const sorted = proj.map((p,i)=>[p,i]).filter(([p])=>p).sort((a,b)=>b[0].z-a[0].z);
+    for (const [p,i] of sorted){const sz=Math.max(0.8,nodes[i].size*p.d*2),a=p.alpha;ctx.beginPath();ctx.arc(p.sx,p.sy,sz,0,Math.PI*2);ctx.fillStyle=`rgba(${G[0]},${G[1]},${G[2]},${a*0.9})`;ctx.fill();if(a>0.6){ctx.beginPath();ctx.arc(p.sx,p.sy,sz*4,0,Math.PI*2);ctx.fillStyle=`rgba(${G[0]},${G[1]},${G[2]},${(a-0.6)*0.2})`;ctx.fill();}}
+    const vg = ctx.createRadialGradient(W/2,H/2,W*0.3,W/2,H/2,W*0.7); vg.addColorStop(0,'transparent'); vg.addColorStop(1,'rgba(5,5,5,0.4)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+    rafId = requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
