@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио — Максим Леонидов | AI-архитектор</title>
+<meta name="description" content="Работы, которые уже живут в проде: лендинги, визитки, клиентские сайты. Реальные проекты с live-ссылками.">
+<meta name="theme-color" content="#050505">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Портфолио — Максим Леонидов">
+<meta property="og:description" content="Лендинги, визитки и клиентские сайты — работы Максима Леонидова, AI-архитектора.">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23050505'/%3E%3Cg stroke='%23A3FF12' stroke-width='6' fill='none' stroke-linecap='round'%3E%3Cline x1='80' y1='120' x2='159' y2='41'/%3E%3Cline x1='174' y1='41' x2='200' y2='67'/%3E%3Cline x1='146' y1='200' x2='80' y2='134'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#050505;--green:#A3FF12;--green-mid:#7ACC0E;--green-dim:rgba(163,255,18,.12);
+  --green-glow:rgba(163,255,18,.45);--white:#F0F0F0;--gray:#888;--gray-dim:#2A2A2A;
+  --border:rgba(163,255,18,.07);--border-h:rgba(163,255,18,.3);
+  --fh:'Chakra Petch',sans-serif;--fb:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none}
+
+.cursor{position:fixed;width:20px;height:20px;border:2px solid var(--green);border-radius:50%;pointer-events:none;z-index:99999;transition:transform .08s ease-out;mix-blend-mode:difference}
+.cursor-dot{position:fixed;width:5px;height:5px;background:var(--green);border-radius:50%;pointer-events:none;z-index:99999;box-shadow:0 0 10px var(--green-glow)}
+
+#flythrough{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+.orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(100px);z-index:0}
+.orb-1{top:-10%;left:20%;width:700px;height:700px;background:radial-gradient(circle,rgba(163,255,18,.06),transparent 65%);animation:ob1 14s ease-in-out infinite}
+.orb-2{bottom:-5%;right:15%;width:500px;height:500px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 65%);animation:ob2 18s ease-in-out infinite}
+@keyframes ob1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,50px) scale(1.15)}}
+@keyframes ob2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-60px) scale(1.2)}}
+.noise{position:fixed;inset:0;z-index:9997;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+/* ═══ HEADER ═══ */
+header{position:fixed;top:0;width:100%;z-index:1000;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,5,.6);backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-icon{width:48px;height:48px;flex-shrink:0}
+.logo-text{display:flex;flex-direction:column;line-height:1.1}
+.logo-name{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
+.logo-role{font-family:var(--fb);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(163,255,18,.5);margin-top:2px}
+@media(max-width:768px){.logo-text{display:none}}
+nav{display:flex;align-items:center;gap:4px}
+nav a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;padding:8px 18px;border-radius:6px;transition:.3s}
+nav a:hover{color:var(--white);background:rgba(163,255,18,.05)}
+nav a.active{color:var(--green)}
+.nav-cta{background:var(--green)!important;color:var(--bg)!important;font-weight:700!important;padding:10px 22px!important}
+.nav-cta:hover{box-shadow:0 0 28px rgba(163,255,18,.35)!important;transform:translateY(-1px)!important}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:140px 48px 40px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:24px;opacity:0;transform:translateY(28px)}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green-glow);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 12px var(--green-glow)}50%{box-shadow:0 0 24px var(--green-glow),0 0 48px rgba(163,255,18,.15)}}
+h1{font-family:var(--fh);font-weight:700;text-transform:uppercase;line-height:.95;margin-bottom:28px;opacity:0;transform:translateY(28px);text-shadow:0 4px 40px rgba(5,13,31,.9)}
+.line1{display:block;font-size:clamp(40px,6vw,76px);letter-spacing:2px}
+.line2{display:block;font-size:clamp(40px,6vw,76px);letter-spacing:2px;background:linear-gradient(90deg,var(--green),#C8FF60,var(--green));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 5s ease-in-out infinite;filter:drop-shadow(0 0 36px rgba(163,255,18,.12))}
+@keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.hero-sub{font-size:17px;font-weight:400;color:rgba(255,255,255,.9);line-height:1.75;max-width:640px;margin-bottom:28px;opacity:0;transform:translateY(28px);text-shadow:0 2px 20px rgba(5,5,5,.95)}
+
+/* ═══ SECTIONS ═══ */
+.section{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:60px 48px}
+.s-ey{display:inline-flex;align-items:center;gap:12px;font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,.55);margin-bottom:20px}
+.s-ey::before{content:'';width:28px;height:2px;background:var(--green);box-shadow:0 0 8px var(--green-glow)}
+.s-title{font-family:var(--fh);font-size:clamp(26px,3vw,42px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.05;margin-bottom:40px}
+.s-title .g{color:var(--green)}
+
+/* ═══ PROJECT CARD ═══ */
+.proj{margin-bottom:28px;position:relative}
+.proj-card{padding:44px 40px;background:rgba(10,10,14,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;transition:.4s cubic-bezier(.16,1,.3,1);display:grid;grid-template-columns:100px 1fr 260px;gap:36px;align-items:start}
+.proj-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .4s}
+.proj-card:hover{border-color:var(--border-h);transform:translateY(-4px);background:rgba(10,10,14,.9)}
+.proj-card:hover::after{opacity:1}
+.proj-featured .proj-card{border-color:var(--border-h);background:linear-gradient(180deg,rgba(10,10,14,.92),rgba(10,10,14,.82))}
+
+.proj-num{font-family:var(--fh);font-size:72px;font-weight:700;color:var(--green);line-height:.9;text-shadow:0 0 40px rgba(163,255,18,.2)}
+.proj-body{min-width:0}
+.proj-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);padding:4px 12px;border:1px solid var(--border-h);margin-bottom:14px}
+.proj-flag{background:var(--green);color:var(--bg);margin-left:8px;border-color:var(--green)}
+.proj-title{font-family:var(--fh);font-size:clamp(22px,2.5vw,32px);font-weight:700;text-transform:uppercase;letter-spacing:1px;line-height:1.1;margin-bottom:14px;color:var(--white)}
+.proj-desc{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px}
+.proj-feats{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin-bottom:20px}
+.proj-feat{font-size:13px;color:var(--gray);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.proj-feat::before{content:'→';color:var(--green);font-weight:700;flex-shrink:0}
+.proj-stack{display:flex;flex-wrap:wrap;gap:6px;padding-top:18px;border-top:1px solid var(--border)}
+.stack-tag{padding:5px 12px;border:1px solid var(--gray-dim);font-size:11px;font-weight:600;color:var(--gray);letter-spacing:.5px;font-family:var(--fh);text-transform:uppercase}
+
+.proj-meta{display:flex;flex-direction:column;gap:16px;padding:24px;background:rgba(255,255,255,.02);border:1px solid var(--border);align-self:stretch}
+.proj-meta-row{display:flex;flex-direction:column;gap:3px}
+.proj-meta-l{font-family:var(--fh);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
+.proj-meta-v{font-family:var(--fh);font-size:15px;font-weight:700;color:var(--white)}
+.proj-meta-v.price{color:var(--green);font-size:17px;text-shadow:0 0 16px rgba(163,255,18,.15)}
+.proj-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;background:var(--green);color:var(--bg);text-decoration:none;font-family:var(--fh);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:.3s;margin-top:auto}
+.proj-link:hover{box-shadow:0 0 24px rgba(163,255,18,.35);transform:translateY(-2px)}
+
+/* ═══ SKILLS ═══ */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.skill{padding:28px 26px;background:rgba(10,10,14,.82);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);transition:.3s}
+.skill:hover{border-color:var(--border-h);background:rgba(10,10,14,.9);transform:translateY(-4px)}
+.skill-ico{font-size:28px;margin-bottom:14px}
+.skill-t{font-family:var(--fh);font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.skill-d{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ═══ CTA ═══ */
+.cta-box{padding:44px 40px;background:rgba(10,10,14,.85);border:1px solid var(--border-h);backdrop-filter:blur(14px);text-align:center;max-width:800px;margin:60px auto 0;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:-40%;right:-30%;width:400px;height:400px;background:radial-gradient(circle,rgba(163,255,18,.04),transparent 60%);border-radius:50%;filter:blur(60px)}
+.cta-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent)}
+.cta-t{font-family:var(--fh);font-size:clamp(22px,2.5vw,32px);font-weight:700;text-transform:uppercase;margin-bottom:14px;position:relative;z-index:1}
+.cta-d{font-size:15px;color:var(--gray);margin-bottom:28px;line-height:1.6;position:relative;z-index:1}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--green);color:var(--bg);text-decoration:none;font-family:var(--fh);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:.3s}
+.btn-p:hover{box-shadow:0 0 28px rgba(163,255,18,.35);transform:translateY(-2px)}
+.btn-g{display:inline-flex;align-items:center;gap:10px;padding:16px 24px;color:var(--white);text-decoration:none;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(10,10,14,.82);transition:.3s;font-family:var(--fb)}
+.btn-g:hover{color:var(--green);border-color:var(--border-h)}
+
+/* ═══ FOOTER ═══ */
+footer{position:relative;z-index:1;padding:60px 48px 40px;border-top:1px solid var(--border);margin-top:60px}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.footer-tagline{font-size:13px;color:var(--gray);max-width:280px;line-height:1.6;margin-top:12px}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:13px;font-weight:500;transition:.3s}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{width:100%;text-align:center;padding-top:32px;margin-top:32px;border-top:1px solid var(--border);font-size:12px;color:var(--gray-dim);letter-spacing:1px}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1100px){
+  .proj-card{grid-template-columns:80px 1fr;gap:24px}
+  .proj-meta{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:20px;padding:20px}
+  .proj-meta-row{flex:1;min-width:140px}
+  .proj-link{width:auto;margin-top:0}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
+@media(max-width:768px){
+  body{cursor:auto}.cursor,.cursor-dot{display:none}
+  header{padding:0 20px}
+  nav a:not(.nav-cta):not(.active){display:none}
+  .hero{padding:100px 20px 32px}
+  .section{padding:40px 20px}
+  .proj-card{padding:28px 22px;grid-template-columns:1fr;gap:20px}
+  .proj-num{font-size:48px}
+  .proj-feats{grid-template-columns:1fr}
+  .proj-meta{flex-direction:column}
+  .skills-grid{grid-template-columns:1fr}
+  .cta-box{padding:32px 22px;margin:40px 0 0}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center}
+  .footer-links{flex-wrap:wrap;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  #flythrough,.orb,.noise{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<canvas id="flythrough" aria-hidden="true"></canvas>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo">
+    <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем">
+      <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+        <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+        <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+        <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+        <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+        <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+        <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+      </g>
+      <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+      <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+      <g stroke="#A3FF12" stroke-width="3.5" stroke-linecap="square">
+        <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+        <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+        <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+        <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+        <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+        <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>
+        <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>
+        <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>
+        <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>
+        <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>
+      </g>
+      <g fill="#A3FF12" opacity=".7">
+        <rect x="121.9" y="54.3" width="5" height="5" transform="rotate(45 123.9 56.3)"/>
+        <rect x="131.23" y="44.97" width="5" height="5" transform="rotate(45 133.23 46.97)"/>
+        <rect x="140.57" y="35.64" width="5" height="5" transform="rotate(45 142.57 37.64)"/>
+        <rect x="185.03" y="32.32" width="5" height="5" transform="rotate(45 187.03 34.32)"/>
+        <rect x="194.36" y="41.65" width="5" height="5" transform="rotate(45 196.36 43.65)"/>
+        <rect x="75.22" y="148.77" width="5" height="5" transform="rotate(45 77.22 150.77)"/>
+        <rect x="87.35" y="160.90" width="5" height="5" transform="rotate(45 89.35 162.90)"/>
+        <rect x="99.47" y="173.02" width="5" height="5" transform="rotate(45 101.47 175.02)"/>
+        <rect x="111.59" y="185.14" width="5" height="5" transform="rotate(45 113.59 187.14)"/>
+        <rect x="123.72" y="197.27" width="5" height="5" transform="rotate(45 125.72 199.27)"/>
+      </g>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-name">Максим Леонидов</span>
+      <span class="logo-role">Архитектор нейросистем</span>
+    </div>
+  </a>
+  <nav>
+    <a href="services.html">Услуги</a>
+    <a href="neuroagents.html">Нейроагенты</a>
+    <a href="portfolio.html" class="active">Работы</a>
+    <a href="#contact" class="nav-cta">Связаться</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge reveal">Портфолио</div>
+  <h1 class="reveal">
+    <span class="line1">Работы,</span>
+    <span class="line2">которые живут в&nbsp;проде</span>
+  </h1>
+  <p class="hero-sub reveal">Реальные проекты с&nbsp;live&#8209;ссылками&nbsp;— не&nbsp;макеты и не&nbsp;концепты. Каждый можно открыть и&nbsp;потрогать.</p>
+</section>
+
+<!-- PROJECTS -->
+<section class="section reveal">
+  <div class="s-ey">Проекты</div>
+  <h2 class="s-title">Что я&nbsp;уже<br>построил <span class="g">своими руками</span></h2>
+
+  <div class="proj proj-featured">
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <div>
+          <span class="proj-tag">AI · Система</span>
+          <span class="proj-tag proj-flag">Текущий</span>
+        </div>
+        <h3 class="proj-title">AI-архитектор · этот сайт</h3>
+        <p class="proj-desc">Полная упаковка персонального бренда: лендинг, страница нейроагентов с живым демо-чатом, каталог услуг, 12-слайдовая презентация (HTML + PDF), шаблон КП с inline-редактированием и автосохранением.</p>
+        <div class="proj-feats">
+          <div class="proj-feat">3D-пролёт через нейросеть на canvas</div>
+          <div class="proj-feat">Живой чат-демо: 3 ниши (салон/магазин/недвижимость)</div>
+          <div class="proj-feat">Форма заявок через Vercel Function</div>
+          <div class="proj-feat">SVG-логотип ML-монограмма с chip-pins</div>
+          <div class="proj-feat">КП с autosave в localStorage</div>
+          <div class="proj-feat">A11y, OG-теги, prefers-reduced-motion</div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Vanilla JS</span>
+          <span class="stack-tag">Vercel Functions</span>
+          <span class="stack-tag">Telegram Bot API</span>
+          <span class="stack-tag">Canvas 2D</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-meta-row"><span class="proj-meta-l">Тип</span><span class="proj-meta-v">5 страниц + API</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Срок</span><span class="proj-meta-v">~1 неделя</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Стек</span><span class="proj-meta-v">Vanilla + Serverless</span></div>
+        <a href="https://ai-architect-five.vercel.app" class="proj-link" target="_blank" rel="noopener">Открыть →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <div><span class="proj-tag">Клиент · Услуги</span></div>
+        <h3 class="proj-title">Александра Леонидова · мастер маникюра</h3>
+        <p class="proj-desc">Клиентский сайт-визитка для мастера маникюра. Задача — уйти от Instagram как единственной точки входа и получить собственный адрес для визиток и рекламы. Розово-золотая палитра, фото работ, ссылки на все соцсети, запись через Telegram.</p>
+        <div class="proj-feats">
+          <div class="proj-feat">Индивидуальный брендинг под нишу</div>
+          <div class="proj-feat">Фотография мастера с анимацией</div>
+          <div class="proj-feat">6 соцсетей в одном экране</div>
+          <div class="proj-feat">Запись через Telegram-бот</div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Vanilla JS</span>
+          <span class="stack-tag">Vercel</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-meta-row"><span class="proj-meta-l">Тип</span><span class="proj-meta-v">Визитка</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Срок</span><span class="proj-meta-v">3 дня</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Клиент</span><span class="proj-meta-v">Частное лицо</span></div>
+        <a href="https://sasha-nails.vercel.app" class="proj-link" target="_blank" rel="noopener">Открыть →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <div><span class="proj-tag">Персональный бренд</span></div>
+        <h3 class="proj-title">ML-Vibecoder · цифровая визитка разработчика</h3>
+        <p class="proj-desc">Персональная визитка-резюме для продвижения услуг разработки. Matrix rain на фоне, фото с многослойными box-shadow кольцами, 6 социальных ссылок. Делал для себя на этапе перехода к AI-архитектору.</p>
+        <div class="proj-feats">
+          <div class="proj-feat">Matrix rain canvas-эффект</div>
+          <div class="proj-feat">Photo-rings с box-shadow</div>
+          <div class="proj-feat">100% responsive</div>
+          <div class="proj-feat">Быстрая загрузка без фреймворков</div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Canvas 2D</span>
+          <span class="stack-tag">Vercel</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-meta-row"><span class="proj-meta-l">Тип</span><span class="proj-meta-v">Визитка</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Срок</span><span class="proj-meta-v">2 дня</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Клиент</span><span class="proj-meta-v">Собственный проект</span></div>
+        <a href="https://ml-vibecoder.vercel.app" class="proj-link" target="_blank" rel="noopener">Открыть →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj">
+    <div class="proj-card">
+      <div class="proj-num">04</div>
+      <div class="proj-body">
+        <div><span class="proj-tag">Лендинг услуг</span></div>
+        <h3 class="proj-title">Maxxleon · лендинг услуг разработки</h3>
+        <p class="proj-desc">Первая версия персонального сайта — до ребрендинга в AI-архитектора. 7 секций: hero, услуги, как работаю, портфолио, отзывы, квиз, контакт. Форма заявок через серверную функцию — первый опыт Vercel Functions для проекта.</p>
+        <div class="proj-feats">
+          <div class="proj-feat">7 полноценных секций</div>
+          <div class="proj-feat">Квиз-воронка лидогенерации</div>
+          <div class="proj-feat">Форма → Telegram через API</div>
+          <div class="proj-feat">Тёмная техно-тематика</div>
+        </div>
+        <div class="proj-stack">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Vanilla JS</span>
+          <span class="stack-tag">Vercel Functions</span>
+        </div>
+      </div>
+      <div class="proj-meta">
+        <div class="proj-meta-row"><span class="proj-meta-l">Тип</span><span class="proj-meta-v">Лендинг</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Срок</span><span class="proj-meta-v">5 дней</span></div>
+        <div class="proj-meta-row"><span class="proj-meta-l">Статус</span><span class="proj-meta-v">Архивный</span></div>
+        <a href="https://maxxleon.vercel.app" class="proj-link" target="_blank" rel="noopener">Открыть →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section reveal">
+  <div class="s-ey">Технологии</div>
+  <h2 class="s-title">Что у&nbsp;меня<br>в&nbsp;<span class="g">арсенале</span></h2>
+  <div class="skills-grid">
+    <div class="skill">
+      <div class="skill-ico">⚡</div>
+      <div class="skill-t">Frontend</div>
+      <p class="skill-d">HTML5, CSS3, Vanilla JS, Canvas 2D/WebGL. Осознанно не тяну React/Vue в статические проекты — быстрее, легче, меньше зависимостей.</p>
+    </div>
+    <div class="skill">
+      <div class="skill-ico">🔌</div>
+      <div class="skill-t">Backend · Serverless</div>
+      <p class="skill-d">Vercel Functions, Telegram Bot API, webhooks. Для быстрых интеграций без инфраструктуры — без VPS, без Docker, без управления сервером.</p>
+    </div>
+    <div class="skill">
+      <div class="skill-ico">🤖</div>
+      <div class="skill-t">LLM & AI</div>
+      <p class="skill-d">OpenAI, Anthropic (Claude), YandexGPT, GigaChat. Промпт-инжиниринг, RAG, function calling. Вайбкодинг с Cursor/Claude Code.</p>
+    </div>
+    <div class="skill">
+      <div class="skill-ico">💬</div>
+      <div class="skill-t">Мессенджеры</div>
+      <p class="skill-d">Telegram Bot API, WhatsApp Business API, VK Callback, Avito Messages. Живая интеграция в воронку продаж.</p>
+    </div>
+    <div class="skill">
+      <div class="skill-ico">📊</div>
+      <div class="skill-t">CRM</div>
+      <p class="skill-d">amoCRM, Bitrix24, Google Sheets как лёгкий CRM. Интеграции через webhooks, собственные поля, воронки, автозадачи.</p>
+    </div>
+    <div class="skill">
+      <div class="skill-ico">🎨</div>
+      <div class="skill-t">Дизайн</div>
+      <p class="skill-d">Не графический дизайнер, но умею собирать цельный визуал: типографика, цветовая система, UI-паттерны. Уверенно веду проект от фигмы до прода.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact">
+  <div class="cta-box">
+    <div class="s-ey" style="justify-content:center">Следующий шаг</div>
+    <h3 class="cta-t">Хочется <span style="color:var(--green)">такое же</span> — или что-то своё?</h3>
+    <p class="cta-d">Напишите задачу в Telegram — отвечу в течение дня. Или оставьте заявку через форму на главной.</p>
+    <div class="cta-btns">
+      <a href="https://t.me/maxxleon927" class="btn-p" target="_blank" rel="noopener">Написать в Telegram →</a>
+      <a href="index.html#contact" class="btn-g">Оставить заявку</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="logo">
+        <svg class="logo-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Максим Леонидов — Архитектор нейросистем" style="width:40px;height:40px">
+          <g stroke="#A3FF12" stroke-width="3.5" fill="none" stroke-linecap="round">
+            <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+            <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+            <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+            <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+            <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+            <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+          </g>
+          <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#A3FF12" text-anchor="middle">ML</text>
+          <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#A3FF12" text-anchor="middle" opacity=".6" letter-spacing="4">AN</text>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">Максим Леонидов</span>
+          <span class="logo-role">Архитектор нейросистем</span>
+        </div>
+      </a>
+      <p class="footer-tagline">Проектирую ИИ-системы для бизнеса: нейроагенты, автоматизация, архитектура решений</p>
+    </div>
+    <div class="footer-links">
+      <a href="services.html">Услуги</a>
+      <a href="neuroagents.html">Нейроагенты</a>
+      <a href="portfolio.html">Работы</a>
+      <a href="https://t.me/maxxleon927" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://github.com/maxxleon84-png" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-copy">© 2026 Максим Юрьевич Леонидов · Самозанятый (НПД)</div>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX - 2.5 + 'px';
+  dot.style.top = e.clientY - 2.5 + 'px';
+  cursor.style.left = e.clientX - 10 + 'px';
+  cursor.style.top = e.clientY - 10 + 'px';
+});
+document.querySelectorAll('a,button,.proj-card,.skill,.btn-p,.btn-g').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.8)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+/* REVEAL */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* FLYTHROUGH */
+(function(){
+  const canvas = document.getElementById('flythrough');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const G=[163,255,18],FOV=600,DEPTH=3000,SPEED=20,NODE_COUNT=700,CONNECT_DIST=300,SPREAD_X=900,SPREAD_Y=600;
+  let mx=0,my=0,camX=0,camY=0;
+  document.addEventListener('mousemove', e => { mx=(e.clientX/W-0.5)*120; my=(e.clientY/H-0.5)*80; });
+  class N{
+    constructor(fz){this.reset(fz);}
+    reset(fz){this.x=(Math.random()-0.5)*SPREAD_X*2;this.y=(Math.random()-0.5)*SPREAD_Y*2;this.z=fz!==undefined?fz:Math.random()*DEPTH;this.size=Math.random()*1.5+1;this.dx=(Math.random()-0.5)*0.15;this.dy=(Math.random()-0.5)*0.15;}
+    update(){this.z-=SPEED;this.x+=this.dx;this.y+=this.dy;if(this.z<-100)this.reset(DEPTH+Math.random()*200);}
+    project(){const px=this.x-camX,py=this.y-camY,d=FOV/(FOV+this.z);if(this.z<-50)return null;return{sx:W/2+px*d,sy:H/2+py*d,d,alpha:Math.min(1,Math.max(0,1-this.z/DEPTH))};}
+  }
+  const ns=[];for(let i=0;i<NODE_COUNT;i++)ns.push(new N());
+  function conns(p){const c=[],cs=100,g=new Map();for(let i=0;i<p.length;i++){const pt=p[i];if(!pt)continue;const k=Math.floor(pt.sx/cs)+','+Math.floor(pt.sy/cs);if(!g.has(k))g.set(k,[]);g.get(k).push(i);}for(let i=0;i<p.length;i++){const pt=p[i];if(!pt)continue;const cx=Math.floor(pt.sx/cs),cy=Math.floor(pt.sy/cs);for(let dx=-2;dx<=2;dx++)for(let dy=-2;dy<=2;dy++){const cell=g.get((cx+dx)+','+(cy+dy));if(!cell)continue;for(const j of cell){if(j<=i)continue;const q=p[j];if(!q)continue;const ni=ns[i],nj=ns[j];const dSq=(ni.x-nj.x)**2+(ni.y-nj.y)**2+(ni.z-nj.z)**2;if(dSq<CONNECT_DIST*CONNECT_DIST)c.push([i,j,1-Math.sqrt(dSq)/CONNECT_DIST]);}}}return c;}
+  let raf=null;
+  document.addEventListener('visibilitychange',()=>{if(document.hidden&&raf){cancelAnimationFrame(raf);raf=null}else if(!document.hidden&&!raf)draw();});
+  function draw(){camX+=(mx-camX)*0.04;camY+=(my-camY)*0.04;ctx.fillStyle='rgba(5,5,5,0.25)';ctx.fillRect(0,0,W,H);ns.forEach(n=>n.update());const p=ns.map(n=>n.project());const cs=conns(p);for(const[i,j,s]of cs){const a=s*Math.min(p[i].alpha,p[j].alpha)*0.4;if(a<0.01)continue;ctx.beginPath();ctx.moveTo(p[i].sx,p[i].sy);ctx.lineTo(p[j].sx,p[j].sy);ctx.strokeStyle=`rgba(${G[0]},${G[1]},${G[2]},${a})`;ctx.lineWidth=s*Math.min(p[i].d,p[j].d)*1.5;ctx.stroke();}const sr=p.map((pt,i)=>[pt,i]).filter(([pt])=>pt).sort((a,b)=>b[0].z-a[0].z);for(const[pt,i]of sr){const sz=Math.max(0.8,ns[i].size*pt.d*2);ctx.beginPath();ctx.arc(pt.sx,pt.sy,sz,0,Math.PI*2);ctx.fillStyle=`rgba(${G[0]},${G[1]},${G[2]},${pt.alpha*0.9})`;ctx.fill();if(pt.alpha>0.6){ctx.beginPath();ctx.arc(pt.sx,pt.sy,sz*4,0,Math.PI*2);ctx.fillStyle=`rgba(${G[0]},${G[1]},${G[2]},${(pt.alpha-0.6)*0.2})`;ctx.fill();}}const vg=ctx.createRadialGradient(W/2,H/2,W*0.3,W/2,H/2,W*0.7);vg.addColorStop(0,'transparent');vg.addColorStop(1,'rgba(5,5,5,0.4)');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);raf=requestAnimationFrame(draw);}draw();
+})();
+</script>
+</body>
+</html>
