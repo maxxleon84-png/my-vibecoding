@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческое предложение — AI-архитектор</title>
+<meta name="description" content="Шаблон коммерческого предложения. Редактируется прямо в браузере, экспортируется в PDF через Ctrl+P.">
+<meta name="theme-color" content="#FAFAF7">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23FAFAF7'/%3E%3Cg stroke='%235A8A0C' stroke-width='6' fill='none' stroke-linecap='round'%3E%3Cline x1='80' y1='120' x2='159' y2='41'/%3E%3Cline x1='174' y1='41' x2='200' y2='67'/%3E%3Cline x1='146' y1='200' x2='80' y2='134'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDEDE8;--paper:#FFFFFF;
+  --ink:#0A0A0A;--ink-2:#444;--ink-3:#8A8A85;
+  --green:#5A8A0C;--green-soft:#E7F4CF;--green-line:#B5D569;
+  --line:#E0E0DA;
+  --fh:'Chakra Petch',sans-serif;--fb:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--fb);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:80px 0 24px;min-height:100vh}
+
+/* ═══ A4 PORTRAIT PAGES ═══ */
+.page{
+  width:210mm;min-height:297mm;
+  padding:18mm 18mm;
+  background:var(--paper);
+  margin:0 auto 16px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;
+  position:relative;
+  border:1px solid var(--line);
+  font-size:10.5pt;line-height:1.55;color:var(--ink-2);
+}
+.page:last-child{margin-bottom:0}
+
+/* ═══ DOC HEADER ═══ */
+.doc-hdr{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:8mm;margin-bottom:10mm;border-bottom:2px solid var(--green)}
+.doc-brand{display:flex;align-items:center;gap:10px}
+.doc-brand svg{width:42px;height:42px;flex-shrink:0}
+.doc-brand-name{font-family:'Orbitron',sans-serif;font-size:12pt;font-weight:900;letter-spacing:2px;color:var(--green);text-transform:uppercase;line-height:1}
+.doc-brand-role{font-family:var(--fh);font-size:8pt;font-weight:500;letter-spacing:2.5px;color:var(--ink-3);text-transform:uppercase;margin-top:3px}
+.doc-meta{text-align:right;font-family:var(--fh);font-size:10pt}
+.doc-meta-l{font-size:8pt;color:var(--ink-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.doc-meta-v{font-weight:700;color:var(--ink);margin-bottom:5mm}
+.doc-meta-v:last-child{margin-bottom:0}
+
+/* ═══ TITLE ═══ */
+.doc-title{font-family:var(--fh);font-size:26pt;font-weight:700;text-transform:uppercase;color:var(--ink);margin-bottom:2mm;letter-spacing:.5px;line-height:1}
+.doc-title .g{color:var(--green)}
+.doc-to{font-family:var(--fh);font-size:10pt;color:var(--ink-3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10mm}
+.doc-to .client{color:var(--ink);font-weight:700;text-transform:none;letter-spacing:0;font-family:var(--fb)}
+
+/* ═══ SECTIONS ═══ */
+.sec{margin-bottom:9mm}
+.sec:last-child{margin-bottom:0}
+.sec-t{font-family:var(--fh);font-size:11pt;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--green);margin-bottom:4mm;display:flex;align-items:center;gap:10px}
+.sec-t::before{content:'';width:6mm;height:2px;background:var(--green)}
+.sec-body{font-size:10.5pt;line-height:1.6;color:var(--ink-2)}
+.sec-body p{margin-bottom:3mm}
+.sec-body p:last-child{margin-bottom:0}
+.sec-body ul{list-style:none;margin:2mm 0}
+.sec-body ul li{padding:2mm 0 2mm 8mm;position:relative;line-height:1.5}
+.sec-body ul li::before{content:'';position:absolute;left:0;top:4mm;width:4mm;height:2px;background:var(--green)}
+.sec-body strong{color:var(--ink);font-weight:700}
+
+/* ═══ SCOPE TABLE ═══ */
+.scope{border:1px solid var(--line);border-radius:0}
+.scope-row{display:grid;grid-template-columns:12mm 1fr;border-bottom:1px solid var(--line);padding:4mm 5mm;align-items:flex-start;gap:4mm}
+.scope-row:last-child{border-bottom:none}
+.scope-n{font-family:var(--fh);font-size:14pt;font-weight:700;color:var(--green);line-height:1}
+.scope-t{font-family:var(--fh);font-size:11pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--ink);margin-bottom:1.5mm;line-height:1.2}
+.scope-d{font-size:10pt;color:var(--ink-2);line-height:1.5}
+
+/* ═══ PRICE TABLE ═══ */
+.price-tbl{width:100%;border-collapse:collapse;margin-top:2mm}
+.price-tbl th{font-family:var(--fh);font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-3);text-align:left;padding:3mm 4mm;border-bottom:2px solid var(--line)}
+.price-tbl th:last-child{text-align:right}
+.price-tbl td{padding:4mm;border-bottom:1px solid var(--line);font-size:10.5pt;vertical-align:top}
+.price-tbl td:last-child{text-align:right;font-family:var(--fh);font-weight:700;color:var(--ink);white-space:nowrap}
+.price-tbl tr:last-child td{border-bottom:none}
+.price-tbl .total-row td{border-top:2px solid var(--ink);padding-top:5mm;font-family:var(--fh);font-size:13pt;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:1px}
+.price-tbl .total-row td:last-child{color:var(--green);font-size:18pt}
+
+/* ═══ HIGHLIGHT BOX ═══ */
+.hlbox{padding:5mm 6mm;background:var(--green-soft);border-left:4px solid var(--green);margin:3mm 0}
+.hlbox-t{font-family:var(--fh);font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:2mm}
+.hlbox-d{font-size:10pt;color:var(--ink);line-height:1.5}
+
+/* ═══ SIGNATURE ═══ */
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:15mm;margin-top:12mm;padding-top:8mm;border-top:1px solid var(--line)}
+.sig-col-t{font-family:var(--fh);font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--ink-3);margin-bottom:8mm}
+.sig-line{border-bottom:1px solid var(--ink);margin-bottom:2mm;height:10mm}
+.sig-name{font-size:10pt;color:var(--ink-2)}
+
+.doc-foot{margin-top:auto;padding-top:8mm;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9pt;color:var(--ink-3);font-family:var(--fh);letter-spacing:1px;text-transform:uppercase}
+
+/* ═══ EDITABLE ═══ */
+[contenteditable]{outline:none;transition:background .15s;min-height:1.2em}
+[contenteditable]:hover{background:rgba(90,138,12,.05)}
+[contenteditable]:focus{background:var(--green-soft);box-shadow:0 0 0 1px var(--green) inset}
+[contenteditable]:empty::before{content:attr(data-placeholder);color:var(--ink-3);font-style:italic;opacity:.7}
+[contenteditable][data-multiline]{white-space:pre-wrap}
+
+/* ═══ TOOLBAR ═══ */
+.toolbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:8px;padding:10px 14px;background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,.08);align-items:center}
+.tb-btn{padding:8px 14px;background:var(--green);color:var(--paper);border:none;cursor:pointer;font-family:var(--fh);font-size:10pt;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.tb-btn:hover{background:#4A7108;box-shadow:0 4px 12px rgba(90,138,12,.3)}
+.tb-btn.sec{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.tb-btn.sec:hover{border-color:var(--green);color:var(--green);background:var(--paper)}
+.tb-save{font-size:9pt;color:var(--ink-3);font-family:var(--fb);letter-spacing:.5px;padding:0 8px;min-width:120px;text-align:center}
+.tb-save.ok{color:var(--green)}
+
+/* ═══ PRINT ═══ */
+@page{size:A4 portrait;margin:15mm}
+@media print{
+  body{background:var(--paper);padding:0}
+  .toolbar{display:none!important}
+  .page{
+    margin:0;box-shadow:none;border:none;
+    width:auto;min-height:auto;
+    padding:0;
+    page-break-after:always;break-after:page;
+  }
+  .page:last-child{page-break-after:auto;break-after:auto}
+  [contenteditable]:empty::before{content:''}
+  [contenteditable]:hover{background:transparent}
+}
+
+@media(max-width:820px){
+  body{padding:70px 8px 16px}
+  .page{width:100%;min-height:auto;padding:10mm 10mm}
+  .sig{grid-template-columns:1fr;gap:10mm}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tb-btn" onclick="window.print()">📄 Сохранить PDF</button>
+  <button class="tb-btn sec" onclick="if(confirm('Очистить все поля? Текущий черновик будет удалён.')){localStorage.removeItem('proposal-draft');location.reload();}">🗑 Новое КП</button>
+  <span class="tb-save" id="saveStatus">Черновик сохраняется...</span>
+  <a class="tb-btn sec" href="presentation.html" style="text-decoration:none">← Презентация</a>
+</div>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="doc-hdr">
+    <div class="doc-brand">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#5A8A0C" stroke-width="3.5" fill="none" stroke-linecap="round">
+          <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+          <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+          <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+          <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+          <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+          <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+        </g>
+        <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#5A8A0C" text-anchor="middle">ML</text>
+        <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#5A8A0C" text-anchor="middle" opacity=".65" letter-spacing="4">AN</text>
+      </svg>
+      <div>
+        <div class="doc-brand-name">Максим Леонидов</div>
+        <div class="doc-brand-role">AI-архитектор</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div class="doc-meta-l">КП №</div>
+      <div class="doc-meta-v" contenteditable="plaintext-only" data-placeholder="2026-001" data-field="number">2026-001</div>
+      <div class="doc-meta-l">Дата</div>
+      <div class="doc-meta-v" contenteditable="plaintext-only" data-placeholder="21 апреля 2026" data-field="date">21 апреля 2026</div>
+    </div>
+  </div>
+
+  <h1 class="doc-title">Коммерческое <span class="g">предложение</span></h1>
+  <div class="doc-to">
+    Для:&nbsp;<span class="client" contenteditable="plaintext-only" data-placeholder="ООО «Название компании»" data-field="company">ООО «Название компании»</span>
+    <br>Контактное лицо:&nbsp;<span class="client" contenteditable="plaintext-only" data-placeholder="Иван Иванов, директор" data-field="contact">Иван Иванов, директор</span>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Задача клиента</div>
+    <div class="sec-body" contenteditable="plaintext-only" data-multiline data-placeholder="Опишите задачу клиента своими словами — что болит, какие каналы, сколько заявок в день. 2-3 предложения из брифа." data-field="task">У компании поток входящих заявок в Telegram и WhatsApp по 40-60 в день. Администратор не успевает отвечать в вечернее время, часть клиентов уходит к конкурентам. Нужен ИИ-сотрудник, который закроет вечерние и ночные часы.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Предлагаемое решение</div>
+    <div class="sec-body" contenteditable="plaintext-only" data-multiline data-placeholder="Как вы решаете задачу — какой продукт, в каких каналах, с какими интеграциями. 3-5 предложений." data-field="solution">Нейроагент-продавец по тарифу «Про». Работает в двух каналах: Telegram и WhatsApp Business API. База знаний на 150 позиций: услуги, цены, условия, график, типовые ответы. Интеграция с amoCRM: каждый диалог → карточка сделки. Эскалация к живому менеджеру при сложных кейсах. Настройка под 152-ФЗ: используем GigaChat от Сбера.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Состав работ</div>
+    <div class="scope">
+      <div class="scope-row">
+        <div class="scope-n">01</div>
+        <div>
+          <div class="scope-t" contenteditable="plaintext-only" data-field="scope1-t">Бриф и техническое задание</div>
+          <div class="scope-d" contenteditable="plaintext-only" data-multiline data-field="scope1-d">Глубокий разбор воронки, сбор материалов для базы знаний, проектирование сценариев диалогов. На выходе — согласованное ТЗ с нумерацией сценариев.</div>
+        </div>
+      </div>
+      <div class="scope-row">
+        <div class="scope-n">02</div>
+        <div>
+          <div class="scope-t" contenteditable="plaintext-only" data-field="scope2-t">Разработка агента</div>
+          <div class="scope-d" contenteditable="plaintext-only" data-multiline data-field="scope2-d">Настройка LLM (GigaChat), сборка базы знаний, обучение на типовых диалогах, тестирование на 50+ кейсах из реальной переписки.</div>
+        </div>
+      </div>
+      <div class="scope-row">
+        <div class="scope-n">03</div>
+        <div>
+          <div class="scope-t" contenteditable="plaintext-only" data-field="scope3-t">Интеграции</div>
+          <div class="scope-d" contenteditable="plaintext-only" data-multiline data-field="scope3-d">Подключение Telegram Bot API, WhatsApp Business API, amoCRM. Настройка webhooks для двусторонней синхронизации.</div>
+        </div>
+      </div>
+      <div class="scope-row">
+        <div class="scope-n">04</div>
+        <div>
+          <div class="scope-t" contenteditable="plaintext-only" data-field="scope4-t">Запуск и сопровождение</div>
+          <div class="scope-d" contenteditable="plaintext-only" data-multiline data-field="scope4-d">Запуск на боевом потоке, мониторинг первых 2 недель, еженедельные отчёты. Далее — 3 месяца поддержки и доработок по фидбеку.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-foot">
+    <span>Страница 1 из 2</span>
+    <span>ai-architect-five.vercel.app · @maxxleon927</span>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <div class="doc-hdr">
+    <div class="doc-brand">
+      <svg viewBox="0 0 200 200" fill="none" aria-hidden="true">
+        <g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g>
+      </svg>
+      <div>
+        <div class="doc-brand-name">Максим Леонидов</div>
+        <div class="doc-brand-role">AI-архитектор · КП <span contenteditable="plaintext-only" data-field="number-copy" data-placeholder="2026-001">2026-001</span></div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <div class="doc-meta-l">Страница</div>
+      <div class="doc-meta-v">2 / 2</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Сроки</div>
+    <div class="sec-body">
+      <ul>
+        <li><strong contenteditable="plaintext-only" data-field="time1-t">Этап 1 — Бриф и ТЗ:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="time1-d">2-3 рабочих дня</span></li>
+        <li><strong contenteditable="plaintext-only" data-field="time2-t">Этап 2 — Разработка агента:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="time2-d">7-10 рабочих дней</span></li>
+        <li><strong contenteditable="plaintext-only" data-field="time3-t">Этап 3 — Интеграции:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="time3-d">3-5 рабочих дней</span></li>
+        <li><strong contenteditable="plaintext-only" data-field="time4-t">Этап 4 — Запуск:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="time4-d">2 дня, далее сопровождение 3 мес</span></li>
+      </ul>
+      <p style="margin-top:3mm"><strong contenteditable="plaintext-only" data-field="time-total-t">Общий срок до запуска:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="time-total-d">14-20 рабочих дней</span></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Стоимость</div>
+    <table class="price-tbl">
+      <thead><tr><th>Позиция</th><th>Сумма</th></tr></thead>
+      <tbody>
+        <tr>
+          <td contenteditable="plaintext-only" data-multiline data-field="p1">Нейроагент · тариф «Про» (2 канала, CRM, 150 позиций базы знаний)</td>
+          <td contenteditable="plaintext-only" data-field="p1v">60 000 ₽</td>
+        </tr>
+        <tr>
+          <td contenteditable="plaintext-only" data-multiline data-field="p2">Интеграция с WhatsApp Business API (включая оформление и верификацию)</td>
+          <td contenteditable="plaintext-only" data-field="p2v">15 000 ₽</td>
+        </tr>
+        <tr>
+          <td contenteditable="plaintext-only" data-multiline data-field="p3">Настройка amoCRM (создание воронки, полей, автоматизаций)</td>
+          <td contenteditable="plaintext-only" data-field="p3v">10 000 ₽</td>
+        </tr>
+        <tr>
+          <td contenteditable="plaintext-only" data-multiline data-field="p4">3 месяца сопровождения (включено в тариф)</td>
+          <td contenteditable="plaintext-only" data-field="p4v">0 ₽</td>
+        </tr>
+        <tr class="total-row">
+          <td>Итого</td>
+          <td contenteditable="plaintext-only" data-field="ptotal">85 000 ₽</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hlbox">
+      <div class="hlbox-t">Текущие расходы после запуска</div>
+      <div class="hlbox-d" contenteditable="plaintext-only" data-multiline data-field="running-costs">API GigaChat: ~800–1200 ₽/мес при 60 диалогах в день. WhatsApp Business API: ~3000 ₽/мес (тариф Meta). amoCRM: лицензии у вас. Плата за поддержку после 3 месяцев: 15 000 ₽/мес (абонемент).</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Условия оплаты</div>
+    <div class="sec-body">
+      <ul>
+        <li><strong contenteditable="plaintext-only" data-field="pay1-t">Предоплата 50%:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="pay1-d">при подписании договора, старт работ</span></li>
+        <li><strong contenteditable="plaintext-only" data-field="pay2-t">Остаток 50%:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="pay2-d">после сдачи этапа 3 (интеграции), перед запуском</span></li>
+        <li><strong contenteditable="plaintext-only" data-field="pay3-t">Форма:</strong>&nbsp;<span contenteditable="plaintext-only" data-field="pay3-d">безналичный расчёт, счёт от ИП на УСН 6%</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Что получаете</div>
+    <div class="sec-body">
+      <ul>
+        <li contenteditable="plaintext-only" data-field="get1">Работающего нейроагента в 2 каналах, обученного на ваших данных</li>
+        <li contenteditable="plaintext-only" data-field="get2">Доступ к админке агента — можете править базу знаний самостоятельно</li>
+        <li contenteditable="plaintext-only" data-field="get3">Все исходные настройки: вы владелец, без vendor-lock</li>
+        <li contenteditable="plaintext-only" data-field="get4">Документацию: как управлять, как добавлять сценарии, как смотреть аналитику</li>
+        <li contenteditable="plaintext-only" data-field="get5">3 месяца поддержки: доработки, обучение команды, еженедельные отчёты</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-t">Гарантии</div>
+    <div class="sec-body" contenteditable="plaintext-only" data-multiline data-field="warranty">Если после запуска агент не покрывает ключевые сценарии из ТЗ — дорабатываю бесплатно в рамках 3 месяцев поддержки. Все данные хранятся на ваших серверах или в вашем облаке. При прекращении сотрудничества исходники и настройки остаются у вас.</div>
+  </div>
+
+  <div class="sig">
+    <div>
+      <div class="sig-col-t">Исполнитель</div>
+      <div class="sig-line"></div>
+      <div class="sig-name">Максим Леонидов, AI-архитектор<br>ИП Леонидов М.Н. · @maxxleon927</div>
+    </div>
+    <div>
+      <div class="sig-col-t">Заказчик</div>
+      <div class="sig-line"></div>
+      <div class="sig-name" contenteditable="plaintext-only" data-field="customer-sig">Иван Иванов, директор<br>ООО «Название компании»</div>
+    </div>
+  </div>
+
+  <div class="doc-foot">
+    <span>Страница 2 из 2</span>
+    <span>Предложение действительно 14 дней с даты выставления</span>
+  </div>
+</section>
+
+<script>
+const KEY = 'proposal-draft';
+const saveEl = document.getElementById('saveStatus');
+const editables = document.querySelectorAll('[contenteditable]');
+
+// Load draft
+try {
+  const draft = JSON.parse(localStorage.getItem(KEY) || '{}');
+  editables.forEach(el => {
+    const f = el.dataset.field;
+    if (f && draft[f] !== undefined) el.textContent = draft[f];
+  });
+} catch(e) {}
+
+// Auto-save on edit
+let saveTimer = null;
+function save() {
+  const data = {};
+  editables.forEach(el => {
+    const f = el.dataset.field;
+    if (f) data[f] = el.textContent;
+  });
+  localStorage.setItem(KEY, JSON.stringify(data));
+  saveEl.textContent = '✓ Сохранено ' + new Date().toLocaleTimeString('ru-RU');
+  saveEl.classList.add('ok');
+}
+
+editables.forEach(el => {
+  el.addEventListener('input', () => {
+    saveEl.textContent = 'Сохранение...';
+    saveEl.classList.remove('ok');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 600);
+  });
+  // Keep number-copy synced with number
+  if (el.dataset.field === 'number') {
+    el.addEventListener('input', () => {
+      const copy = document.querySelector('[data-field="number-copy"]');
+      if (copy) copy.textContent = el.textContent;
+    });
+  }
+});
+
+// Initial save status
+if (localStorage.getItem(KEY)) {
+  saveEl.textContent = '✓ Черновик загружен';
+  saveEl.classList.add('ok');
+} else {
+  saveEl.textContent = 'Редактирование включено';
+}
+
+// Prevent rich paste (safety net for browsers ignoring plaintext-only)
+editables.forEach(el => {
+  el.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+  });
+});
+</script>
+</body>
+</html>
