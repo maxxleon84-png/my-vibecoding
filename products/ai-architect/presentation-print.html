@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-архитектор · Презентация для печати</title>
+<meta name="description" content="Print-версия презентации AI-архитектора. A4 landscape, для экспорта в PDF через Ctrl+P.">
+<meta name="theme-color" content="#FAFAF7">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23FAFAF7'/%3E%3Cg stroke='%235A8A0C' stroke-width='6' fill='none' stroke-linecap='round'%3E%3Cline x1='80' y1='120' x2='159' y2='41'/%3E%3Cline x1='174' y1='41' x2='200' y2='67'/%3E%3Cline x1='146' y1='200' x2='80' y2='134'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Manrope:wght@400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#FAFAF7;--paper:#FFFFFF;
+  --ink:#0A0A0A;--ink-2:#555;--ink-3:#999;
+  --green:#5A8A0C;--green-soft:#E7F4CF;--green-line:#B5D569;
+  --line:#E0E0DA;
+  --fh:'Chakra Petch',sans-serif;--fb:'Manrope',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--fb);background:#EDEDE8;color:var(--ink);-webkit-font-smoothing:antialiased;padding:24px 0}
+
+/* ═══ A4 LANDSCAPE PAGES ═══ */
+.page{
+  width:297mm;min-height:210mm;
+  padding:14mm 18mm;
+  background:var(--paper);
+  margin:0 auto 16px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  border:1px solid var(--line);
+}
+.page-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8mm;padding-bottom:5mm;border-bottom:1px solid var(--line)}
+.page-num{font-family:var(--fh);font-size:10pt;font-weight:700;letter-spacing:2px;color:var(--ink-3);text-transform:uppercase}
+.page-num b{color:var(--green);font-weight:700}
+.page-brand{display:flex;align-items:center;gap:10px}
+.page-brand svg{width:22px;height:22px}
+.page-brand-text{font-family:'Orbitron',sans-serif;font-size:9pt;font-weight:700;letter-spacing:1.5px;color:var(--green)}
+
+.p-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--fh);font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--green);margin-bottom:6mm}
+.p-eyebrow::before{content:'';width:22px;height:2px;background:var(--green)}
+.p-title{font-family:var(--fh);font-size:32pt;font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.5px;margin-bottom:10mm;color:var(--ink)}
+.p-title .g{color:var(--green)}
+.p-sub{font-size:13pt;color:var(--ink-2);line-height:1.5;max-width:240mm;margin-bottom:8mm;font-weight:400}
+
+/* ═══ 1 — COVER ═══ */
+.cover{text-align:center;justify-content:center;align-items:center;padding:30mm 18mm}
+.cover .logo{width:26mm;height:26mm;margin-bottom:10mm}
+.cover-name{font-family:'Orbitron',sans-serif;font-size:26pt;font-weight:900;letter-spacing:4px;color:var(--green);text-transform:uppercase;margin-bottom:5mm}
+.cover-role{font-family:var(--fh);font-size:14pt;font-weight:700;text-transform:uppercase;letter-spacing:6px;color:var(--ink);margin-bottom:10mm}
+.cover-tagline{font-size:13pt;color:var(--ink-2);max-width:190mm;line-height:1.55;margin:0 auto 12mm}
+.cover-meta{margin-top:auto;padding-top:8mm;border-top:1px solid var(--line);font-size:10pt;color:var(--ink-3);font-family:var(--fh);letter-spacing:2px;text-transform:uppercase;display:flex;justify-content:space-between;width:100%}
+
+/* ═══ 3 CARDS ROW ═══ */
+.row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;margin-top:2mm}
+.row-4{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm;margin-top:6mm}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:2mm}
+
+.box{padding:8mm 7mm;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--green);position:relative}
+.box-ico{font-size:22pt;margin-bottom:4mm;color:var(--green)}
+.box-t{font-family:var(--fh);font-size:13pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3mm;color:var(--ink);line-height:1.2}
+.box-d{font-size:10.5pt;color:var(--ink-2);line-height:1.55}
+
+/* ═══ 6 DIRECTIONS ═══ */
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:4mm}
+.dir{padding:6mm 7mm;background:var(--paper);border:1px solid var(--line);display:flex;gap:5mm;align-items:flex-start}
+.dir-num{font-family:var(--fh);font-size:22pt;font-weight:700;color:var(--green);line-height:1;min-width:15mm}
+.dir-t{font-family:var(--fh);font-size:12pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1.5mm}
+.dir-d{font-size:9.5pt;color:var(--ink-2);line-height:1.5}
+.dir.flag{background:var(--green-soft);border-color:var(--green-line)}
+.dir.flag .dir-num{color:var(--green)}
+
+/* ═══ 4 STEPS ═══ */
+.step{position:relative;padding:8mm 6mm 6mm;background:var(--paper);border:1px solid var(--line);counter-increment:st}
+.steps{counter-reset:st}
+.step::before{content:'0' counter(st);position:absolute;top:-3mm;left:5mm;font-family:var(--fh);font-size:20pt;font-weight:700;color:var(--green);background:var(--paper);padding:0 3mm}
+.step-ico{font-size:18pt;margin:3mm 0 3mm;color:var(--green)}
+.step-t{font-family:var(--fh);font-size:11pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2mm}
+.step-d{font-size:9.5pt;color:var(--ink-2);line-height:1.5}
+
+/* ═══ METRICS (3 big numbers) ═══ */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;margin-top:4mm}
+.metric{padding:15mm 8mm;background:var(--green-soft);border:1px solid var(--green-line);text-align:center}
+.metric-v{font-family:var(--fh);font-size:52pt;font-weight:700;color:var(--green);line-height:1;margin-bottom:5mm}
+.metric-v span{font-size:.5em;font-weight:500}
+.metric-l{font-size:11pt;color:var(--ink);line-height:1.45;font-weight:500}
+
+/* ═══ PRICING 3 COLS ═══ */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:4mm}
+.price{padding:8mm 7mm;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;position:relative}
+.price.pop{background:var(--green-soft);border-color:var(--green-line);border-width:2px}
+.price.pop::before{content:'ПОПУЛЯРНЫЙ';position:absolute;top:4mm;right:4mm;font-family:var(--fh);font-size:8pt;font-weight:700;letter-spacing:1.5px;padding:1.5mm 3mm;background:var(--green);color:var(--paper);text-transform:uppercase}
+.price-name{font-family:var(--fh);font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--ink-3);margin-bottom:3mm}
+.price-v{font-family:var(--fh);font-size:22pt;font-weight:700;color:var(--green);margin-bottom:2mm;line-height:1}
+.price-for{font-size:10pt;color:var(--ink-2);margin-bottom:6mm}
+.price ul{list-style:none}
+.price ul li{font-size:10pt;color:var(--ink);padding:1.5mm 0;display:flex;gap:3mm;align-items:flex-start;line-height:1.4}
+.price ul li::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;flex-shrink:0;margin-top:5px}
+
+/* ═══ DIFFS ═══ */
+.diffs{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm}
+.diff{padding:6mm 7mm;background:var(--paper);border:1px solid var(--line);display:flex;gap:5mm;align-items:flex-start}
+.diff-ico{font-size:22pt;color:var(--green);flex-shrink:0;line-height:1}
+.diff-t{font-family:var(--fh);font-size:12pt;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2mm}
+.diff-d{font-size:10pt;color:var(--ink-2);line-height:1.5}
+
+/* ═══ CTA ═══ */
+.cta{text-align:center;align-items:center;justify-content:center}
+.cta .p-title{margin-bottom:8mm}
+.cta-offers{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:6mm;max-width:220mm;width:100%}
+.cta-offer{padding:8mm 10mm;background:var(--paper);border:2px solid var(--green-line);text-align:left}
+.cta-offer-t{font-family:var(--fh);font-size:11pt;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3mm}
+.cta-offer-d{font-size:10.5pt;color:var(--ink-2);line-height:1.5}
+
+/* ═══ CONTACTS ═══ */
+.contacts{text-align:left}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm}
+.contact{padding:7mm 8mm;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;gap:6mm;text-decoration:none}
+.contact-ico{width:16mm;height:16mm;display:flex;align-items:center;justify-content:center;background:var(--green-soft);border:1px solid var(--green-line);font-size:20pt;flex-shrink:0}
+.contact-l{font-family:var(--fh);font-size:9pt;font-weight:700;letter-spacing:2px;color:var(--ink-3);text-transform:uppercase;margin-bottom:1mm}
+.contact-v{font-family:var(--fh);font-size:14pt;font-weight:700;color:var(--ink);word-break:break-all}
+.contacts-foot{margin-top:auto;padding-top:8mm;border-top:1px solid var(--line);text-align:center;font-size:10pt;color:var(--ink-3);font-family:var(--fh);letter-spacing:2px;text-transform:uppercase}
+
+/* ═══ TOOLBAR (only on screen) ═══ */
+.toolbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:8px;padding:10px 14px;background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,.08);font-family:var(--fh);font-size:11pt;align-items:center}
+.tb-btn{padding:8px 14px;background:var(--green);color:var(--paper);border:none;cursor:pointer;font-family:var(--fh);font-size:11pt;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:.2s}
+.tb-btn:hover{background:#4A7108;box-shadow:0 4px 12px rgba(90,138,12,.3)}
+.tb-link{color:var(--ink-2);text-decoration:none;font-size:10pt;letter-spacing:1px;text-transform:uppercase;padding:8px 12px}
+.tb-link:hover{color:var(--green)}
+.tb-hint{font-size:9.5pt;color:var(--ink-3);letter-spacing:1px;text-transform:uppercase}
+
+/* ═══ PRINT ═══ */
+@page{size:A4 landscape;margin:0}
+@media print{
+  body{background:var(--paper);padding:0}
+  .toolbar{display:none!important}
+  .page{
+    margin:0;box-shadow:none;border:none;
+    page-break-after:always;break-after:page;
+    width:297mm;height:210mm;min-height:210mm;max-height:210mm;
+    overflow:hidden;
+  }
+  .page:last-child{page-break-after:auto;break-after:auto}
+}
+
+/* ═══ RESPONSIVE (screen only) ═══ */
+@media(max-width:1200px){
+  body{padding:80px 8px 16px}
+  .page{width:100%;min-height:auto;padding:10mm 12mm}
+  .row-3,.row-4,.dirs,.steps.row-4,.metrics,.prices,.diffs,.cta-offers,.contact-grid{grid-template-columns:1fr 1fr}
+  .p-title{font-size:22pt}
+}
+@media(max-width:720px){
+  .row-3,.row-4,.dirs,.steps.row-4,.metrics,.prices,.diffs,.cta-offers,.contact-grid{grid-template-columns:1fr}
+  .cover-name{font-size:20pt}
+  .p-title{font-size:18pt}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="tb-btn" onclick="window.print()">📄 Сохранить PDF</button>
+  <a class="tb-link" href="presentation.html">← Интерактивная версия</a>
+  <span class="tb-hint">Ctrl+P → Сохранить как PDF</span>
+</div>
+
+<!-- 1. COVER -->
+<section class="page cover">
+  <svg class="logo" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#5A8A0C" stroke-width="3.5" fill="none" stroke-linecap="round">
+      <line x1="80.20" y1="119.80" x2="159.39" y2="40.61"/>
+      <line x1="173.53" y1="40.61" x2="200" y2="67.08"/>
+      <line x1="146.25" y1="200" x2="80.20" y2="133.94"/>
+      <path d="M 160.80 39.20 A 8 8 0 0 1 172.12 39.20"/>
+      <path d="M 78.79 132.53 A 8 8 0 0 1 78.79 121.21"/>
+      <line x1="200" y1="186.68" x2="186.67" y2="200"/>
+    </g>
+    <text x="94" y="100" font-family="Orbitron" font-weight="900" font-size="46" fill="#5A8A0C" text-anchor="middle">ML</text>
+    <text x="104" y="136" font-family="Orbitron" font-weight="500" font-size="26" fill="#5A8A0C" text-anchor="middle" opacity=".65" letter-spacing="4">AN</text>
+    <g stroke="#5A8A0C" stroke-width="3.5" stroke-linecap="square">
+      <line x1="133.80" y1="66.20" x2="123.90" y2="56.30"/>
+      <line x1="143.13" y1="56.87" x2="133.23" y2="46.97"/>
+      <line x1="152.47" y1="47.54" x2="142.57" y2="37.64"/>
+      <line x1="177.13" y1="44.21" x2="187.03" y2="34.32"/>
+      <line x1="186.46" y1="53.54" x2="196.36" y2="43.65"/>
+      <line x1="87.12" y1="140.87" x2="77.22" y2="150.77"/>
+      <line x1="99.25" y1="153.00" x2="89.35" y2="162.90"/>
+      <line x1="111.37" y1="165.12" x2="101.47" y2="175.02"/>
+      <line x1="123.49" y1="177.24" x2="113.59" y2="187.14"/>
+      <line x1="135.62" y1="189.37" x2="125.72" y2="199.27"/>
+    </g>
+    <g fill="#5A8A0C" opacity=".8">
+      <rect x="121.9" y="54.3" width="5" height="5" transform="rotate(45 123.9 56.3)"/>
+      <rect x="131.23" y="44.97" width="5" height="5" transform="rotate(45 133.23 46.97)"/>
+      <rect x="140.57" y="35.64" width="5" height="5" transform="rotate(45 142.57 37.64)"/>
+      <rect x="185.03" y="32.32" width="5" height="5" transform="rotate(45 187.03 34.32)"/>
+      <rect x="194.36" y="41.65" width="5" height="5" transform="rotate(45 196.36 43.65)"/>
+      <rect x="75.22" y="148.77" width="5" height="5" transform="rotate(45 77.22 150.77)"/>
+      <rect x="87.35" y="160.90" width="5" height="5" transform="rotate(45 89.35 162.90)"/>
+      <rect x="99.47" y="173.02" width="5" height="5" transform="rotate(45 101.47 175.02)"/>
+      <rect x="111.59" y="185.14" width="5" height="5" transform="rotate(45 113.59 187.14)"/>
+      <rect x="123.72" y="197.27" width="5" height="5" transform="rotate(45 125.72 199.27)"/>
+    </g>
+  </svg>
+  <div class="cover-name">Максим Леонидов</div>
+  <div class="cover-role">AI-архитектор</div>
+  <p class="cover-tagline">Проектирую ИИ-системы для бизнеса, которые реально приносят деньги — не просто чат-боты и не маркетинговые обещания.</p>
+  <div class="cover-meta">
+    <span>ai-architect-five.vercel.app</span>
+    <span>@maxxleon927</span>
+  </div>
+</section>
+
+<!-- 2. PROBLEM -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>02</b> / 12 · Проблема</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Почему бизнес теряет деньги</div>
+  <h1 class="p-title">Три причины,<br>почему клиенты <span class="g">не доходят</span> до сделки</h1>
+  <div class="row-3">
+    <div class="box">
+      <div class="box-ico">🌙</div>
+      <div class="box-t">Заявки приходят ночью</div>
+      <p class="box-d">Клиент пишет в 22:30, менеджер видит в 9:00. К этому моменту клиент уже купил у конкурента.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">🤒</div>
+      <div class="box-t">Человеческий фактор</div>
+      <p class="box-d">Менеджер болеет, в отпуске, уволился. Воронка встаёт, обучение нового — 2 недели и минус выручка.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">🔁</div>
+      <div class="box-t">Типовые вопросы съедают время</div>
+      <p class="box-d">«Есть в наличии?», «сколько стоит?», «когда доставка?» — 80% рабочего дня менеджера уходит на одно и то же.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. CONCEPT -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>03</b> / 12 · Концепция</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Что такое AI-архитектор</div>
+  <h1 class="p-title">Разница между<br>«делать сайты» и <span class="g">«проектировать системы»</span></h1>
+  <div class="row-3">
+    <div class="box">
+      <div class="box-ico">🌐</div>
+      <div class="box-t">Сайт — фасад</div>
+      <p class="box-d">Красивый, но пассивный. Привлекает внимание — ничего не делает дальше.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">🤖</div>
+      <div class="box-t">Нейроагент — сотрудник</div>
+      <p class="box-d">Общается с клиентом, консультирует, записывает, продаёт. Работает 24/7.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">🏗️</div>
+      <div class="box-t">Система — бизнес, работающий сам</div>
+      <p class="box-d">Сайт + агенты + CRM + аналитика. Связано в одно целое. Метрики — измеримые.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. DIRECTIONS -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>04</b> / 12 · Направления</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Шесть направлений</div>
+  <h1 class="p-title">Одна команда —<br><span class="g">полный стек</span></h1>
+  <p class="p-sub">От простого лендинга до комплексной ИИ-системы. Внутри одного проекта можно собрать любую комбинацию.</p>
+  <div class="dirs">
+    <div class="dir"><div class="dir-num">01</div><div><div class="dir-t">Сайты</div><div class="dir-d">Лендинги, визитки, корпоративные. От 30к · 5-10 дней</div></div></div>
+    <div class="dir"><div class="dir-num">02</div><div><div class="dir-t">Магазины</div><div class="dir-d">Каталог, корзина, оплата, доставка. От 80к · 3-4 нед</div></div></div>
+    <div class="dir"><div class="dir-num">03</div><div><div class="dir-t">Приложения</div><div class="dir-d">Веб, Telegram Mini App, PWA. От 50к · 2-4 нед</div></div></div>
+    <div class="dir flag"><div class="dir-num">04</div><div><div class="dir-t">Нейроагенты 🏁</div><div class="dir-d">ИИ-сотрудник в мессенджерах. От 30к · 5 дн – 1 мес</div></div></div>
+    <div class="dir"><div class="dir-num">05</div><div><div class="dir-t">Комплекс</div><div class="dir-d">Аудит + архитектура + внедрение. От 80к · от 1 мес</div></div></div>
+    <div class="dir"><div class="dir-num">06</div><div><div class="dir-t">Обучение</div><div class="dir-d">Консультации, воркшопы, наставничество. От 5к</div></div></div>
+  </div>
+</section>
+
+<!-- 5. ROLES -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>05</b> / 12 · Флагман</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Флагманский продукт</div>
+  <h1 class="p-title">Нейроагенты —<br>ИИ-сотрудник <span class="g">под задачу</span></h1>
+  <p class="p-sub">Три роли одного продукта. Каждая закрывает свой участок воронки.</p>
+  <div class="row-3">
+    <div class="box">
+      <div class="box-ico">💼</div>
+      <div class="box-t">ИИ-продавец</div>
+      <p class="box-d">Отвечает за 15 секунд. Консультирует, рассчитывает стоимость, закрывает возражения, ведёт в CRM.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">🎧</div>
+      <div class="box-t">ИИ-поддержка</div>
+      <p class="box-d">Отвечает на типовые вопросы из базы знаний. Снимает 80% нагрузки с живых менеджеров.</p>
+    </div>
+    <div class="box">
+      <div class="box-ico">📅</div>
+      <div class="box-t">ИИ-администратор</div>
+      <p class="box-d">Ведёт запись, напоминает о визите, переносит и отменяет брони. Telegram + WhatsApp + сайт.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. HOW AGENT WORKS -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>06</b> / 12 · Как работает</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Как работает нейроагент</div>
+  <h1 class="p-title">От сообщения<br>до <span class="g">сделки</span></h1>
+  <div class="steps row-4">
+    <div class="step"><div class="step-ico">📨</div><div class="step-t">Получает</div><p class="step-d">Клиент пишет в Telegram, WhatsApp, Avito, VK или на сайте. Агент видит моментально.</p></div>
+    <div class="step"><div class="step-ico">🧠</div><div class="step-t">Понимает</div><p class="step-d">Разбирает намерение: цена, запись, возврат, жалоба. Учитывает контекст диалога.</p></div>
+    <div class="step"><div class="step-ico">💬</div><div class="step-t">Отвечает</div><p class="step-d">По вашей базе знаний: услуги, цены, график, 200+ типовых ответов.</p></div>
+    <div class="step"><div class="step-ico">🎯</div><div class="step-t">Закрывает</div><p class="step-d">Записывает в календарь, заводит сделку в CRM, эскалирует к менеджеру.</p></div>
+  </div>
+</section>
+
+<!-- 7. METRICS -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>07</b> / 12 · Результат</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Типовой результат</div>
+  <h1 class="p-title">Что получают<br>мои <span class="g">клиенты</span></h1>
+  <div class="metrics">
+    <div class="metric"><div class="metric-v">15<span> сек</span></div><div class="metric-l">Среднее время ответа на входящее сообщение</div></div>
+    <div class="metric"><div class="metric-v">+40<span>%</span></div><div class="metric-l">К конверсии в запись / заявку / заказ</div></div>
+    <div class="metric"><div class="metric-v">−80<span>%</span></div><div class="metric-l">Нагрузки на живых менеджеров и админов</div></div>
+  </div>
+  <p style="margin-top:6mm;color:var(--ink-3);font-size:9.5pt;text-align:center;font-style:italic">Показаны типовые метрики для ИИ-агентов. Ваш результат зависит от ниши и текущей воронки — уточним на брифе.</p>
+</section>
+
+<!-- 8. PROCESS -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>08</b> / 12 · Процесс</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Как я работаю</div>
+  <h1 class="p-title">От брифа<br>до <span class="g">запуска</span></h1>
+  <div class="steps row-4">
+    <div class="step"><div class="step-ico">💬</div><div class="step-t">Бриф</div><p class="step-d">30 минут разговора. Разбираем задачу и текущую воронку. Бесплатно.</p></div>
+    <div class="step"><div class="step-ico">🏗️</div><div class="step-t">Архитектура</div><p class="step-d">Технический план: компоненты, интеграции, данные. КП с ТЗ и сметой.</p></div>
+    <div class="step"><div class="step-ico">⚙️</div><div class="step-t">Разработка</div><p class="step-d">Собираю систему, подключаю каналы, тестирую на реальных диалогах.</p></div>
+    <div class="step"><div class="step-ico">🚀</div><div class="step-t">Запуск</div><p class="step-d">Запускаю на боевом потоке, мониторю 2 недели, дорабатываю по фидбеку.</p></div>
+  </div>
+</section>
+
+<!-- 9. PRICING -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>09</b> / 12 · Тарифы</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Тарифы нейроагентов</div>
+  <h1 class="p-title">Выберите <span class="g">формат</span><br>под задачу</h1>
+  <div class="prices">
+    <div class="price">
+      <div class="price-name">Базовый</div>
+      <div class="price-v">от 30 000 ₽</div>
+      <div class="price-for">Малый бизнес, 1 канал</div>
+      <ul>
+        <li>1 агент в 1 канале</li>
+        <li>База до 50 позиций</li>
+        <li>Google Sheets</li>
+        <li>Запуск 5-7 дней</li>
+      </ul>
+    </div>
+    <div class="price pop">
+      <div class="price-name">Про</div>
+      <div class="price-v">от 60 000 ₽</div>
+      <div class="price-for">Отдел продаж</div>
+      <ul>
+        <li>До 3 агентов в 3+ каналах</li>
+        <li>База до 300 позиций</li>
+        <li>amoCRM / Bitrix24</li>
+        <li>Эскалация к менеджеру</li>
+        <li>3 месяца поддержки</li>
+      </ul>
+    </div>
+    <div class="price">
+      <div class="price-name">Флот</div>
+      <div class="price-v">от 150 000 ₽</div>
+      <div class="price-for">Масштабирование</div>
+      <ul>
+        <li>Команда агентов</li>
+        <li>Своя LLM / fine-tune</li>
+        <li>Аналитика диалогов</li>
+        <li>Обучение команды</li>
+        <li>6 месяцев SLA</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. DIFFS -->
+<section class="page">
+  <div class="page-hdr">
+    <div class="page-num"><b>10</b> / 12 · Отличия</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Чем отличаюсь</div>
+  <h1 class="p-title">Почему это<br>работает <span class="g">иначе</span></h1>
+  <div class="diffs">
+    <div class="diff">
+      <div class="diff-ico">👤</div>
+      <div><div class="diff-t">Один исполнитель</div><div class="diff-d">Нет прослойки из менеджеров, аналитиков и джунов. Напрямую договариваемся — напрямую делаю. Качество контролирую лично.</div></div>
+    </div>
+    <div class="diff">
+      <div class="diff-ico">🏗️</div>
+      <div><div class="diff-t">Архитектурный подход</div><div class="diff-d">Не «чат-бот за 15 тысяч». Сначала воронка, потом система, потом реализация. Каждый компонент встраивается в целое.</div></div>
+    </div>
+    <div class="diff">
+      <div class="diff-ico">🇷🇺</div>
+      <div><div class="diff-t">152-ФЗ из коробки</div><div class="diff-d">YandexGPT, GigaChat, self-hosted модели. Данные ваших клиентов не уходят на западные сервера.</div></div>
+    </div>
+    <div class="diff">
+      <div class="diff-ico">💎</div>
+      <div><div class="diff-t">Прозрачные сметы</div><div class="diff-d">Цена известна до начала работы. Никаких «договорных» формулировок или «доплата за сложность». Фиксируем в ТЗ.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. CTA -->
+<section class="page cta">
+  <div class="page-hdr" style="width:100%">
+    <div class="page-num"><b>11</b> / 12 · Следующий шаг</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Следующий шаг</div>
+  <h1 class="p-title">Бесплатный бриф<br><span class="g">30 минут</span></h1>
+  <p class="p-sub" style="max-width:220mm;text-align:center;margin:0 auto 4mm">Вы рассказываете про бизнес и текущую воронку. Я задаю вопросы и показываю, что можно автоматизировать. На выходе — понимание задачи и ориентировочные цены.</p>
+  <div class="cta-offers">
+    <div class="cta-offer">
+      <div class="cta-offer-t">Что будет</div>
+      <div class="cta-offer-d">Разбор воронки · Технический план · Смета с диапазоном</div>
+    </div>
+    <div class="cta-offer">
+      <div class="cta-offer-t">Что не будет</div>
+      <div class="cta-offer-d">Продаж «в лоб» · Скрытых условий · Обязательств</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. CONTACTS -->
+<section class="page contacts">
+  <div class="page-hdr">
+    <div class="page-num"><b>12</b> / 12 · Контакты</div>
+    <div class="page-brand">
+      <svg viewBox="0 0 200 200" fill="none"><g stroke="#5A8A0C" stroke-width="5" fill="none" stroke-linecap="round"><line x1="80" y1="120" x2="159" y2="41"/><line x1="174" y1="41" x2="200" y2="67"/><line x1="146" y1="200" x2="80" y2="134"/></g></svg>
+      <span class="page-brand-text">AI-АРХИТЕКТОР</span>
+    </div>
+  </div>
+  <div class="p-eyebrow">Контакты</div>
+  <h1 class="p-title">Давайте <span class="g">созвонимся</span></h1>
+  <div class="contact-grid">
+    <div class="contact">
+      <div class="contact-ico">✈️</div>
+      <div><div class="contact-l">Telegram</div><div class="contact-v">@maxxleon927</div></div>
+    </div>
+    <div class="contact">
+      <div class="contact-ico">🌐</div>
+      <div><div class="contact-l">Сайт</div><div class="contact-v">ai-architect-five.vercel.app</div></div>
+    </div>
+    <div class="contact">
+      <div class="contact-ico">🤖</div>
+      <div><div class="contact-l">Про нейроагентов</div><div class="contact-v">ai-architect-five.vercel.app/neuroagents.html</div></div>
+    </div>
+    <div class="contact">
+      <div class="contact-ico">📋</div>
+      <div><div class="contact-l">Каталог услуг</div><div class="contact-v">ai-architect-five.vercel.app/services.html</div></div>
+    </div>
+  </div>
+  <div class="contacts-foot">Максим Леонидов · AI-архитектор · © 2026</div>
+</section>
+
+</body>
+</html>
